@@ -62,9 +62,9 @@ public class MakeUserFrame extends JFrame {
 	}
 
 	class ChoiceCharacterPanel extends JPanel {
-		JLabel choicela;
+		JLabel choiceLabel;
 		GraphicRadioButton[] choiceBtn;
-		ButtonGroup chracterGroup;
+		ButtonGroup chracterBtnGroup;
 
 		ChoiceCharacterPanel() {
 			this.setSize(400, 250);
@@ -76,7 +76,7 @@ public class MakeUserFrame extends JFrame {
 		}
 
 		void makeBtn() {
-			chracterGroup = new ButtonGroup();
+			chracterBtnGroup = new ButtonGroup();
 
 			String path = "images/MakeUserFrame/";
 			choiceBtn = new GraphicRadioButton[3];
@@ -89,7 +89,7 @@ public class MakeUserFrame extends JFrame {
 			}
 
 			for (int i = 0; i < 3; i++) {
-				chracterGroup.add(choiceBtn[i]);
+				chracterBtnGroup.add(choiceBtn[i]);
 				add(choiceBtn[i]);
 			}
 		}
@@ -129,16 +129,14 @@ public class MakeUserFrame extends JFrame {
 
 		class SubmitActionListener implements ActionListener {
 			String chracter;
-			MakeUserFrame topFrame;
 
 			public void actionPerformed(ActionEvent e) {
-				topFrame = (MakeUserFrame) SubmitPanel.this.getTopLevelAncestor();
 
 				GraphicButton btn = (GraphicButton) e.getSource();
-				if (btn.getFILENAME().equals("SubmitBtn")) {
+				if (btn.getFilename().equals("SubmitBtn")) {
 
 					String CHARCTERNAME = null;
-					Enumeration<AbstractButton> enums = topFrame.choiceChracterPanel.chracterGroup.getElements();
+					Enumeration<AbstractButton> enums = choiceChracterPanel.chracterBtnGroup.getElements();
 					while (enums.hasMoreElements()) {
 						GraphicRadioButton radiobtn = (GraphicRadioButton) enums.nextElement();
 						if (radiobtn.isSelected())
@@ -163,7 +161,7 @@ public class MakeUserFrame extends JFrame {
 					else if (CHARCTERNAME.equals("ApeachBtn"))
 						chracter = "APEACH";
 
-					String user = topFrame.userInputPanel.userInput.getText();
+					String user = userInputPanel.userTextField.getText();
 					if (user.equals("")) {
 						JOptionPane.showMessageDialog(null, "이름을 입력해주세요", "경고!", JOptionPane.WARNING_MESSAGE);
 						return;
@@ -202,13 +200,13 @@ public class MakeUserFrame extends JFrame {
 	}
 
 	class UserInputPanel extends JPanel {
-		JTextField userInput;
+		JTextField userTextField;
 
 		UserInputPanel() {
 			setLayout(new FlowLayout());
 			setBackground(null);
-			userInput = new JTextField("", 15);
-			add(userInput);
+			userTextField = new JTextField("", 15);
+			add(userTextField);
 		}
 	}
 }

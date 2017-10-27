@@ -117,19 +117,19 @@ public class WordSetFrame extends JFrame {
 	}
 
 	class UserListPanel extends GraphicPanel {
-		private JComboBox<String> userList;
+		private JComboBox<String> userComboBox;
 
 		UserListPanel(String path, String FILENAME, int width, int height) {
 			super(path, FILENAME, width, height);
 			setLayout(null);
 			this.setBackground(null);
 
-			userList = new JComboBox<String>();
-			userList.setSize(150, 20);
-			userList.setLocation(70, 10);
-			userList.setBackground(Color.WHITE);
+			userComboBox = new JComboBox<String>();
+			userComboBox.setSize(150, 20);
+			userComboBox.setLocation(70, 10);
+			userComboBox.setBackground(Color.WHITE);
 
-			userList.addItemListener(new UserListItemListener());
+			userComboBox.addItemListener(new UserListItemListener());
 
 			try {
 				readUser();
@@ -138,11 +138,11 @@ public class WordSetFrame extends JFrame {
 				e.printStackTrace();
 			}
 
-			add(userList);
+			add(userComboBox);
 		}
 
 		public void readUser() throws IOException {
-			userList.addItem(null);
+			userComboBox.addItem(null);
 			BufferedReader in = new BufferedReader(new FileReader("resources/User.txt"));
 			String line = "";
 			String[] spliter;
@@ -151,7 +151,7 @@ public class WordSetFrame extends JFrame {
 				String item;
 				spliter = line.split("\t");
 				item = spliter[0] + "." + "\t" + spliter[1];
-				userList.addItem(item);
+				userComboBox.addItem(item);
 			}
 
 		}
@@ -162,8 +162,7 @@ public class WordSetFrame extends JFrame {
 			public void itemStateChanged(ItemEvent e) {
 				if (e.getItem() != null) {
 					String userInfo = (String) e.getItem();
-					String[] spliter;
-					spliter = userInfo.split("\t");
+					String[] spliter = userInfo.split("\t");
 					String user = spliter[1];
 
 					WordSetFrame topFrame = (WordSetFrame) UserListPanel.this.getTopLevelAncestor();
@@ -174,8 +173,8 @@ public class WordSetFrame extends JFrame {
 	}
 
 	class SetButtonPanel extends JPanel {
-		GraphicButton wordPlusbtn;
-		GraphicButton successResetbtn;
+		GraphicButton wordPlusBtn;
+		GraphicButton successResetBtn;
 
 		SetButtonPanel() {
 			setBackground(null);
@@ -183,19 +182,18 @@ public class WordSetFrame extends JFrame {
 		}
 
 		void makeBtn() {
+			wordPlusBtn = new GraphicButton("images/WordSetFrame/", "wordPlusBtn", 100, 40);
+			successResetBtn = new GraphicButton("images/WordSetFrame/", "SuccessResetBtn", 100, 40);
 
-			wordPlusbtn = new GraphicButton("images/WordSetFrame/", "wordPlusBtn", 100, 40);
-			successResetbtn = new GraphicButton("images/WordSetFrame/", "SuccessResetBtn", 100, 40);
-
-			add(wordPlusbtn);
-			add(successResetbtn);
+			add(wordPlusBtn);
+			add(successResetBtn);
 		}
 
 	}
 
 	class SubmitButtonPanel extends JPanel {
-		GraphicButton wordPlusbtn;
-		GraphicButton successResetbtn;
+		GraphicButton wordPlusBtn;
+		GraphicButton successResetBtn;
 
 		SubmitButtonPanel() {
 			setBackground(null);
@@ -204,24 +202,22 @@ public class WordSetFrame extends JFrame {
 		}
 
 		void makeBtn() {
+			wordPlusBtn = new GraphicButton("images/WordSetFrame/", "SubmitBtn", 100, 35);
+			wordPlusBtn.addActionListener(new SubmitAction());
 
-			wordPlusbtn = new GraphicButton("images/WordSetFrame/", "SubmitBtn", 100, 35);
-			wordPlusbtn.addActionListener(new SubmitAction());
+			successResetBtn = new GraphicButton("images/WordSetFrame/", "ConcealBtn", 100, 35);
+			successResetBtn.addActionListener(new SubmitAction());
 
-			successResetbtn = new GraphicButton("images/WordSetFrame/", "ConcealBtn", 100, 35);
-			successResetbtn.addActionListener(new SubmitAction());
-
-			add(wordPlusbtn);
-			add(successResetbtn);
+			add(wordPlusBtn);
+			add(successResetBtn);
 		}
 
 		class SubmitAction implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
+				
 				GraphicButton btn = (GraphicButton) e.getSource();
-				if (btn.getFILENAME() == "SubmitBtn")
-					;
-				else if (btn.getFILENAME() == "ConcealBtn")
-					;
+				if (btn.getFilename() == "SubmitBtn");
+				else if (btn.getFilename() == "ConcealBtn");
 
 				JFrame topFrame = (JFrame) (SubmitButtonPanel.this.getTopLevelAncestor());
 				topFrame.dispose();

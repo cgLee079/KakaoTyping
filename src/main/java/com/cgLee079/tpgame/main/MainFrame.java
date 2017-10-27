@@ -24,11 +24,9 @@ import PlayPanel.PlayPanel;
 
 
 public class MainFrame extends JFrame{
-	public static MainFrame mf;
-	public MainPagePanel mainPanel;
-	public PlayPanel playPanel;
-	public StartFrame startFrame;
-	
+	private MainPanel mainPanel;
+	private PlayPanel playPanel;
+	private StartFrame startFrame;
 	
 	public MainFrame(){
 		setSize(800,550);
@@ -40,20 +38,15 @@ public class MainFrame extends JFrame{
 		
 		Dimension frameSize = getSize();
 		Dimension windowSize = Toolkit.getDefaultToolkit().getScreenSize();		
-		setLocation((windowSize.width - frameSize.width) / 2,
-				(windowSize.height - frameSize.height) / 2);
+		setLocation((windowSize.width - frameSize.width) / 2, (windowSize.height - frameSize.height) / 2);
 		
-		mainPanel=new MainPagePanel();
+		mainPanel = new MainPanel();
 		this.setContentPane(mainPanel);
 		
-		
 		createMenuBar();
-		
 	}
 	
-	
-	void createMenuBar(){
-		
+	private void createMenuBar(){
 		JMenuBar menuBar 	= new JMenuBar();
 		JMenu fileMenu 		= new JMenu("File");
 		JMenu helpMenu 		= new JMenu("Help");
@@ -70,8 +63,8 @@ public class MainFrame extends JFrame{
 		fileMenu.add(exit);
 						
 		//파일 메뉴 단축키 설정
-		regame.setAccelerator(KeyStroke.getKeyStroke('N',InputEvent.CTRL_MASK));
-		exit.setAccelerator(KeyStroke.getKeyStroke('X',InputEvent.CTRL_MASK));
+		regame.setAccelerator(KeyStroke.getKeyStroke('N', InputEvent.CTRL_MASK));
+		exit.setAccelerator(KeyStroke.getKeyStroke('X', InputEvent.CTRL_MASK));
 		
 		//add Listener
 		version.addActionListener(new HelpActionListener());
@@ -91,8 +84,8 @@ public class MainFrame extends JFrame{
 	
 	class HelpActionListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			JMenuItem item= (JMenuItem) e.getSource();
-			String s=item.getText();
+			JMenuItem item = (JMenuItem) e.getSource();
+			String s = item.getText();
 			if(s.equals("Version")){
 				JOptionPane.showMessageDialog(null, "version. 1.00\n2016.05.23","Version",JOptionPane.INFORMATION_MESSAGE);
 			} else if(s.equals("Developer")) {
@@ -101,8 +94,9 @@ public class MainFrame extends JFrame{
 		}
 	}
 	
-	class MainPagePanel extends JPanel{
-		MainPagePanel(){
+	class MainPanel extends JPanel{
+		
+		MainPanel(){
 			setLayout(null);
 			MakeButton();
 		}
@@ -127,16 +121,14 @@ public class MainFrame extends JFrame{
 		}
 				
 		class MenuActionListener implements ActionListener {
-						
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				GraphicButton btn=(GraphicButton)e.getSource();
 
-				if(btn.getFILENAME().equals("Startbtn")) { startFrame = new StartFrame(); }
-				else if(btn.getFILENAME().equals("WordSetBtn")) { new WordSetFrame(); }
-				else if(btn.getFILENAME().equals("Help"));
-				else if(btn.getFILENAME().equals("Exitbtn")){ System.exit(0); }
-				
+				if(btn.getFilename().equals("Startbtn")) { startFrame = new StartFrame(); }
+				else if(btn.getFilename().equals("WordSetBtn")) { new WordSetFrame(); }
+				else if(btn.getFilename().equals("Help"));
+				else if(btn.getFilename().equals("Exitbtn")){ System.exit(0); }
 				
 				/*switch(btn.getFILENAME()){
 				case "Startbtn": startFrame=new StartFrame(); break;
@@ -144,7 +136,6 @@ public class MainFrame extends JFrame{
 				case "Help": break;
 				case "Exitbtn": System.exit(0);break; 
 				}*/
-				
 			}
 		}
 				
@@ -169,6 +160,6 @@ public class MainFrame extends JFrame{
 			e.printStackTrace();
 		}*/
 		
-		mf =new MainFrame();
+		new MainFrame();
 	}
 }

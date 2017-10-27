@@ -14,12 +14,12 @@ import javax.swing.JTextArea;
 import javax.swing.border.Border;
 
 public class WordPlusFrame extends JFrame {
-	private KoreaInputPanel pKoInput;
-	private EnglishInputPanel pEnInput;
-	private JButton btnPlus;
-	private JLabel laTop;
-	private JTextArea taKoInput;
-	private JTextArea taEnInput;
+	private KoreaInputPanel koInputPanel;
+	private EnglishInputPanel enInputPanel;
+	private JButton plusBtn;
+	private JLabel topLabel;
+	private JTextArea koTextArea;
+	private JTextArea enTextArea;
 
 	public WordPlusFrame() {
 		setSize(400, 400);
@@ -29,15 +29,15 @@ public class WordPlusFrame extends JFrame {
 		setTitle("Word Plus");
 		setResizable(false);
 
-		pKoInput = new KoreaInputPanel();
-		pEnInput = new EnglishInputPanel();
-		btnPlus = new JButton("PLUS");
-		laTop = new JLabel("Input Your Word");
-		laTop.setFont(new Font("고딕", Font.BOLD, 25));
-		add(laTop, BorderLayout.NORTH);
-		add(pKoInput, BorderLayout.WEST);
-		add(pEnInput, BorderLayout.CENTER);
-		add(btnPlus, BorderLayout.SOUTH);
+		koInputPanel = new KoreaInputPanel();
+		enInputPanel = new EnglishInputPanel();
+		plusBtn = new JButton("PLUS");
+		topLabel = new JLabel("Input Your Word");
+		topLabel.setFont(new Font("고딕", Font.BOLD, 25));
+		add(topLabel, BorderLayout.NORTH);
+		add(koInputPanel, BorderLayout.WEST);
+		add(enInputPanel, BorderLayout.CENTER);
+		add(plusBtn, BorderLayout.SOUTH);
 	}
 
 	class KoreaInputPanel extends JPanel {
@@ -49,9 +49,9 @@ public class WordPlusFrame extends JFrame {
 			border = BorderFactory.createTitledBorder("Korean");
 			setBorder(border);
 
-			taKoInput = new JTextArea();
+			koTextArea = new JTextArea();
 
-			add(taKoInput, BorderLayout.CENTER);
+			add(koTextArea, BorderLayout.CENTER);
 		}
 	}
 
@@ -63,8 +63,8 @@ public class WordPlusFrame extends JFrame {
 			border = BorderFactory.createTitledBorder("English");
 			setBorder(border);
 
-			taEnInput = new JTextArea();
-			add(taEnInput, BorderLayout.CENTER);
+			enTextArea = new JTextArea();
+			add(enTextArea, BorderLayout.CENTER);
 		}
 	}
 }

@@ -14,9 +14,9 @@ import com.cgLee079.tpgame.graphic.GlobalGraphic;
 import com.cgLee079.tpgame.graphic.GraphicButton;
 
 public class PauseFrame extends JFrame {
-	GraphicButton homebtn;
-	GraphicButton resumebtn;
-	GraphicButton exitbtn;
+	GraphicButton homeBtn;
+	GraphicButton resumeBtn;
+	GraphicButton exitBtn;
 
 	public PauseFrame() {
 		setLayout(new FlowLayout());
@@ -39,29 +39,29 @@ public class PauseFrame extends JFrame {
 		ButtonPanel() {
 			setPreferredSize(new Dimension(200, 200));
 			this.setBackground(null);
-			homebtn = new GraphicButton("images/PauseFrame/", "Homebtn", 120, 50);
-			homebtn.addActionListener(new ButtonActionListener());
+			homeBtn = new GraphicButton("images/PauseFrame/", "Homebtn", 120, 50);
+			homeBtn.addActionListener(new ButtonActionListener());
 
-			resumebtn = new GraphicButton("images/PauseFrame/", "resumebtn", 120, 50);
-			resumebtn.addActionListener(new ButtonActionListener());
+			resumeBtn = new GraphicButton("images/PauseFrame/", "resumebtn", 120, 50);
+			resumeBtn.addActionListener(new ButtonActionListener());
 
-			exitbtn = new GraphicButton("images/PauseFrame/", "exitbtn", 120, 50);
-			exitbtn.addActionListener(new ButtonActionListener());
+			exitBtn = new GraphicButton("images/PauseFrame/", "exitbtn", 120, 50);
+			exitBtn.addActionListener(new ButtonActionListener());
 
-			add(homebtn);
-			add(resumebtn);
-			add(exitbtn);
+			add(homeBtn);
+			add(resumeBtn);
+			add(exitBtn);
 		}
 
 		class ButtonActionListener implements ActionListener {
 
 			public void actionPerformed(ActionEvent e) {
 				GraphicButton btn = (GraphicButton) e.getSource();
-				if (btn.getFILENAME().equals("homebtn"))
+				if (btn.getFilename().equals("homebtn"))
 					;
-				else if (btn.getFILENAME().equals("resumebtn"))
+				else if (btn.getFilename().equals("resumebtn"))
 					MainFrame.mf.playPanel.play.resumeGame();
-				else if (btn.getFILENAME().equals("exitbtn"))
+				else if (btn.getFilename().equals("exitbtn"))
 					System.exit(0);
 
 				/*
@@ -71,7 +71,6 @@ public class PauseFrame extends JFrame {
 				 */
 
 				PauseFrame.this.dispose();
-
 			}
 
 		}

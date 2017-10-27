@@ -29,9 +29,9 @@ import PlayPanel.PlayPanel;
 
 public class StartFrame extends JFrame {
 	private Window f = this;
-	private UserListPanel pUserList;
-	private LevelListPanel pLevelList;
-	private SubmitPanel pSubmit;
+	private UserListPanel userListPanel;
+	private LevelListPanel levelListPanel;
+	private SubmitPanel submitPanel;
 
 	public StartFrame() {
 		setSize(400, 250);
@@ -54,27 +54,27 @@ public class StartFrame extends JFrame {
 		StartPanel() {
 			setLayout(null);
 			String path = "images/StartFrame/";
-			pUserList = new UserListPanel(path, "UserListPa", 300, 40);
-			pUserList.setLocation(40, 50);
-			add(pUserList);
+			userListPanel = new UserListPanel(path, "UserListPa", 300, 40);
+			userListPanel.setLocation(40, 50);
+			add(userListPanel);
 
-			pLevelList = new LevelListPanel();
-			pLevelList.setSize(400, 70);
-			pLevelList.setLocation(0, 110);
+			levelListPanel = new LevelListPanel();
+			levelListPanel.setSize(400, 70);
+			levelListPanel.setLocation(0, 110);
 
-			pSubmit = new SubmitPanel();
-			pSubmit.setSize(400, 50);
-			pSubmit.setLocation(50, 180);
+			submitPanel = new SubmitPanel();
+			submitPanel.setSize(400, 50);
+			submitPanel.setLocation(50, 180);
 
-			add(pLevelList, BorderLayout.CENTER);
-			add(pSubmit, BorderLayout.SOUTH);
+			add(levelListPanel, BorderLayout.CENTER);
+			add(submitPanel, BorderLayout.SOUTH);
 		}
 	}
 
 	class LevelListPanel extends JPanel {
 		String level;
 		GraphicRadioButton levelbtn[];
-		ButtonGroup levelGroup;
+		ButtonGroup levelBtnGroup;
 
 		LevelListPanel() {
 			setBackground(null);
@@ -82,24 +82,23 @@ public class StartFrame extends JFrame {
 		}
 
 		void makeBtn() {
-			levelGroup = new ButtonGroup();
+			levelBtnGroup = new ButtonGroup();
 			levelbtn = new GraphicRadioButton[3];
 			levelbtn[0] = new GraphicRadioButton("images/StartFrame/", "levelBtn1", 70, 35);
 			levelbtn[1] = new GraphicRadioButton("images/StartFrame/", "levelBtn2", 70, 35);
 			levelbtn[2] = new GraphicRadioButton("images/StartFrame/", "levelBtn3", 70, 35);
 
 			for (int i = 0; i < 3; i++) {
-				levelGroup.add(levelbtn[i]);
+				levelBtnGroup.add(levelbtn[i]);
 				add(levelbtn[i]);
 			}
 		}
 	}
 
 	class SubmitPanel extends JPanel {
-
 		String user;
 		String character;
-		GraphicButton[] btnSubmit;
+		GraphicButton[] submitBtn;
 
 		SubmitPanel() {
 			setLayout(null);
@@ -109,24 +108,24 @@ public class StartFrame extends JFrame {
 
 		void makeBtn() {
 			String path = "images/StartFrame/";
-			btnSubmit = new GraphicButton[2];
-			btnSubmit[0] = new GraphicButton(path, "SubmitBtn", 100, 35);
-			btnSubmit[1] = new GraphicButton(path, "ConcealBtn", 100, 35);
+			submitBtn = new GraphicButton[2];
+			submitBtn[0] = new GraphicButton(path, "SubmitBtn", 100, 35);
+			submitBtn[1] = new GraphicButton(path, "ConcealBtn", 100, 35);
 
 			for (int i = 0; i < 2; i++) {
-				btnSubmit[i].addActionListener(new SubmitAction());
+				submitBtn[i].addActionListener(new SubmitAction());
 			}
 
 			for (int i = 0; i < 2; i++) {
-				btnSubmit[i].setLocation(40 + (i * 120), 0);
-				add(btnSubmit[i]);
+				submitBtn[i].setLocation(40 + (i * 120), 0);
+				add(submitBtn[i]);
 			}
 		}
 
 		class SubmitAction implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				GraphicButton btn = (GraphicButton) e.getSource();
-				if (btn.getFILENAME() == "SubmitBtn") {
+				if (btn.getFilename() == "SubmitBtn") {
 
 					String[] spliter;
 
