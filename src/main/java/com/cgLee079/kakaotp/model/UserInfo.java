@@ -1,4 +1,4 @@
-package com.cgLee079.tpgame.model;
+package com.cgLee079.kakaotp.model;
 
 public class UserInfo {
 	private String character;

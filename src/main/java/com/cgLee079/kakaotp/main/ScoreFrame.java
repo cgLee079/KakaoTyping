@@ -1,4 +1,4 @@
-package com.cgLee079.tpgame.main;
+package com.cgLee079.kakaotp.main;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -11,12 +11,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.cgLee079.tpgame.graphic.GameFontB;
-import com.cgLee079.tpgame.graphic.GameFontP;
-import com.cgLee079.tpgame.graphic.GlobalGraphic;
-import com.cgLee079.tpgame.graphic.GraphicPanel;
-import com.cgLee079.tpgame.model.UserInfo;
-import com.cgLee079.tpgame.util.FileIO;
+import com.cgLee079.kakaotp.graphic.GameFontB;
+import com.cgLee079.kakaotp.graphic.GameFontP;
+import com.cgLee079.kakaotp.graphic.GlobalGraphic;
+import com.cgLee079.kakaotp.graphic.GraphicPanel;
+import com.cgLee079.kakaotp.model.UserInfo;
+import com.cgLee079.kakaotp.util.FileIO;
 
 import PlayPanel.PlayPanel;
 
@@ -30,7 +30,7 @@ public class ScoreFrame extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
 		setVisible(true);
-		setBackground(com.cgLee079.tpgame.graphic.GlobalGraphic.basic);
+		setBackground(com.cgLee079.kakaotp.graphic.GlobalGraphic.basic);
 
 		Dimension frameSize = getSize();
 		Dimension windowSize = Toolkit.getDefaultToolkit().getScreenSize();

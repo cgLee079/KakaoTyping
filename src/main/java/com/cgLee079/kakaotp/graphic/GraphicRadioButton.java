@@ -1,23 +1,23 @@
-package com.cgLee079.tpgame.graphic;
+package com.cgLee079.kakaotp.graphic;
 
 import javax.swing.ImageIcon;
 import javax.swing.JRadioButton;
 
 public class GraphicRadioButton extends JRadioButton {
 	private String path;
-	private String FILENAME;
+	private String id;
 
 	public String getPath() {
 		return path;
 	}
 
-	public String getFILENAME() {
-		return FILENAME;
+	public String getId() {
+		return id;
 	}
 
 	public GraphicRadioButton(String path, String filename, int width, int height) {
 		this.path = path;
-		this.FILENAME = filename;
+		this.id = filename;
 
 		setOpaque(false);
 		setBorderPainted(false);

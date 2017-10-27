@@ -5,9 +5,9 @@ import java.awt.Dimension;
 
 import javax.swing.JProgressBar;
 
-import com.cgLee079.tpgame.graphic.GameFontB;
-import com.cgLee079.tpgame.graphic.GraphicPanel;
-import com.cgLee079.tpgame.main.MainFrame;
+import com.cgLee079.kakaotp.graphic.GameFontB;
+import com.cgLee079.kakaotp.graphic.GraphicPanel;
+import com.cgLee079.kakaotp.main.MainFrame;
 
 public class HeartGagePanel extends GraphicPanel{
 	public HeartGage heartgage=new HeartGage();

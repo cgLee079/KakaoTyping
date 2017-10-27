@@ -8,7 +8,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import com.cgLee079.tpgame.graphic.GameFontP;
+import com.cgLee079.kakaotp.graphic.GameFontP;
 public class SuccessWordPanel extends JPanel{
 	public SuccessWordTable successWordTable;
 	

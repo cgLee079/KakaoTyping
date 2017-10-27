@@ -1,4 +1,4 @@
-package com.cgLee079.tpgame.util;
+package com.cgLee079.kakaotp.util;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import com.cgLee079.tpgame.model.UserInfo;
+import com.cgLee079.kakaotp.model.UserInfo;
 
 import PlayPanel.PlayPanel;
 

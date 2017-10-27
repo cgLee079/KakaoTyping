@@ -1,4 +1,4 @@
-package com.cgLee079.tpgame.main;
+package com.cgLee079.kakaotp.main;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -10,8 +10,8 @@ import java.awt.geom.RoundRectangle2D;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import com.cgLee079.tpgame.graphic.GlobalGraphic;
-import com.cgLee079.tpgame.graphic.GraphicButton;
+import com.cgLee079.kakaotp.graphic.GlobalGraphic;
+import com.cgLee079.kakaotp.graphic.GraphicButton;
 
 public class PauseFrame extends JFrame {
 	GraphicButton homeBtn;
@@ -57,11 +57,11 @@ public class PauseFrame extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 				GraphicButton btn = (GraphicButton) e.getSource();
-				if (btn.getFilename().equals("homebtn"))
+				if (btn.getId().equals("homebtn"))
 					;
-				else if (btn.getFilename().equals("resumebtn"))
+				else if (btn.getId().equals("resumebtn"))
 					MainFrame.mf.playPanel.play.resumeGame();
-				else if (btn.getFilename().equals("exitbtn"))
+				else if (btn.getId().equals("exitbtn"))
 					System.exit(0);
 
 				/*

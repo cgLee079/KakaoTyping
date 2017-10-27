@@ -4,7 +4,7 @@ import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
-import com.cgLee079.tpgame.graphic.GlobalGraphic;
+import com.cgLee079.kakaotp.graphic.GlobalGraphic;
 
 public class EastPanel extends JPanel{
 	public InformationPanel infoPanel;

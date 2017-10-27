@@ -1,4 +1,4 @@
-package com.cgLee079.tpgame.main;
+package com.cgLee079.kakaotp.main;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
-import com.cgLee079.tpgame.graphic.GraphicButton;
+import com.cgLee079.kakaotp.graphic.GraphicButton;
 
 import PlayPanel.PlayPanel;
 
@@ -125,10 +125,10 @@ public class MainFrame extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				GraphicButton btn=(GraphicButton)e.getSource();
 
-				if(btn.getFilename().equals("Startbtn")) { startFrame = new StartFrame(); }
-				else if(btn.getFilename().equals("WordSetBtn")) { new WordSetFrame(); }
-				else if(btn.getFilename().equals("Help"));
-				else if(btn.getFilename().equals("Exitbtn")){ System.exit(0); }
+				if(btn.getId().equals("Startbtn")) { startFrame = new StartFrame(); }
+				else if(btn.getId().equals("WordSetBtn")) { new WordSetFrame(); }
+				else if(btn.getId().equals("Help"));
+				else if(btn.getId().equals("Exitbtn")){ System.exit(0); }
 				
 				/*switch(btn.getFILENAME()){
 				case "Startbtn": startFrame=new StartFrame(); break;

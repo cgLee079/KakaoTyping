@@ -9,8 +9,8 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Vector;
 
-import com.cgLee079.tpgame.main.MainFrame;
-import com.cgLee079.tpgame.main.ScoreFrame;
+import com.cgLee079.kakaotp.main.MainFrame;
+import com.cgLee079.kakaotp.main.ScoreFrame;
 
 import PlayPanel.CenterPanel.FallWordLabel;
 

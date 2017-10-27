@@ -7,8 +7,8 @@ import java.util.Vector;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.cgLee079.tpgame.main.MainFrame;
-import com.cgLee079.tpgame.main.PauseFrame;
+import com.cgLee079.kakaotp.main.MainFrame;
+import com.cgLee079.kakaotp.main.PauseFrame;
 
 import PlayPanel.PlayPanel;
 import PlayPanel.CenterPanel.FallWordLabel;

@@ -2,8 +2,8 @@ package PlayPanel.CenterPanel;
 
 import java.util.Vector;
 
-import com.cgLee079.tpgame.graphic.GlobalGraphic;
-import com.cgLee079.tpgame.graphic.GraphicPanel;
+import com.cgLee079.kakaotp.graphic.GlobalGraphic;
+import com.cgLee079.kakaotp.graphic.GraphicPanel;
 
 import PlayPanel.PlayPanel;
 

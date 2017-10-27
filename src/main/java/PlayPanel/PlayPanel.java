@@ -5,8 +5,8 @@ import java.awt.Color;
 
 import javax.swing.JPanel;
 
-import com.cgLee079.tpgame.dict.UserDictionary;
-import com.cgLee079.tpgame.graphic.GlobalGraphic;
+import com.cgLee079.kakaotp.dict.UserDictionary;
+import com.cgLee079.kakaotp.graphic.GlobalGraphic;
 
 import PlayPanel.CenterPanel.CenterPanel;
 import PlayPanel.EastPanel.EastPanel;

@@ -1,4 +1,4 @@
-package com.cgLee079.tpgame.main;
+package com.cgLee079.kakaotp.main;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -19,10 +19,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.cgLee079.tpgame.dict.BasicDictionary;
-import com.cgLee079.tpgame.graphic.GlobalGraphic;
-import com.cgLee079.tpgame.graphic.GraphicButton;
-import com.cgLee079.tpgame.graphic.GraphicRadioButton;
+import com.cgLee079.kakaotp.dict.BasicDictionary;
+import com.cgLee079.kakaotp.graphic.GlobalGraphic;
+import com.cgLee079.kakaotp.graphic.GraphicButton;
+import com.cgLee079.kakaotp.graphic.GraphicRadioButton;
 
 public class MakeUserFrame extends JFrame {
 	ChoiceCharacterPanel choiceChracterPanel;
@@ -67,12 +67,10 @@ public class MakeUserFrame extends JFrame {
 		ButtonGroup chracterBtnGroup;
 
 		ChoiceCharacterPanel() {
-			this.setSize(400, 250);
-
+			setSize(400, 250);
 			setBackground(null);
 
 			makeBtn();
-
 		}
 
 		void makeBtn() {
@@ -133,14 +131,14 @@ public class MakeUserFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				GraphicButton btn = (GraphicButton) e.getSource();
-				if (btn.getFilename().equals("SubmitBtn")) {
+				if (btn.getId().equals("SubmitBtn")) {
 
 					String CHARCTERNAME = null;
 					Enumeration<AbstractButton> enums = choiceChracterPanel.chracterBtnGroup.getElements();
 					while (enums.hasMoreElements()) {
 						GraphicRadioButton radiobtn = (GraphicRadioButton) enums.nextElement();
 						if (radiobtn.isSelected())
-							CHARCTERNAME = radiobtn.getFILENAME();
+							CHARCTERNAME = radiobtn.getId();
 					}
 
 					if (CHARCTERNAME == null) {

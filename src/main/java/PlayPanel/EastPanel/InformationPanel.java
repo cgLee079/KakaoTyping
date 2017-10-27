@@ -3,8 +3,8 @@ package PlayPanel.EastPanel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-import com.cgLee079.tpgame.graphic.GameFontB;
-import com.cgLee079.tpgame.graphic.GraphicPanel;
+import com.cgLee079.kakaotp.graphic.GameFontB;
+import com.cgLee079.kakaotp.graphic.GraphicPanel;
 
 public class InformationPanel extends GraphicPanel{
 	JLabel userla;

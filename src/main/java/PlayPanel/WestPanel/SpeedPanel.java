@@ -5,10 +5,10 @@ import java.text.NumberFormat;
 
 import javax.swing.JLabel;
 
-import com.cgLee079.tpgame.graphic.GameFontB;
-import com.cgLee079.tpgame.graphic.GlobalGraphic;
-import com.cgLee079.tpgame.graphic.GraphicPanel;
-import com.cgLee079.tpgame.main.MainFrame;
+import com.cgLee079.kakaotp.graphic.GameFontB;
+import com.cgLee079.kakaotp.graphic.GlobalGraphic;
+import com.cgLee079.kakaotp.graphic.GraphicPanel;
+import com.cgLee079.kakaotp.main.MainFrame;
 
 public class SpeedPanel extends GraphicPanel{
 	private JLabel speedLa=new JLabel();

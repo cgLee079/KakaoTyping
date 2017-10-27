@@ -1,9 +1,9 @@
 package PlayPanel.WestPanel;
 
-import com.cgLee079.tpgame.graphic.GlobalGraphic;
-import com.cgLee079.tpgame.graphic.GraphicButton;
-import com.cgLee079.tpgame.graphic.GraphicPanel;
-import com.cgLee079.tpgame.main.MainFrame;
+import com.cgLee079.kakaotp.graphic.GlobalGraphic;
+import com.cgLee079.kakaotp.graphic.GraphicButton;
+import com.cgLee079.kakaotp.graphic.GraphicPanel;
+import com.cgLee079.kakaotp.main.MainFrame;
 
 
 public class ItemPanel extends GraphicPanel{

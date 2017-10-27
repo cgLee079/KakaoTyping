@@ -1,4 +1,4 @@
-package com.cgLee079.tpgame.main;
+package com.cgLee079.kakaotp.main;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -20,11 +20,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import com.cgLee079.tpgame.dict.UserDictionary;
-import com.cgLee079.tpgame.graphic.GameFontP;
-import com.cgLee079.tpgame.graphic.GlobalGraphic;
-import com.cgLee079.tpgame.graphic.GraphicButton;
-import com.cgLee079.tpgame.graphic.GraphicPanel;
+import com.cgLee079.kakaotp.dict.UserDictionary;
+import com.cgLee079.kakaotp.graphic.GameFontP;
+import com.cgLee079.kakaotp.graphic.GlobalGraphic;
+import com.cgLee079.kakaotp.graphic.GraphicButton;
+import com.cgLee079.kakaotp.graphic.GraphicPanel;
 
 //AllWordList 프레임
 public class WordSetFrame extends JFrame {
@@ -216,8 +216,8 @@ public class WordSetFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				GraphicButton btn = (GraphicButton) e.getSource();
-				if (btn.getFilename() == "SubmitBtn");
-				else if (btn.getFilename() == "ConcealBtn");
+				if (btn.getId() == "SubmitBtn");
+				else if (btn.getId() == "ConcealBtn");
 
 				JFrame topFrame = (JFrame) (SubmitButtonPanel.this.getTopLevelAncestor());
 				topFrame.dispose();

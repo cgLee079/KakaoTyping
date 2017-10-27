@@ -1,6 +1,6 @@
 package PlayPanel;
 
-import com.cgLee079.tpgame.dict.UserDictionary;
+import com.cgLee079.kakaotp.dict.UserDictionary;
 
 public class UserInfo {
 	private String user;

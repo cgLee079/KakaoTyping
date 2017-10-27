@@ -1,4 +1,4 @@
-package com.cgLee079.tpgame.main;
+package com.cgLee079.kakaotp.main;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -20,10 +20,10 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import com.cgLee079.tpgame.graphic.GlobalGraphic;
-import com.cgLee079.tpgame.graphic.GraphicButton;
-import com.cgLee079.tpgame.graphic.GraphicPanel;
-import com.cgLee079.tpgame.graphic.GraphicRadioButton;
+import com.cgLee079.kakaotp.graphic.GlobalGraphic;
+import com.cgLee079.kakaotp.graphic.GraphicButton;
+import com.cgLee079.kakaotp.graphic.GraphicPanel;
+import com.cgLee079.kakaotp.graphic.GraphicRadioButton;
 
 import PlayPanel.PlayPanel;
 
@@ -125,7 +125,7 @@ public class StartFrame extends JFrame {
 		class SubmitAction implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				GraphicButton btn = (GraphicButton) e.getSource();
-				if (btn.getFilename() == "SubmitBtn") {
+				if (btn.getId() == "SubmitBtn") {
 
 					String[] spliter;
 
@@ -146,7 +146,7 @@ public class StartFrame extends JFrame {
 					while (enums.hasMoreElements()) {
 						GraphicRadioButton radiobtn = (GraphicRadioButton) enums.nextElement();
 						if (radiobtn.isSelected()) {
-							levelbtn = radiobtn.getFILENAME();
+							levelbtn = radiobtn.getId();
 						}
 					}
 
