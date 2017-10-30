@@ -3,7 +3,6 @@ package com.cgLee079.kakaotp.play;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.KeyAdapter;
 import java.util.Vector;
 
 import javax.swing.JButton;
@@ -16,22 +15,12 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
-import com.cgLee079.kakaotp.dict.UserDictionary;
 import com.cgLee079.kakaotp.graphic.GameFontB;
 import com.cgLee079.kakaotp.graphic.GameFontP;
 import com.cgLee079.kakaotp.graphic.GlobalGraphic;
 import com.cgLee079.kakaotp.graphic.GraphicButton;
 import com.cgLee079.kakaotp.graphic.GraphicPanel;
 import com.cgLee079.kakaotp.model.FallingWordLabel;
-import com.cgLee079.kakaotp.model.Item;
-import com.cgLee079.kakaotp.play.CenterPanel.CenterPanel.HeartGagePanel.HeartGageBar;
-import com.cgLee079.kakaotp.play.SouthPanel.GameKeyEventor;
-import com.cgLee079.kakaotp.play.WestPanel.Item2;
-import com.cgLee079.kakaotp.play.WestPanel.Item3;
-import com.cgLee079.kakaotp.play.WestPanel.Item4;
-import com.cgLee079.kakaotp.play.WestPanel.WestPanel;
-import com.cgLee079.kakaotp.play.WestPanel.WestPanel.ItemPanel;
-import com.cgLee079.kakaotp.play.WestPanel.WestPanel.SpeedPanel;
 
 public class PlayPanel extends JPanel {
 	private EastPanel eastPanel;
@@ -67,8 +56,8 @@ public class PlayPanel extends JPanel {
 		addKeyListener(new KeyEventor(PlayPanel.this, play));
 		
 		drawLevel(play.getLevel());
-		drawScore(play.getScore());
-		westPanel.speedPanel.setSpeedText(play.getSpeed().toString());
+		drawPoint(play.getPoint());
+		drawSpeed(play.getSpeed());
 		drawUsername(play.getUser().getUsername());
 
 		play.startGame();
@@ -84,8 +73,8 @@ public class PlayPanel extends JPanel {
 		northPanel.getLevelPanel().getLevelLabel().setText(level + "");
 	}
 	
-	public void drawScore(int score){
-		northPanel.getScorePanel().getScoreLabel().setText(score + "");
+	public void drawPoint(int point){
+		northPanel.getPointPanel().getPointLabel().setText(point + "");
 	}
 	
 	public void drawSpeed(double speed){
@@ -126,7 +115,7 @@ public class PlayPanel extends JPanel {
 	/**/
 	class NorthPanel extends GraphicPanel {
 		private LevelPanel levelPanel;
-		private ScorePanel scorePanel;
+		private PointPanel scorePanel;
 
 		private NorthPanel(String path, String filename, int width, int height) {
 			super(path, filename, width, height);
@@ -134,7 +123,7 @@ public class PlayPanel extends JPanel {
 
 			String panelPath = GlobalGraphic.path + "NorthPanel/";
 			levelPanel = new LevelPanel(panelPath, "levelGra", 130, 50);
-			scorePanel = new ScorePanel(panelPath, "scoreGra", 130, 50);
+			scorePanel = new PointPanel(panelPath, "scoreGra", 130, 50);
 
 			levelPanel.setLocation(250, 0);
 			scorePanel.setLocation(400, 0);
@@ -147,7 +136,7 @@ public class PlayPanel extends JPanel {
 			return levelPanel;
 		}
 
-		public ScorePanel getScorePanel() {
+		public PointPanel getPointPanel() {
 			return scorePanel;
 		}
 
@@ -169,21 +158,21 @@ public class PlayPanel extends JPanel {
 			}
 		}
 
-		class ScorePanel extends GraphicPanel {
-			private JLabel scoreLabel;
+		class PointPanel extends GraphicPanel {
+			private JLabel pointLabel;
 
-			private ScorePanel(String path, String filename, int width, int height) {
+			private PointPanel(String path, String filename, int width, int height) {
 				super(path, filename, width, height);
 				setLayout(null);
-				scoreLabel = new JLabel();
-				scoreLabel.setFont(new GameFontB(17));
-				scoreLabel.setSize(100, 40);
-				scoreLabel.setLocation(90, 8);
-				add(scoreLabel);
+				pointLabel = new JLabel();
+				pointLabel.setFont(new GameFontB(17));
+				pointLabel.setSize(100, 40);
+				pointLabel.setLocation(90, 8);
+				add(pointLabel);
 			}
 
-			public JLabel getScoreLabel() {
-				return scoreLabel;
+			public JLabel getPointLabel() {
+				return pointLabel;
 			}
 		}
 	}
@@ -276,8 +265,6 @@ public class PlayPanel extends JPanel {
 			super(path, filename, width, height);
 			setLayout(null);
 
-			fallingWordLabels = new Vector<FallingWordLabel>();
-
 			heartGagePanel = new HeartGagePanel(path, "HeartGageGra", 200, 30);
 			heartGagePanel.setLocation(150, 10);
 			add(heartGagePanel);
@@ -289,7 +276,7 @@ public class PlayPanel extends JPanel {
 		}
 
 		class HeartGagePanel extends GraphicPanel {
-			private JProgressBar heartGageBar = new HeartGageBar();
+			private JProgressBar heartGageBar = new JProgressBar();
 
 			private HeartGagePanel(String path, String filename, int width, int height) {
 				super(path, filename, width, height);

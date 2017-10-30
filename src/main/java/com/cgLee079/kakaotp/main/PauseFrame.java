@@ -12,12 +12,11 @@ import javax.swing.JPanel;
 
 import com.cgLee079.kakaotp.graphic.GlobalGraphic;
 import com.cgLee079.kakaotp.graphic.GraphicButton;
+import com.cgLee079.kakaotp.play.Play;
 
 public class PauseFrame extends JFrame {
-	GraphicButton homeBtn;
-	GraphicButton resumeBtn;
-	GraphicButton exitBtn;
-
+	private Play play;
+	
 	public PauseFrame() {
 		setLayout(new FlowLayout());
 		setSize(150, 180);
@@ -25,17 +24,26 @@ public class PauseFrame extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);// 크기 고정
 		setUndecorated(true);
-		getContentPane().setBackground(GlobalGraphic.baseColor);
+		setBackground(GlobalGraphic.baseColor);
 		setVisible(true);
-		this.setShape(new RoundRectangle2D.Float(0, 0, this.getWidth(), this.getHeight(), 50, 50));
+		setShape(new RoundRectangle2D.Float(0, 0, this.getWidth(), this.getHeight(), 50, 50));
 		Dimension frameSize = getSize();
 		Dimension windowSize = Toolkit.getDefaultToolkit().getScreenSize();
 		setLocation((windowSize.width - frameSize.width) / 2, (windowSize.height - frameSize.height) / 2);
 
 		add(new ButtonPanel());
 	}
+	
+	public PauseFrame (Play play){
+		this();
+		this.play = play;
+	}
 
 	class ButtonPanel extends JPanel {
+		private GraphicButton homeBtn;
+		private GraphicButton resumeBtn;
+		private GraphicButton exitBtn;
+
 		private ButtonPanel() {
 			setPreferredSize(new Dimension(200, 200));
 			setBackground(null);
@@ -55,12 +63,11 @@ public class PauseFrame extends JFrame {
 		}
 
 		class ButtonActionListener implements ActionListener {
-
 			public void actionPerformed(ActionEvent e) {
 				GraphicButton btn = (GraphicButton) e.getSource();
 				if (btn.getId().equals("homebtn")){
 				} else if (btn.getId().equals("resumebtn")){
-					MainFrame.mf.playPanel.play.resumeGame();
+					play.resumeGame();
 					PauseFrame.this.dispose();
 				} else if (btn.getId().equals("exitbtn")){
 					System.exit(0);

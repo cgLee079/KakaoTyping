@@ -2,15 +2,10 @@ package com.cgLee079.kakaotp.play;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.Random;
-import java.util.Vector;
 
 import javax.swing.JTextField;
 
-import com.cgLee079.kakaotp.dict.UserDictionary;
 import com.cgLee079.kakaotp.main.PauseFrame;
-import com.cgLee079.kakaotp.model.FallingWordLabel;
-import com.cgLee079.kakaotp.play.WestPanel.ItemPanel;
 
 class KeyEventor extends KeyAdapter {
 	PlayPanel playPanel;

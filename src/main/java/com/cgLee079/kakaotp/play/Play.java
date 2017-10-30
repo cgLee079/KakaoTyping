@@ -1,19 +1,13 @@
 package com.cgLee079.kakaotp.play;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.Vector;
 
 import com.cgLee079.kakaotp.dict.UserDictionary;
 import com.cgLee079.kakaotp.io.ScoreManager;
-import com.cgLee079.kakaotp.main.MainFrame;
 import com.cgLee079.kakaotp.main.ScoreFrame;
 import com.cgLee079.kakaotp.model.FallingWordLabel;
 import com.cgLee079.kakaotp.model.Score;
@@ -27,7 +21,7 @@ public class Play {
 	private boolean iskorean; // 입력 차례 (한글,영문)
 	private int heart;
 	private int level;
-	private int score;
+	private int point;
 	private double speed;
 	private int count;
 	private boolean[] item;
@@ -42,7 +36,7 @@ public class Play {
 		this.heart		= 100;
 		this.level 		= level;
 		this.speed 		= speed;
-		this.score 		= 0;
+		this.point 		= 0;
 		this.isplay 	= true;
 		this.iskorean 	= true; // 입력 차례 (한글,영문)
 		this.count 		= 10;
@@ -56,6 +50,153 @@ public class Play {
 		Arrays.fill(item, false);
 	}
 
+	public PlayPanel getPlayPanel() {
+		return playPanel;
+	}
+
+	public void setPlayPanel(PlayPanel playPanel) {
+		this.playPanel = playPanel;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
+
+	public UserDictionary getDictionary() {
+		return dictionary;
+	}
+
+
+
+	public void setDictionary(UserDictionary dictionary) {
+		this.dictionary = dictionary;
+	}
+
+
+
+	public boolean isIsplay() {
+		return isplay;
+	}
+
+	public void setIsplay(boolean isplay) {
+		this.isplay = isplay;
+	}
+
+	public boolean isIskorean() {
+		return iskorean;
+	}
+
+	public void setIskorean(boolean iskorean) {
+		this.iskorean = iskorean;
+	}
+
+
+
+	public int getHeart() {
+		return heart;
+	}
+
+
+
+	public void setHeart(int heart) {
+		this.heart = heart;
+	}
+
+
+
+	public int getLevel() {
+		return level;
+	}
+
+
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+	public int getPoint() {
+		return point;
+	}
+
+	public void setPoint(int point) {
+		this.point = point;
+	}
+
+
+
+	public double getSpeed() {
+		return speed;
+	}
+
+
+
+	public void setSpeed(double speed) {
+		this.speed = speed;
+	}
+
+
+
+	public int getCount() {
+		return count;
+	}
+
+
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+
+
+	public boolean[] getItem() {
+		return item;
+	}
+
+
+
+	public void setItem(boolean[] item) {
+		this.item = item;
+	}
+
+	public Vector<FallingWordLabel> getFallingWordLabels() {
+		return fallingWordLabels;
+	}
+
+	public void setFallingWordLabels(Vector<FallingWordLabel> fallingWordLabels) {
+		this.fallingWordLabels = fallingWordLabels;
+	}
+
+	public Vector<FallingAni> getFallingAnis() {
+		return fallingAnis;
+	}
+
+	public void setFallingAnis(Vector<FallingAni> fallingAnis) {
+		this.fallingAnis = fallingAnis;
+	}
+
+	public WordMaker getWordMaker() {
+		return wordMaker;
+	}
+
+	public void setWordMaker(WordMaker wordMaker) {
+		this.wordMaker = wordMaker;
+	}
+
+	public SpeedUpper getSpeedUpper() {
+		return speedUpper;
+	}
+
+	public void setSpeedUpper(SpeedUpper speedUpper) {
+		this.speedUpper = speedUpper;
+	}
+
+	
 	public void setKoreanTurn() {
 		this.iskorean = true;
 	} // 한글 입력 차례로
@@ -76,9 +217,9 @@ public class Play {
 
 	public void scoreUp() {// 점수 증가
 		count--;
-		score += level * 5;
+		point += level * 5;
 		
-		playPanel.drawScore(score);
+		playPanel.drawPoint(point);
 		
 		if (count == 0) {
 			levelUp();
@@ -100,6 +241,20 @@ public class Play {
 		playPanel.drawGain(value);
 	}
 
+	public void useItem(int index){
+		if(item[index]){
+			switch(index){
+			case 0: new Item1().call(); break;
+			case 1: new Item2().call(); break;
+			case 2: new Item3().call(); break;
+			case 3: new Item4().call(); break;
+			}
+			
+			item[index] = false;
+			playPanel.drawItemBtn(index, false);
+		}
+	}
+	
 	public void clearFallingWordLabels() { // 떨어지는 단어 모두 삭제
 		for (int index = 0; index < fallingWordLabels.size(); index++) {
 			fallingWordLabels.get(index).setVisible(false);
@@ -202,30 +357,32 @@ public class Play {
 			fallingAnis.get(i).interrupt();
 		}
 			
-		new ScoreFrame(playPanel);
 	}
 
 	public void pauseGame() {
 		this.isplay = false;
 		speedUpper.suspend();
 		wordMaker.suspend();
-		for (int i = 0; i < fallingAnis.size(); i++)
+		for (int i = 0; i < fallingAnis.size(); i++){
 			fallingAnis.get(i).suspend();
+		}
 	}
 
 	public void resumeGame() {
 		this.isplay = true;
 		speedUpper.resume();
 		wordMaker.resume();
-		for (int i = 0; i < fallingAnis.size(); i++)
+		for (int i = 0; i < fallingAnis.size(); i++){
 			fallingAnis.get(i).resume();
+		}
 	}
-
 	
 	public void gameOver() {
 		stopGame();
+		Score score = new Score(user.getCharacter(), user.getUsername(), point);
 		ScoreManager scoreManager = ScoreManager.getInstance();
-		scoreManager.addScore(new Score(user.getCharacter(), user.getUsername(), score));
+		scoreManager.addScore(score);
+		new ScoreFrame(score, level);
 	}
 
 	class SpeedUpper extends Thread {
@@ -299,4 +456,79 @@ public class Play {
 		}
 
 	}// FallingAni 클래스 끝
+	
+	abstract class Item {
+		public abstract void call(); // item 사용
+	}
+
+	class Item1 extends Item {
+		public void call() {
+			String korean;
+			String english;
+
+			// 떨어지는 모든 단어를 성공 단어에 추가
+			// case 1: 한글 입력상태에서 아이템 사용
+			// case 2: 영문 입력상테에서 아이템 사용
+			int size = fallingWordLabels.size();
+			for (int index = 0; index < size; index++) {
+				
+				FallingWordLabel fwLabel = fallingWordLabels.get(index);
+
+				korean = fwLabel.getText();
+				english = dictionary.render(korean);
+
+				// case2의 경우 - 모든 떨어지는 라벨 중 하나의 라벨은 영어를 가지고있음
+				if (fwLabel.getLanguage() == false) {
+					english = korean;
+					korean = dictionary.renderReverse(english);
+				}
+
+				// 성공 단어에 추가
+				playPanel.addSuccessWord(korean, english);
+			}
+
+			// 모든 떨어지는 라벨 제거
+			clearFallingWordLabels();
+		}
+	}
+
+	class Item2 extends Item {
+		public void call() {
+			pauseGame();
+
+			Timer t = new Timer(false);
+			// 5초후에 원래 속도로
+			t.schedule(new TimerTask() {
+				public void run() {
+					resumeGame();
+				}
+			}, 5000);
+		}
+	}
+
+	class Item3 extends Item {
+		double curSpeed;
+		
+		public void call() {
+			curSpeed = speed;
+			speed = 5.0;
+			
+			Timer t = new Timer(false);
+
+			// 5초후에 원래 속도로
+			t.schedule(new TimerTask() {
+				@Override
+				public void run() {
+					speed = curSpeed;
+				}
+			}, 5000);
+
+		}
+	}
+
+	class Item4 extends Item {
+		public void call() {
+			gain(100);
+		}
+	}
 }

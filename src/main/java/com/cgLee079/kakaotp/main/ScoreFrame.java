@@ -21,6 +21,9 @@ import com.cgLee079.kakaotp.model.Score;
 import com.cgLee079.kakaotp.play.PlayPanel;
 
 public class ScoreFrame extends JFrame {
+	private Score score;
+	private int level;
+	
 	public ScoreFrame() {
 
 		setSize(800, 550);
@@ -34,11 +37,18 @@ public class ScoreFrame extends JFrame {
 		setLocation((windowSize.width - frameSize.width) / 2, (windowSize.height - frameSize.height) / 2);
 
 		String npPath = "images/ScoreFrame/NorthPanel/";
-		NorthPanel north = new NorthPanel(npPath, "Background", 800, 60);
+		NorthPanel northPanel = new NorthPanel(npPath, "Background", 800, 60);
+		CenterPanel centerPanel = new CenterPanel();
+		
+		add(centerPanel, BorderLayout.CENTER);
+		add(northPanel, BorderLayout.NORTH);
 
-		addSuccessWord(center, BorderLayout.CENTER);
-		add(north, BorderLayout.NORTH);
-
+	}
+	
+	public ScoreFrame(Score score, int level){
+		this();
+		this.score = score;
+		this.level = level;
 	}
 
 	class NorthPanel extends GraphicPanel {
@@ -49,6 +59,7 @@ public class ScoreFrame extends JFrame {
 
 	class CenterPanel extends JPanel {
 		String path = "images/ScoreFrame/CenterPanel/";
+		
 		private CenterPanel() {
 			setVisible(true);
 			setBackground(GlobalGraphic.baseColor);
@@ -61,7 +72,7 @@ public class ScoreFrame extends JFrame {
 			this.add(gp);
 			this.add(mgp);
 
-			String myCharacter = myuser.getCharacter(); // 캐릭터 이미지
+			String myCharacter = score.getCharacter(); // 캐릭터 이미지
 			ImageIcon myChimage = new ImageIcon(path + myCharacter + "스코어.gif");
 			JLabel myChLabel = new JLabel(myChimage);
 			myChLabel.setLocation(630, 300);
@@ -151,9 +162,9 @@ public class ScoreFrame extends JFrame {
 
 			public void setMyGrade() {
 
-				Integer myScore = myuser.getPoint();
-				String myName 	= myuser.getUsername();
-				Integer myLevel = p.play.getLevel();
+				Integer myScore = score.getPoint();
+				String myName 	= score.getUsername();
+				Integer myLevel = level;
 
 				JLabel myScoreLabel = new JLabel(myScore.toString());
 				setGradeLabel(myScoreLabel, 250, 60, 50);
