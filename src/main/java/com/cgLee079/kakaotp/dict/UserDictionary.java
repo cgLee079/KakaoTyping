@@ -2,11 +2,10 @@ package com.cgLee079.kakaotp.dict;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Vector;
@@ -18,19 +17,28 @@ public class UserDictionary {
 
 	public UserDictionary(String user) {
 		try {
-			readWordBasicDictionary(user);
+			readWordUserDictionary(user);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	// 파일에서 단어를 입력시킴
-	private void readWordBasicDictionary(String user) throws IOException {
+	private void readWordUserDictionary(String user) throws IOException {
 		String line = ""; // readline 읽을 String변수
 
+		String path = "resources/UserDictionary";
+		String filename = user + "_Dictionary.txt";
+		File dictFile = new File(path, filename);
+
+		if (!dictFile.exists()) {
+			dictFile.createNewFile();
+			initDictionary(dictFile);
+		}
+
 		// 파일 데이터 저장 스트림
-		BufferedReader in = new BufferedReader(new FileReader("resources/UserDictionary/" + user + "_Dictionary.txt"));
-	
+		BufferedReader in = new BufferedReader(new FileReader(dictFile));
+
 		// 데이터 잘라줄 객체
 		String[] spliter;
 		String korean;
@@ -41,13 +49,39 @@ public class UserDictionary {
 		while ((line = in.readLine()) != null) {
 			spliter = line.split("\t"); // 읽어온 라인데이터를 "탭"단위로 자름
 
-			korean 		= spliter[0];
-			english 	= spliter[1];
-			successCnt 	= spliter[2];
+			korean = spliter[0];
+			english = spliter[1];
+			successCnt = spliter[2];
 			this.add(korean, english, Integer.parseInt(successCnt));
 		}
 
 		in.close(); // 스트림 종료
+	}
+
+	public void initDictionary(File dictFile) {
+		String line = ""; // readline 읽을 String변수
+		
+		// 파일 데이터 저장 스트림
+		BufferedReader in = null;
+		BufferedWriter out = null;
+		
+		// 파일 라인별로 읽음
+		try {
+			in 	= new BufferedReader(new FileReader("resources/BasicDictionary.txt"));
+			out = new BufferedWriter(new FileWriter(dictFile));
+			
+			while ((line = in.readLine()) != null) {
+				out.write(line);
+				out.newLine();
+			}
+			// 스트림 종료
+			in.close();
+			out.close();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	public void writeWordUserDictionary(String user) throws IOException {
@@ -74,11 +108,11 @@ public class UserDictionary {
 	public int getNumOfWord() {
 		return list.size();
 	}
-	
-	public String getWord(int i){
+
+	public String getWord(int i) {
 		return list.get(i);
 	}
-	
+
 	// 단어를 입력
 	public void add(String korean, String english, Integer successcount) {
 		list.add(korean);
@@ -100,7 +134,7 @@ public class UserDictionary {
 	// 영어를 한글로 번역
 	public String renderReverse(String english) {
 		for (String s : render.keySet()) {
-			if (render.get(s).equals(english)){
+			if (render.get(s).equals(english)) {
 				return s;
 			}
 		}

@@ -6,8 +6,6 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Enumeration;
 
@@ -19,7 +17,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.cgLee079.kakaotp.dict.BasicDictionary;
 import com.cgLee079.kakaotp.graphic.GlobalGraphic;
 import com.cgLee079.kakaotp.graphic.GraphicButton;
 import com.cgLee079.kakaotp.graphic.GraphicRadioButton;
@@ -190,9 +187,6 @@ public class MakeUserFrame extends JFrame {
 					UserManager userManager = UserManager.getInstance();
 					userManager.writeUser(character, username);					
 					userListPanel.updateUser();
-					
-					BasicDictionary basicDictionary = new BasicDictionary();
-					basicDictionary.MAKE_UserDictionary(username);
 				}
 
 				JFrame topFrame = (JFrame) (SubmitPanel.this.getTopLevelAncestor());
