@@ -1,7 +1,9 @@
 package com.cgLee079.kakaotp.io;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,16 +11,23 @@ import java.util.Comparator;
 import java.util.List;
 
 import com.cgLee079.kakaotp.model.Score;
-
-import PlayPanel.PlayPanel;
+import com.cgLee079.kakaotp.play.PlayPanel;
 
 public class ScoreManager {
-
-	public ScoreManager() {
+	private static ScoreManager instance = null;
+	
+	private ScoreManager() {
+	}
+	
+	public static ScoreManager getInstance() {
+		if(instance == null){
+			instance = new ScoreManager();
+		}
+		return instance;
 	}
 
-	public List<Score> readScores() {
-		List<Score> scores = new ArrayList<Score>();
+	public ArrayList<Score> getScores() {
+		ArrayList<Score> scores = new ArrayList<Score>();
 		BufferedReader in = null;
 		String[] split;
 		String s;
@@ -80,10 +89,26 @@ public class ScoreManager {
 
 		return myScore;
 	}
+	
+	public void addScore(Score score) {
+		try {
+			BufferedWriter out = new BufferedWriter(new FileWriter("resources/Score.txt", true));
+			
+			String name = score.getUsername();
+			String ch = score.getCharacter();
+			int point = score.getPoint();
+			
+			out.write(ch + '\t' + name + '\t' + point);
+			out.newLine();
+			out.close();
+		} catch (IOException e) {
+			return;
+		}
+	}
 
 	class NoDescCompare implements Comparator<Score> {
 		public int compare(Score arg0, Score arg1) {
-			return arg0.getScore() > arg1.getScore() ? -1 : arg0.getScore() < arg1.getScore() ? 1 : 0;
+			return arg0.getPoint() > arg1.getPoint() ? -1 : arg0.getPoint() < arg1.getPoint() ? 1 : 0;
 		}
 	}
 

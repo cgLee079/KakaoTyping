@@ -19,14 +19,11 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
 import com.cgLee079.kakaotp.graphic.GraphicButton;
-
-import PlayPanel.PlayPanel;
+import com.cgLee079.kakaotp.play.PlayPanel;
 
 
 public class MainFrame extends JFrame{
 	private MainPanel mainPanel;
-	private PlayPanel playPanel;
-	private StartFrame startFrame;
 	
 	public MainFrame(){
 		setSize(800,550);
@@ -123,19 +120,13 @@ public class MainFrame extends JFrame{
 		class MenuActionListener implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				GraphicButton btn=(GraphicButton)e.getSource();
+				GraphicButton btn = (GraphicButton)e.getSource();
 
-				if(btn.getId().equals("Startbtn")) { startFrame = new StartFrame(); }
+				if(btn.getId().equals("Startbtn")) { new StartFrame((MainFrame) btn.getTopLevelAncestor()); }
 				else if(btn.getId().equals("WordSetBtn")) { new WordSetFrame(); }
 				else if(btn.getId().equals("Help"));
 				else if(btn.getId().equals("Exitbtn")){ System.exit(0); }
 				
-				/*switch(btn.getFILENAME()){
-				case "Startbtn": startFrame=new StartFrame(); break;
-				case "WordSetbtn": new WordSetFrame(); break;
-				case "Help": break;
-				case "Exitbtn": System.exit(0);break; 
-				}*/
 			}
 		}
 				

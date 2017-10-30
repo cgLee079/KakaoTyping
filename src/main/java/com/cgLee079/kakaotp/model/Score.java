@@ -2,26 +2,25 @@ package com.cgLee079.kakaotp.model;
 
 public class Score {
 	private String character;
-	private String name;
-	private Integer score;
-	
-	Score(){ };
-	public Score(String ch,String name,Integer score){
-		this.character=ch;
-		this.name=name;
-		this.score=score;
+	private String username;
+	private Integer point;
+
+	public Score(String character, String name, Integer point) {
+		this.character = character;
+		this.username = name;
+		this.point = point;
 	}
-	
-	public String getCharacter(){//캐릭터 타입 리턴
+
+	public String getCharacter() {// 캐릭터 타입 리턴
 		return character;
 	}
-	
-	public String getName(){//이름 리턴
-		return name;
+
+	public String getUsername() {// 이름 리턴
+		return username;
 	}
-	
-	public Integer getScore(){//점수 리턴
-		return score;
+
+	public Integer getPoint() {// 점수 리턴
+		return point;
 	}
 
 }

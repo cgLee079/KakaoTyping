@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -17,19 +18,16 @@ import com.cgLee079.kakaotp.graphic.GlobalGraphic;
 import com.cgLee079.kakaotp.graphic.GraphicPanel;
 import com.cgLee079.kakaotp.io.ScoreManager;
 import com.cgLee079.kakaotp.model.Score;
-
-import PlayPanel.PlayPanel;
+import com.cgLee079.kakaotp.play.PlayPanel;
 
 public class ScoreFrame extends JFrame {
-	private ScoreManager scoreManager;
-
 	public ScoreFrame() {
 
 		setSize(800, 550);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
 		setVisible(true);
-		setBackground(com.cgLee079.kakaotp.graphic.GlobalGraphic.basic);
+		setBackground(GlobalGraphic.basic);
 
 		Dimension frameSize = getSize();
 		Dimension windowSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -38,7 +36,7 @@ public class ScoreFrame extends JFrame {
 		String npPath = "images/ScoreFrame/NorthPanel/";
 		NorthPanel north = new NorthPanel(npPath, "Background", 800, 60);
 
-		add(center, BorderLayout.CENTER);
+		addSuccessWord(center, BorderLayout.CENTER);
 		add(north, BorderLayout.NORTH);
 
 	}
@@ -88,35 +86,34 @@ public class ScoreFrame extends JFrame {
 			}
 
 			private void drawGrade() {
+				ScoreManager scoreManager = ScoreManager.getInstance();
+				ArrayList<Score> scores = scoreManager.getScores();
+				Score score = null;
+				
+				ImageIcon[] images	 = new ImageIcon[num];
+				ImageIcon[] gradeImg = new ImageIcon[num];
 
-				ImageIcon images[] = new ImageIcon[num];
-				ImageIcon gradeImg[] = new ImageIcon[num];
-
-				JLabel faceLabel[] = new JLabel[num];
-				JLabel scoreLabel[] = new JLabel[num];
-				JLabel gradeLabel[] = new JLabel[num];
-				JLabel nameLabel[] = new JLabel[num];
+				JLabel[] faceLabel 	= new JLabel[num];
+				JLabel[] scoreLabel = new JLabel[num];
+				JLabel[] gradeLabel = new JLabel[num];
+				JLabel[] nameLabel 	= new JLabel[num];
 
 				String name = " ";// 이름 저장
 				String faceType = " ";// 캐릭터 타입 저장
 
 				for (int i = 0; i < num; i++) {
-
+					score = scores.get(i);
+					
 					gradeImg[i] = new ImageIcon(path + "트로피.png");
 					gradeLabel[i] = new JLabel(gradeImg[i]);
 
-					name = scoreLabel.get(i).getName();
+					name = score.getUsername();
 
-					faceType = scoreLabel.get(i).getCharacter();
-					images[i] = new ImageIcon(path + faceType + "Face.png");// faceType
-																			// 별로
-																			// 이모티콘
-																			// 분류
+					faceType = score.getCharacter();
+					images[i] = new ImageIcon(path + faceType + "Face.png");// faceType 별로 이모티콘  분류
 					faceLabel[i] = new JLabel(images[i]);
 
-					System.out.println(faceType);
-
-					scoreLabel[i] = new JLabel(scoreLabel.get(i).getScore().toString());
+					scoreLabel[i] = new JLabel(score.getPoint().toString());
 					scoreLabel[i].setSize(100, 100);
 					scoreLabel[i].setLocation(300, i * 100);
 					scoreLabel[i].setFont(new GameFontB(15));
@@ -142,21 +139,20 @@ public class ScoreFrame extends JFrame {
 
 		class MyGradePanel extends GraphicPanel {
 
-			MyGradePanel(String path, String FILENAME, int width, int height, CenterPanel p) {
-				super(path, FILENAME, width, height);
+			MyGradePanel(String path, String filename, int width, int height, CenterPanel p) {
+				super(path, filename, width, height);
 
 				setVisible(true);
 				setBackground(Color.white);
 				setLayout(new GridLayout(3, 1));
 				setLocation(450, 30);
 				setMyGrade();
-
 			}
 
 			public void setMyGrade() {
 
-				Integer myScore = myuser.getScore();
-				String myName = myuser.getName();
+				Integer myScore = myuser.getPoint();
+				String myName 	= myuser.getUsername();
 				Integer myLevel = p.play.getLevel();
 
 				JLabel myScoreLabel = new JLabel(myScore.toString());
