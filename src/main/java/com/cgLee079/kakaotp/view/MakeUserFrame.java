@@ -1,4 +1,4 @@
-package com.cgLee079.kakaotp.main;
+package com.cgLee079.kakaotp.view;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -24,7 +24,7 @@ import com.cgLee079.kakaotp.graphic.GlobalGraphic;
 import com.cgLee079.kakaotp.graphic.GraphicButton;
 import com.cgLee079.kakaotp.graphic.GraphicRadioButton;
 import com.cgLee079.kakaotp.io.UserManager;
-import com.cgLee079.kakaotp.main.StartFrame.UserListPanel;
+import com.cgLee079.kakaotp.view.StartFrame.UserListPanel;
 
 public class MakeUserFrame extends JFrame {
 	UserListPanel userListPanel;

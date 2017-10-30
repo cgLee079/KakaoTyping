@@ -11,7 +11,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import com.cgLee079.kakaotp.model.Score;
-import com.cgLee079.kakaotp.play.PlayPanel;
+import com.cgLee079.kakaotp.view.PlayPanel;
 
 public class ScoreManager {
 	private static ScoreManager instance = null;

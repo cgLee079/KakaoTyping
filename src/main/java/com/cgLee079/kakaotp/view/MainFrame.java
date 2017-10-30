@@ -1,4 +1,4 @@
-package com.cgLee079.kakaotp.main;
+package com.cgLee079.kakaotp.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -19,7 +19,6 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
 import com.cgLee079.kakaotp.graphic.GraphicButton;
-import com.cgLee079.kakaotp.play.PlayPanel;
 
 
 public class MainFrame extends JFrame{

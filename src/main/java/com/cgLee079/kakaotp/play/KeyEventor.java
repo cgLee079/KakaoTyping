@@ -5,9 +5,10 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.JTextField;
 
-import com.cgLee079.kakaotp.main.PauseFrame;
+import com.cgLee079.kakaotp.view.PauseFrame;
+import com.cgLee079.kakaotp.view.PlayPanel;
 
-class KeyEventor extends KeyAdapter {
+public class KeyEventor extends KeyAdapter {
 	PlayPanel playPanel;
 	Play play;
 	PauseFrame pauseFrame;

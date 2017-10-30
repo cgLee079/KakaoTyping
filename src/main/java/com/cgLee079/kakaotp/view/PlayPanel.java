@@ -1,9 +1,8 @@
-package com.cgLee079.kakaotp.play;
+package com.cgLee079.kakaotp.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -21,6 +20,8 @@ import com.cgLee079.kakaotp.graphic.GlobalGraphic;
 import com.cgLee079.kakaotp.graphic.GraphicButton;
 import com.cgLee079.kakaotp.graphic.GraphicPanel;
 import com.cgLee079.kakaotp.model.FallingWordLabel;
+import com.cgLee079.kakaotp.play.KeyEventor;
+import com.cgLee079.kakaotp.play.Play;
 
 public class PlayPanel extends JPanel {
 	private EastPanel eastPanel;
@@ -29,7 +30,6 @@ public class PlayPanel extends JPanel {
 	private SouthPanel southPanel;
 	private WestPanel westPanel;
 	private Play play;
-	private KeyEventor keyEventor;
 
 	public PlayPanel() {
 		this.setBackground(Color.WHITE);

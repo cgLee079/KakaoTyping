@@ -1,4 +1,4 @@
-package com.cgLee079.kakaotp.main;
+package com.cgLee079.kakaotp.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -29,7 +29,6 @@ import com.cgLee079.kakaotp.graphic.GraphicRadioButton;
 import com.cgLee079.kakaotp.io.UserManager;
 import com.cgLee079.kakaotp.model.User;
 import com.cgLee079.kakaotp.play.Play;
-import com.cgLee079.kakaotp.play.PlayPanel;
 
 public class StartFrame extends JFrame {
 	private MainFrame mainFrame;

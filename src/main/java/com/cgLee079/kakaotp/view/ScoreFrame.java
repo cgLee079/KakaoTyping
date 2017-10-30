@@ -1,4 +1,4 @@
-package com.cgLee079.kakaotp.main;
+package com.cgLee079.kakaotp.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -18,7 +18,6 @@ import com.cgLee079.kakaotp.graphic.GlobalGraphic;
 import com.cgLee079.kakaotp.graphic.GraphicPanel;
 import com.cgLee079.kakaotp.io.ScoreManager;
 import com.cgLee079.kakaotp.model.Score;
-import com.cgLee079.kakaotp.play.PlayPanel;
 
 public class ScoreFrame extends JFrame {
 	private Score score;

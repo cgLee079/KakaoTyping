@@ -8,10 +8,11 @@ import java.util.Vector;
 
 import com.cgLee079.kakaotp.dict.UserDictionary;
 import com.cgLee079.kakaotp.io.ScoreManager;
-import com.cgLee079.kakaotp.main.ScoreFrame;
 import com.cgLee079.kakaotp.model.FallingWordLabel;
 import com.cgLee079.kakaotp.model.Score;
 import com.cgLee079.kakaotp.model.User;
+import com.cgLee079.kakaotp.view.PlayPanel;
+import com.cgLee079.kakaotp.view.ScoreFrame;
 
 public class Play {
 	PlayPanel playPanel;
