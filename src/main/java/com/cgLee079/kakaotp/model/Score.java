@@ -1,12 +1,12 @@
 package com.cgLee079.kakaotp.model;
 
-public class UserInfo {
+public class Score {
 	private String character;
 	private String name;
 	private Integer score;
 	
-	UserInfo(){ };
-	public UserInfo(String ch,String name,Integer score){
+	Score(){ };
+	public Score(String ch,String name,Integer score){
 		this.character=ch;
 		this.name=name;
 		this.score=score;

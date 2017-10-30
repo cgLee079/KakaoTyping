@@ -23,8 +23,11 @@ import com.cgLee079.kakaotp.dict.BasicDictionary;
 import com.cgLee079.kakaotp.graphic.GlobalGraphic;
 import com.cgLee079.kakaotp.graphic.GraphicButton;
 import com.cgLee079.kakaotp.graphic.GraphicRadioButton;
+import com.cgLee079.kakaotp.io.UserManager;
+import com.cgLee079.kakaotp.main.StartFrame.UserListPanel;
 
 public class MakeUserFrame extends JFrame {
+	UserListPanel userListPanel;
 	ChoiceCharacterPanel choiceChracterPanel;
 	UserInputPanel userInputPanel;
 	SubmitPanel submitPanel;
@@ -60,20 +63,25 @@ public class MakeUserFrame extends JFrame {
 		add(userInputPanel);
 		add(submitPanel);
 	}
+	
+	public MakeUserFrame(UserListPanel userListPanel){
+		this();
+		this.userListPanel = userListPanel;
+	}
 
 	class ChoiceCharacterPanel extends JPanel {
 		JLabel choiceLabel;
 		GraphicRadioButton[] choiceBtn;
 		ButtonGroup chracterBtnGroup;
 
-		ChoiceCharacterPanel() {
+		private ChoiceCharacterPanel() {
 			setSize(400, 250);
 			setBackground(null);
 
 			makeBtn();
 		}
 
-		void makeBtn() {
+		private void makeBtn() {
 			chracterBtnGroup = new ButtonGroup();
 
 			String path = "images/MakeUserFrame/";
@@ -91,6 +99,20 @@ public class MakeUserFrame extends JFrame {
 				add(choiceBtn[i]);
 			}
 		}
+		
+		public String getCharaterSelect(){
+			String charaterID = null;
+			
+			Enumeration<AbstractButton> enums = this.chracterBtnGroup.getElements();
+			while (enums.hasMoreElements()) {
+				GraphicRadioButton radiobtn = (GraphicRadioButton) enums.nextElement();
+				if (radiobtn.isSelected()){
+					charaterID = radiobtn.getId();
+				}
+			}
+			
+			return charaterID;
+		}
 
 		class ChoiceActionListener implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
@@ -100,10 +122,21 @@ public class MakeUserFrame extends JFrame {
 		}
 	}
 
+	class UserInputPanel extends JPanel {
+		JTextField userTextField;
+
+		private UserInputPanel() {
+			setLayout(new FlowLayout());
+			setBackground(null);
+			userTextField = new JTextField("", 15);
+			add(userTextField);
+		}
+	}
+	
 	class SubmitPanel extends JPanel {
 		GraphicButton[] submitBtn;
 
-		SubmitPanel() {
+		private SubmitPanel() {
 			setLayout(null);
 			setBackground(null);
 			makeBtn();
@@ -114,7 +147,7 @@ public class MakeUserFrame extends JFrame {
 			}
 		}
 
-		void makeBtn() {
+		private void makeBtn() {
 			String path = "images/MakeUserFrame/";
 			submitBtn = new GraphicButton[2];
 			submitBtn[0] = new GraphicButton(path, "SubmitBtn", 100, 35);
@@ -126,67 +159,44 @@ public class MakeUserFrame extends JFrame {
 		}
 
 		class SubmitActionListener implements ActionListener {
-			String chracter;
+			String character;
 
 			public void actionPerformed(ActionEvent e) {
 
 				GraphicButton btn = (GraphicButton) e.getSource();
 				if (btn.getId().equals("SubmitBtn")) {
 
-					String CHARCTERNAME = null;
-					Enumeration<AbstractButton> enums = choiceChracterPanel.chracterBtnGroup.getElements();
-					while (enums.hasMoreElements()) {
-						GraphicRadioButton radiobtn = (GraphicRadioButton) enums.nextElement();
-						if (radiobtn.isSelected())
-							CHARCTERNAME = radiobtn.getId();
-					}
-
-					if (CHARCTERNAME == null) {
+					String characterID = null;
+					characterID = choiceChracterPanel.getCharaterSelect();
+					if (characterID == null) {
 						JOptionPane.showMessageDialog(null, "캐릭터를 선택해주세요", "경고!", JOptionPane.WARNING_MESSAGE);
 						return;
 					}
 
-					/*
-					 * switch(CHARCTERNAME){ case "MuziBtn": chracter="MUZI";
-					 * break; case "LyanBtn": chracter="LYAN"; break; case
-					 * "ApeachBtn": chracter="APEACH"; break; }
-					 */
+					if (characterID.equals("MuziBtn")){
+						character = "MUZI";
+					} else if (characterID.equals("LyanBtn")){
+						character = "LYAN";
+					} else if (characterID.equals("ApeachBtn")){
+						character = "APEACH";
+					}
 
-					if (CHARCTERNAME.equals("MuziBtn"))
-						chracter = "MUZI";
-					else if (CHARCTERNAME.equals("LyanBtn"))
-						chracter = "LYAN";
-					else if (CHARCTERNAME.equals("ApeachBtn"))
-						chracter = "APEACH";
-
-					String user = userInputPanel.userTextField.getText();
-					if (user.equals("")) {
+					String username = userInputPanel.userTextField.getText();
+					if (username.equals("")) {
 						JOptionPane.showMessageDialog(null, "이름을 입력해주세요", "경고!", JOptionPane.WARNING_MESSAGE);
 						return;
-
 					}
 
-					try {
-						writeUser(user);
-						MainFrame.mf.startFrame.pUserList.readUser();
-						BasicDictionary basicDictionary = new BasicDictionary();
-						basicDictionary.MAKE_UserDictionary(user);
-					} catch (IOException e2) {
-						// TODO Auto-generated catch block
-						e2.printStackTrace();
-					}
+					UserManager userManager = UserManager.getInstance();
+					userManager.writeUser(character, username);					
+					userListPanel.updateUser();
+					
+					BasicDictionary basicDictionary = new BasicDictionary();
+					basicDictionary.MAKE_UserDictionary(username);
 				}
 
 				JFrame topFrame = (JFrame) (SubmitPanel.this.getTopLevelAncestor());
 				topFrame.dispose();
-			}
-
-			public void writeUser(String user) throws IOException {
-				BufferedWriter out = new BufferedWriter(new FileWriter("resources/User.txt", true));
-
-				out.write(chracter + "\t" + user);
-				out.newLine();
-				out.close();
 			}
 
 			public void makeUserDictinary() throws IOException {
@@ -197,14 +207,4 @@ public class MakeUserFrame extends JFrame {
 
 	}
 
-	class UserInputPanel extends JPanel {
-		JTextField userTextField;
-
-		UserInputPanel() {
-			setLayout(new FlowLayout());
-			setBackground(null);
-			userTextField = new JTextField("", 15);
-			add(userTextField);
-		}
-	}
 }

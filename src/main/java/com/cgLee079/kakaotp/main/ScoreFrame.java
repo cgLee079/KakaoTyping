@@ -15,16 +15,15 @@ import com.cgLee079.kakaotp.graphic.GameFontB;
 import com.cgLee079.kakaotp.graphic.GameFontP;
 import com.cgLee079.kakaotp.graphic.GlobalGraphic;
 import com.cgLee079.kakaotp.graphic.GraphicPanel;
-import com.cgLee079.kakaotp.model.UserInfo;
-import com.cgLee079.kakaotp.util.FileIO;
+import com.cgLee079.kakaotp.io.ScoreManager;
+import com.cgLee079.kakaotp.model.Score;
 
 import PlayPanel.PlayPanel;
 
 public class ScoreFrame extends JFrame {
-	private FileIO fIO;
-	public PlayPanel p;
+	private ScoreManager scoreManager;
 
-	public ScoreFrame(PlayPanel p) {
+	public ScoreFrame() {
 
 		setSize(800, 550);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -36,12 +35,8 @@ public class ScoreFrame extends JFrame {
 		Dimension windowSize = Toolkit.getDefaultToolkit().getScreenSize();
 		setLocation((windowSize.width - frameSize.width) / 2, (windowSize.height - frameSize.height) / 2);
 
-		this.p = p;
-		fIO = new FileIO(p);
-
 		String npPath = "images/ScoreFrame/NorthPanel/";
 		NorthPanel north = new NorthPanel(npPath, "Background", 800, 60);
-		CenterPanel center = new CenterPanel(p);
 
 		add(center, BorderLayout.CENTER);
 		add(north, BorderLayout.NORTH);
@@ -56,22 +51,17 @@ public class ScoreFrame extends JFrame {
 
 	class CenterPanel extends JPanel {
 		String path = "images/ScoreFrame/CenterPanel/";
-		public PlayPanel p;
-		UserInfo myuser = fIO.getMyUser();
-
-		CenterPanel(PlayPanel p) {
-			this.p = p;
+		private CenterPanel() {
 			setVisible(true);
-
-			setBackground(GlobalGraphic.character);
+			setBackground(GlobalGraphic.baseColor);
 
 			setLayout(null);
 			setPreferredSize(new Dimension(500, 420));
 
 			GradePanel gp = new GradePanel(path, "frame", 390, 410, this);
 			MyGradePanel mgp = new MyGradePanel(path, "myScore", 320, 290, this);
-			add(gp);
-			add(mgp);
+			this.add(gp);
+			this.add(mgp);
 
 			String myCharacter = myuser.getCharacter(); // 캐릭터 이미지
 			ImageIcon myChimage = new ImageIcon(path + myCharacter + "스코어.gif");
@@ -79,30 +69,31 @@ public class ScoreFrame extends JFrame {
 			myChLabel.setLocation(630, 300);
 			myChLabel.setSize(130, 130);
 
-			add(myChLabel);
+			this.add(myChLabel);
 		}
 
 		class GradePanel extends GraphicPanel {
 
 			int num = 4;// 전체 화면에 표시할 등수 표시 갯수
 
-			public GradePanel(String path, String FILENAME, int width, int height, CenterPanel p) {
-				super(path, FILENAME, width, height);
+			public GradePanel(String path, String filename, int width, int height, CenterPanel p) {
+				super(path, filename, width, height);
 
 				setVisible(true);
 				setBackground(Color.white);
 				setLayout(null);
-				setGrade();
 				setLocation(30, 30);
+				
+				drawGrade();
 			}
 
-			void setGrade() {
+			private void drawGrade() {
 
 				ImageIcon images[] = new ImageIcon[num];
 				ImageIcon gradeImg[] = new ImageIcon[num];
 
 				JLabel faceLabel[] = new JLabel[num];
-				JLabel scores[] = new JLabel[num];
+				JLabel scoreLabel[] = new JLabel[num];
 				JLabel gradeLabel[] = new JLabel[num];
 				JLabel nameLabel[] = new JLabel[num];
 
@@ -114,9 +105,9 @@ public class ScoreFrame extends JFrame {
 					gradeImg[i] = new ImageIcon(path + "트로피.png");
 					gradeLabel[i] = new JLabel(gradeImg[i]);
 
-					name = fIO.getUsers().get(i).getName();
+					name = scoreLabel.get(i).getName();
 
-					faceType = fIO.getUsers().get(i).getCharacter();
+					faceType = scoreLabel.get(i).getCharacter();
 					images[i] = new ImageIcon(path + faceType + "Face.png");// faceType
 																			// 별로
 																			// 이모티콘
@@ -125,10 +116,10 @@ public class ScoreFrame extends JFrame {
 
 					System.out.println(faceType);
 
-					scores[i] = new JLabel(fIO.getUsers().get(i).getScore().toString());
-					scores[i].setSize(100, 100);
-					scores[i].setLocation(300, i * 100);
-					scores[i].setFont(new GameFontB(15));
+					scoreLabel[i] = new JLabel(scoreLabel.get(i).getScore().toString());
+					scoreLabel[i].setSize(100, 100);
+					scoreLabel[i].setLocation(300, i * 100);
+					scoreLabel[i].setFont(new GameFontB(15));
 
 					faceLabel[i].setSize(100, 100);
 					faceLabel[i].setLocation(10, i * 100);
@@ -143,7 +134,7 @@ public class ScoreFrame extends JFrame {
 
 					add(faceLabel[i]);
 					add(gradeLabel[i]);
-					add(scores[i]);
+					add(scoreLabel[i]);
 					add(nameLabel[i]);
 				}
 			}
@@ -181,7 +172,7 @@ public class ScoreFrame extends JFrame {
 
 			public void setGradeLabel(JLabel source, int x, int y, int fontSize) {
 				source.setSize(x, y);
-				source.setForeground(GlobalGraphic.character);
+				source.setForeground(GlobalGraphic.baseColor);
 				source.setHorizontalAlignment(JLabel.CENTER);
 				source.setVerticalAlignment(JLabel.CENTER);
 				source.setFont(new GameFontP(fontSize));

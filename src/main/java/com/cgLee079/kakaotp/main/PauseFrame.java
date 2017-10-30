@@ -25,7 +25,7 @@ public class PauseFrame extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);// 크기 고정
 		setUndecorated(true);
-		getContentPane().setBackground(GlobalGraphic.character);
+		getContentPane().setBackground(GlobalGraphic.baseColor);
 		setVisible(true);
 		this.setShape(new RoundRectangle2D.Float(0, 0, this.getWidth(), this.getHeight(), 50, 50));
 		Dimension frameSize = getSize();
@@ -36,9 +36,10 @@ public class PauseFrame extends JFrame {
 	}
 
 	class ButtonPanel extends JPanel {
-		ButtonPanel() {
+		private ButtonPanel() {
 			setPreferredSize(new Dimension(200, 200));
-			this.setBackground(null);
+			setBackground(null);
+			
 			homeBtn = new GraphicButton("images/PauseFrame/", "Homebtn", 120, 50);
 			homeBtn.addActionListener(new ButtonActionListener());
 
@@ -57,20 +58,14 @@ public class PauseFrame extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 				GraphicButton btn = (GraphicButton) e.getSource();
-				if (btn.getId().equals("homebtn"))
-					;
-				else if (btn.getId().equals("resumebtn"))
+				if (btn.getId().equals("homebtn")){
+				} else if (btn.getId().equals("resumebtn")){
 					MainFrame.mf.playPanel.play.resumeGame();
-				else if (btn.getId().equals("exitbtn"))
+					PauseFrame.this.dispose();
+				} else if (btn.getId().equals("exitbtn")){
 					System.exit(0);
-
-				/*
-				 * switch(btn.getFILENAME()){ case "homebtn": break; case
-				 * "resumebtn":MainFrame.mf.playPanel.play.resumeGame(); break;
-				 * case "exitbtn": System.exit(0); }
-				 */
-
-				PauseFrame.this.dispose();
+				}
+				
 			}
 
 		}

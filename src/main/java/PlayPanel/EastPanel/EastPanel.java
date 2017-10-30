@@ -11,7 +11,7 @@ public class EastPanel extends JPanel{
 	public SuccessWordPanel successWordPanel;
 
 	public EastPanel(){
-		setBackground(GlobalGraphic.character);
+		setBackground(GlobalGraphic.baseColor);
 		setPreferredSize(new Dimension(150,0));
 		setLayout(null);
 		

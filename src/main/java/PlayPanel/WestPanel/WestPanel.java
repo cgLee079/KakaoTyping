@@ -12,7 +12,7 @@ public class WestPanel extends JPanel{
 	public ItemPanel itemPanel;
 	
 	public WestPanel(){
-		setBackground(GlobalGraphic.character);
+		setBackground(GlobalGraphic.baseColor);
 		setPreferredSize(new Dimension(150,0));
 		
 		String itemPath=GlobalGraphic.path+"WestPanel/";

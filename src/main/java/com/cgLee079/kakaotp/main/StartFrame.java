@@ -11,6 +11,7 @@ import java.awt.geom.RoundRectangle2D;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 import javax.swing.AbstractButton;
@@ -24,6 +25,7 @@ import com.cgLee079.kakaotp.graphic.GlobalGraphic;
 import com.cgLee079.kakaotp.graphic.GraphicButton;
 import com.cgLee079.kakaotp.graphic.GraphicPanel;
 import com.cgLee079.kakaotp.graphic.GraphicRadioButton;
+import com.cgLee079.kakaotp.io.UserManager;
 
 import PlayPanel.PlayPanel;
 
@@ -33,7 +35,7 @@ public class StartFrame extends JFrame {
 	private LevelListPanel levelListPanel;
 	private SubmitPanel submitPanel;
 
-	public StartFrame() {
+	public StartFrame() throws IOException {
 		setSize(400, 250);
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -51,7 +53,7 @@ public class StartFrame extends JFrame {
 	}
 
 	class StartPanel extends JPanel {
-		StartPanel() {
+		StartPanel() throws IOException {
 			setLayout(null);
 			String path = "images/StartFrame/";
 			userListPanel = new UserListPanel(path, "UserListPa", 300, 40);
@@ -62,7 +64,7 @@ public class StartFrame extends JFrame {
 			levelListPanel.setSize(400, 70);
 			levelListPanel.setLocation(0, 110);
 
-			submitPanel = new SubmitPanel();
+			submitPanel = new SubmitPanel(userListPanel, levelListPanel);
 			submitPanel.setSize(400, 50);
 			submitPanel.setLocation(50, 180);
 
@@ -93,10 +95,26 @@ public class StartFrame extends JFrame {
 				add(levelbtn[i]);
 			}
 		}
+		
+		public String getLevelSelect(){
+			String levelbtn = null;
+			Enumeration<AbstractButton> enums = levelBtnGroup.getElements();
+			while (enums.hasMoreElements()) {
+				GraphicRadioButton radiobtn = (GraphicRadioButton) enums.nextElement();
+				if (radiobtn.isSelected()) {
+					levelbtn = radiobtn.getId();
+				}
+			}
+			
+			return levelbtn;
+		}
+		
 	}
 
 	class SubmitPanel extends JPanel {
-		String user;
+		UserListPanel userListPanel;
+		LevelListPanel levelListPanel;
+		String username;
 		String character;
 		GraphicButton[] submitBtn;
 
@@ -104,6 +122,12 @@ public class StartFrame extends JFrame {
 			setLayout(null);
 			setBackground(null);
 			makeBtn();
+		}
+		
+		public SubmitPanel(UserListPanel userListPanel, LevelListPanel levelListPanel){
+			this();
+			this.userListPanel = userListPanel;
+			this.levelListPanel = levelListPanel;
 		}
 
 		void makeBtn() {
@@ -129,72 +153,48 @@ public class StartFrame extends JFrame {
 
 					String[] spliter;
 
-					String selection = (String) MainFrame.mf.startFrame.pUserList.getSelectedItem();
-					if (selection == null) {
+					String user = SubmitPanel.this.userListPanel.getSelectedItem();
+					if (user == null) {
 						JOptionPane.showMessageDialog(null, "유저를 선택해주세요", "경고!", JOptionPane.WARNING_MESSAGE);
 						return;
 					}
-					spliter = selection.split("\t");
-
+					
+					spliter = user.split("\t");
 					character = spliter[0];
-					user = spliter[1];
-					int level = 0;
-					double speed = 0;
-
-					String levelbtn = null;
-					Enumeration<AbstractButton> enums = MainFrame.mf.startFrame.pLevelList.levelGroup.getElements();
-					while (enums.hasMoreElements()) {
-						GraphicRadioButton radiobtn = (GraphicRadioButton) enums.nextElement();
-						if (radiobtn.isSelected()) {
-							levelbtn = radiobtn.getId();
-						}
-					}
-
-					/*
-					 * switch(character){ case "MUZI.":
-					 * GlobalGraphic.character=new Color(251,233,13);
-					 * GlobalGraphic.path="images/MainFrame/Muzi/"; break; case
-					 * "LYAN.": GlobalGraphic.character=new Color(215,209,137);
-					 * GlobalGraphic.path="images/MainFrame/Lyan/"; break; case
-					 * "APEACH.": GlobalGraphic.character=new
-					 * Color(247,171,171);
-					 * GlobalGraphic.path="images/MainFrame/Apeach/"; break; }
-					 */
+					username = spliter[1];
 
 					if (character.equals("MUZI.")) {
-						GlobalGraphic.character = new Color(251, 233, 13);
+						GlobalGraphic.baseColor = new Color(251, 233, 13);
 						GlobalGraphic.path = "images/MainFrame/Muzi/";
 					} else if (character.equals("LYAN.")) {
-						GlobalGraphic.character = new Color(215, 209, 137);
+						GlobalGraphic.baseColor = new Color(215, 209, 137);
 						GlobalGraphic.path = "images/MainFrame/Lyan/";
 					} else if (character.equals("APEACH.")) {
-						GlobalGraphic.character = new Color(247, 171, 171);
+						GlobalGraphic.baseColor = new Color(247, 171, 171);
 						GlobalGraphic.path = "images/MainFrame/Apeach/";
 					}
 
-					if (levelbtn == null) {
+					String levelID =  SubmitPanel.this.levelListPanel.getLevelSelect();
+					int level = 0;
+					double speed = 0;
+					
+					if (levelID == null) {
 						JOptionPane.showMessageDialog(null, "레벨을 선택해주세요", "경고!", JOptionPane.WARNING_MESSAGE);
 						return;
 					}
 
-					/*
-					 * switch(levelbtn){ case "levelBtn1": level=1;speed=10;
-					 * break; case "levelBtn2": level=5;speed=20; break; case
-					 * "levelBtn3": level=10;speed=30; break; }
-					 */
-
-					if (levelbtn.equals("levelBtn1")) {
+					if (levelID.equals("levelBtn1")) {
 						level = 1;
 						speed = 10;
-					} else if (levelbtn.equals("levelBtn1")) {
+					} else if (levelID.equals("levelBtn1")) {
 						level = 5;
 						speed = 20;
-					} else if (levelbtn.equals("levelBtn3")) {
+					} else if (levelID.equals("levelBtn3")) {
 						level = 10;
 						speed = 30;
 					}
 
-					MainFrame.mf.setContentPane(MainFrame.mf.playPanel = new PlayPanel(user, character, level, speed));
+					MainFrame.mf.setContentPane(MainFrame.mf.playPanel = new PlayPanel(username, character, level, speed));
 				}
 				JFrame topFrame = (JFrame) (SubmitPanel.this.getTopLevelAncestor());
 				topFrame.dispose();
@@ -204,60 +204,51 @@ public class StartFrame extends JFrame {
 	}
 
 	class UserListPanel extends GraphicPanel {
-		JComboBox<String> userList;
+		JComboBox<String> userComboBox;
 
-		UserListPanel(String path, String FILENAME, int width, int height) {
+		UserListPanel(String path, String FILENAME, int width, int height) throws IOException {
 			super(path, FILENAME, width, height);
 			setLayout(null);
 			this.setBackground(null);
-			userList = new JComboBox<String>();
-			userList.setSize(150, 20);
-			userList.setLocation(70, 10);
-			userList.setBackground(Color.WHITE);
-			userList.setSelectedIndex(-1);
-			userList.setSelectedItem(-1);
+			userComboBox = new JComboBox<String>();
+			userComboBox.setSize(150, 20);
+			userComboBox.setLocation(70, 10);
+			userComboBox.setBackground(Color.WHITE);
+			userComboBox.setSelectedIndex(-1);
+			userComboBox.setSelectedItem(-1);
 
-			try {
-				readUser();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			updateUser();
 
-			add(userList);
+			this.add(userComboBox);
 
 			String btnPath = "images/StartFrame/";
 			GraphicButton wordPlusBtn = new GraphicButton(btnPath, "UserPlusBtn", 30, 30);
-			wordPlusBtn.addActionListener(new WordPlusAction());
+			wordPlusBtn.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e) {
+					new MakeUserFrame(UserListPanel.this);
+				}
+			});
+			
 			wordPlusBtn.setLocation(240, 5);
 
-			add(wordPlusBtn);
+			this.add(wordPlusBtn);
 		}
 
-		class WordPlusAction implements ActionListener {
-			public void actionPerformed(ActionEvent e) {
-				new MakeUserFrame();
-			}
-
-		}
-
-		public void readUser() throws IOException {
-			userList.removeAllItems();
-			userList.addItem(null);
-			BufferedReader in = new BufferedReader(new FileReader("resources/User.txt"));
-			String line = "";
-			String[] spliter;
-
-			while ((line = in.readLine()) != null) {
-				String item;
-				spliter = line.split("\t");
-				item = spliter[0] + "." + "\t" + spliter[1];
-				userList.addItem(item);
+		public void updateUser(){
+			userComboBox.removeAllItems();
+			userComboBox.addItem(null);
+			
+			UserManager userManager = UserManager.getInstance();
+			ArrayList<String> users = userManager.readUser();
+			
+			int size = users.size();
+			for(int i = 0; i < size ; i++){
+				userComboBox.addItem(users.get(i));
 			}
 		}
 
-		public Object getSelectedItem() {
-			return userList.getSelectedItem();
+		public String getSelectedItem() {
+			return (String) userComboBox.getSelectedItem();
 		}
 	}
 

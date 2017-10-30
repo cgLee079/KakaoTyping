@@ -16,41 +16,69 @@ import PlayPanel.CenterPanel.FallWordLabel;
 
 public class Play {
 	private boolean play;
-	private boolean turn; //입력 차례 (한글,영문)
-	private Integer level; 
+	private boolean turn; // 입력 차례 (한글,영문)
+	private Integer level;
 	private Double speed;
-	private Integer score;	
+	private Integer score;
 	private int count;
 
 	private Vector<FallingAni> fallingAniArray;
 	private MakeWord makeWord;
-	private SpeedAni speedAni;	
-	
-	Play(Integer level, Double speed){
-		this.level=level;
-		this.speed=speed;
-		this.score=0;
-		this.play=true;
-		this.turn=true; //입력 차례 (한글,영문)
-		this.count=10;		
-		
-		speedAni=new SpeedAni();
-		fallingAniArray=new Vector<FallingAni>();
-		makeWord=new MakeWord(); //단어 생성 시작
+	private SpeedAni speedAni;
+
+	Play(Integer level, Double speed) {
+		this.level = level;
+		this.speed = speed;
+		this.score = 0;
+		this.play = true;
+		this.turn = true; // 입력 차례 (한글,영문)
+		this.count = 10;
+
+		speedAni = new SpeedAni();
+		fallingAniArray = new Vector<FallingAni>();
+		makeWord = new MakeWord(); // 단어 생성 시작
 	}
-		
-	public boolean getTurn(){return turn;}
-	public Integer getLevel(){return level;}	
-	public Double getSpeed(){return speed;}	
-	public Integer getScore(){return score;}	
-	public boolean getPlay(){return play;}	
-	
-	public void setSpeed(Double speed){this.speed=speed;}
-	public void setlevel(int level){this.level=level;}
-	public void speedUp(double up){this.speed+=up;} //속도 업
-	public void setKoreanTurn(){this.turn=true;} //한글 입력 차례로
-	public void setEnglishTurn(){this.turn=false;} //영문 입력 차례로
-	
+
+	public boolean getTurn() {
+		return turn;
+	}
+
+	public Integer getLevel() {
+		return level;
+	}
+
+	public Double getSpeed() {
+		return speed;
+	}
+
+	public Integer getScore() {
+		return score;
+	}
+
+	public boolean getPlay() {
+		return play;
+	}
+
+	public void setSpeed(Double speed) {
+		this.speed = speed;
+	}
+
+	public void setlevel(int level) {
+		this.level = level;
+	}
+
+	public void speedUp(double up) {
+		this.speed += up;
+	} // 속도 업
+
+	public void setKoreanTurn() {
+		this.turn = true;
+	} // 한글 입력 차례로
+
+	public void setEnglishTurn() {
+		this.turn = false;
+	} // 영문 입력 차례로
+
 	public void levelUp() {
 		level++;
 		MainFrame.mf.playPanel.np.levelPa.setLevelText(level.toString());
@@ -68,20 +96,20 @@ public class Play {
 		}
 	}
 
-	public void startGame(){
+	public void startGame() {
 		speedAni.start();
 		makeWord.start();
 	}
-	
-	public void stopGame(){
+
+	public void stopGame() {
 		speedAni.interrupt();
 		makeWord.interrupt();
 		writeFinal();
 		for (int i = 0; i < fallingAniArray.size(); i++)
 			fallingAniArray.get(i).interrupt();
-		new ScoreFrame(	MainFrame.mf.playPanel);
+		new ScoreFrame(MainFrame.mf.playPanel);
 	}
-	
+
 	public void pauseGame() {
 		this.play = false;
 		speedAni.suspend();
@@ -97,13 +125,12 @@ public class Play {
 		for (int i = 0; i < fallingAniArray.size(); i++)
 			fallingAniArray.get(i).resume();
 	}
-	
 
-	public void gameOver(){
+	public void gameOver() {
 		stopGame();
 		writeFinal();
 	}
-	
+
 	private void writeFinal() {
 		try {
 			BufferedWriter out = new BufferedWriter(new FileWriter("resources/Score.txt", true));
@@ -121,8 +148,7 @@ public class Play {
 			out.newLine();
 			in2.close();
 			out.close();
-		} 
-		catch (IOException e) {
+		} catch (IOException e) {
 			return;
 		}
 	}
@@ -158,11 +184,11 @@ public class Play {
 			}
 		}
 	}
-	
-	//라벨 하나 하나 떨어지는 쓰레드
-	class FallingAni extends Thread{
+
+	// 라벨 하나 하나 떨어지는 쓰레드
+	class FallingAni extends Thread {
 		public void run() {
-			PlayPanel playPanel=MainFrame.mf.playPanel;
+			PlayPanel playPanel = MainFrame.mf.playPanel;
 			// 좌표값 설정
 			int x = (int) (Math.random() * 400);
 			int y = 50;
@@ -204,5 +230,5 @@ public class Play {
 			return;
 		}
 
-	}//FallingAni 클래스 끝
+	}// FallingAni 클래스 끝
 }

@@ -10,7 +10,7 @@ public class SouthPanel extends JPanel{
 	private InputTextPanel inputTextPanel; 
 	
 	public SouthPanel(){		
-		setBackground(GlobalGraphic.character);
+		setBackground(GlobalGraphic.baseColor);
 		setPreferredSize(new Dimension(0,40));
 		inputTextPanel =new InputTextPanel();
 		add(inputTextPanel);
