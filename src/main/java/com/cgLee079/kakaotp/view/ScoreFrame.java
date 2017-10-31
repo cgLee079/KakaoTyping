@@ -24,7 +24,6 @@ public class ScoreFrame extends JFrame {
 	private int level;
 	
 	public ScoreFrame() {
-
 		setSize(800, 550);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
@@ -36,7 +35,7 @@ public class ScoreFrame extends JFrame {
 		setLocation((windowSize.width - frameSize.width) / 2, (windowSize.height - frameSize.height) / 2);
 
 		String npPath = "images/ScoreFrame/NorthPanel/";
-		NorthPanel northPanel = new NorthPanel(npPath, "Background", 800, 60);
+		GraphicPanel northPanel = new GraphicPanel(npPath, "Background", 800, 60);
 		CenterPanel centerPanel = new CenterPanel();
 		
 		add(centerPanel, BorderLayout.CENTER);
@@ -50,14 +49,10 @@ public class ScoreFrame extends JFrame {
 		this.level = level;
 	}
 
-	class NorthPanel extends GraphicPanel {
-		NorthPanel(String path, String filename, int width, int height) {
-			super(path, filename, width, height);
-		}
-	}
-
 	class CenterPanel extends JPanel {
 		String path = "images/ScoreFrame/CenterPanel/";
+		private GradePanel gradePanel;
+		private MyGradePanel myGradePanel;
 		
 		private CenterPanel() {
 			setVisible(true);
@@ -66,25 +61,25 @@ public class ScoreFrame extends JFrame {
 			setLayout(null);
 			setPreferredSize(new Dimension(500, 420));
 
-			GradePanel gp = new GradePanel(path, "frame", 390, 410);
-			MyGradePanel mgp = new MyGradePanel(path, "myScore", 320, 290);
-			this.add(gp);
-			this.add(mgp);
+			
+			gradePanel = new GradePanel(path, "frame", 390, 410);
+			myGradePanel = new MyGradePanel(path, "myScore", 320, 290);
+			this.add(gradePanel);
+			this.add(myGradePanel);
 
 			String myCharacter = score.getCharacter(); // 캐릭터 이미지
-			ImageIcon myChimage = new ImageIcon(path + myCharacter + "_score.gif");
-			JLabel myChLabel = new JLabel(myChimage);
-			myChLabel.setLocation(630, 300);
-			myChLabel.setSize(130, 130);
+			ImageIcon myCharacterImageICon = new ImageIcon(path + myCharacter + "_score.gif");
+			JLabel myCharacterLabel = new JLabel(myCharacterImageICon);
+			myCharacterLabel.setLocation(630, 300);
+			myCharacterLabel.setSize(130, 130);
 
-			this.add(myChLabel);
+			this.add(myCharacterLabel);
 		}
 
 		class GradePanel extends GraphicPanel {
+			private int num = 4;// 전체 화면에 표시할 등수 표시 갯수
 
-			int num = 4;// 전체 화면에 표시할 등수 표시 갯수
-
-			public GradePanel(String path, String filename, int width, int height) {
+			private GradePanel(String path, String filename, int width, int height) {
 				super(path, filename, width, height);
 
 				setVisible(true);
@@ -148,19 +143,14 @@ public class ScoreFrame extends JFrame {
 		}
 
 		class MyGradePanel extends GraphicPanel {
-
-			MyGradePanel(String path, String filename, int width, int height) {
+			private MyGradePanel(String path, String filename, int width, int height) {
 				super(path, filename, width, height);
 
 				setVisible(true);
 				setBackground(Color.white);
 				setLayout(new GridLayout(3, 1));
 				setLocation(450, 30);
-				setMyGrade();
-			}
-
-			public void setMyGrade() {
-
+				
 				Integer myScore = score.getPoint();
 				String myName 	= score.getUsername();
 				Integer myLevel = level;
@@ -173,8 +163,9 @@ public class ScoreFrame extends JFrame {
 
 				JLabel myLevelLabel = new JLabel("userlevel : " + myLevel);
 				setGradeLabel(myLevelLabel, 100, 50, 20);
-
+				
 			}
+
 
 			public void setGradeLabel(JLabel source, int x, int y, int fontSize) {
 				source.setSize(x, y);
