@@ -19,7 +19,7 @@ import com.cgLee079.kakaotp.graphic.GameFontP;
 import com.cgLee079.kakaotp.graphic.GlobalGraphic;
 import com.cgLee079.kakaotp.graphic.GraphicButton;
 import com.cgLee079.kakaotp.graphic.GraphicPanel;
-import com.cgLee079.kakaotp.model.FwLabel;
+import com.cgLee079.kakaotp.play.FwLabel;
 import com.cgLee079.kakaotp.play.KeyEventor;
 import com.cgLee079.kakaotp.play.Play;
 
@@ -86,7 +86,7 @@ public class PlayPanel extends JPanel {
 		itemBtn.setEnabled(enabled);
 	}
 	
-	public void drawFallingWord(FwLabel fwLabel){
+	public void drawFwLabel(FwLabel fwLabel){
 		centerPanel.add(fwLabel);
 	}
 	

@@ -8,7 +8,6 @@ import java.util.Vector;
 
 import com.cgLee079.kakaotp.dict.UserDictionary;
 import com.cgLee079.kakaotp.io.ScoreManager;
-import com.cgLee079.kakaotp.model.FwLabel;
 import com.cgLee079.kakaotp.model.Score;
 import com.cgLee079.kakaotp.model.User;
 import com.cgLee079.kakaotp.view.PlayPanel;
@@ -402,7 +401,7 @@ public class Play {
 			FwLabel fwLabel = new FwLabel(dictionary.rand());
 			fwLabel.setLocation(x, y); // 위치 설정
 			fwLabels.add(fwLabel); // 떨어지는 라벨 추가
-			playPanel.drawFallingWord(fwLabel);
+			playPanel.drawFwLabel(fwLabel);
 
 			// y<410까지 떨어트림
 			while (y < 410 && !Thread.currentThread().isInterrupted()) {

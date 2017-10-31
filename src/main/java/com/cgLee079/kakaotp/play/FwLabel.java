@@ -1,4 +1,4 @@
-package com.cgLee079.kakaotp.model;
+package com.cgLee079.kakaotp.play;
 
 import java.awt.Color;
 
