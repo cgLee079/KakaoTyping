@@ -9,7 +9,7 @@ import com.cgLee079.kakaotp.graphic.GameFontB;
 import com.cgLee079.kakaotp.graphic.GameFontP;
 import com.cgLee079.kakaotp.graphic.GlobalGraphic;
 
-public class FallingWordLabel extends JLabel {
+public class FwLabel extends JLabel {
 	// 라벨의 Item 보유
 	private boolean itemHave = false;
 
@@ -19,7 +19,7 @@ public class FallingWordLabel extends JLabel {
 	// 라벨의 언어
 	private boolean lenguage = true;
 
-	public FallingWordLabel(String text) {
+	public FwLabel(String text) {
 		super(text);
 		this.setSize(120, 40);
 

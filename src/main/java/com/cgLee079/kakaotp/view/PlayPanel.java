@@ -19,7 +19,7 @@ import com.cgLee079.kakaotp.graphic.GameFontP;
 import com.cgLee079.kakaotp.graphic.GlobalGraphic;
 import com.cgLee079.kakaotp.graphic.GraphicButton;
 import com.cgLee079.kakaotp.graphic.GraphicPanel;
-import com.cgLee079.kakaotp.model.FallingWordLabel;
+import com.cgLee079.kakaotp.model.FwLabel;
 import com.cgLee079.kakaotp.play.KeyEventor;
 import com.cgLee079.kakaotp.play.Play;
 
@@ -86,7 +86,7 @@ public class PlayPanel extends JPanel {
 		itemBtn.setEnabled(enabled);
 	}
 	
-	public void drawFallingWord(FallingWordLabel fwLabel){
+	public void drawFallingWord(FwLabel fwLabel){
 		centerPanel.add(fwLabel);
 	}
 	
@@ -122,8 +122,8 @@ public class PlayPanel extends JPanel {
 			setLayout(null);
 
 			String panelPath = GlobalGraphic.path + "NorthPanel/";
-			levelPanel = new LevelPanel(panelPath, "levelGra", 130, 50);
-			scorePanel = new PointPanel(panelPath, "scoreGra", 130, 50);
+			levelPanel = new LevelPanel(panelPath, "levelBg", 130, 50);
+			scorePanel = new PointPanel(panelPath, "scoreBg", 130, 50);
 
 			levelPanel.setLocation(250, 0);
 			scorePanel.setLocation(400, 0);
@@ -265,7 +265,7 @@ public class PlayPanel extends JPanel {
 			super(path, filename, width, height);
 			setLayout(null);
 
-			heartGagePanel = new HeartGagePanel(path, "HeartGageGra", 200, 30);
+			heartGagePanel = new HeartGagePanel(path, "HeartGageBg", 200, 30);
 			heartGagePanel.setLocation(150, 10);
 			add(heartGagePanel);
 

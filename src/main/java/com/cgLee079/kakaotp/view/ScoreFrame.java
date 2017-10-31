@@ -66,13 +66,13 @@ public class ScoreFrame extends JFrame {
 			setLayout(null);
 			setPreferredSize(new Dimension(500, 420));
 
-			GradePanel gp = new GradePanel(path, "frame", 390, 410, this);
-			MyGradePanel mgp = new MyGradePanel(path, "myScore", 320, 290, this);
+			GradePanel gp = new GradePanel(path, "frame", 390, 410);
+			MyGradePanel mgp = new MyGradePanel(path, "myScore", 320, 290);
 			this.add(gp);
 			this.add(mgp);
 
 			String myCharacter = score.getCharacter(); // 캐릭터 이미지
-			ImageIcon myChimage = new ImageIcon(path + myCharacter + "스코어.gif");
+			ImageIcon myChimage = new ImageIcon(path + myCharacter + "_score.gif");
 			JLabel myChLabel = new JLabel(myChimage);
 			myChLabel.setLocation(630, 300);
 			myChLabel.setSize(130, 130);
@@ -84,7 +84,7 @@ public class ScoreFrame extends JFrame {
 
 			int num = 4;// 전체 화면에 표시할 등수 표시 갯수
 
-			public GradePanel(String path, String filename, int width, int height, CenterPanel p) {
+			public GradePanel(String path, String filename, int width, int height) {
 				super(path, filename, width, height);
 
 				setVisible(true);
@@ -114,7 +114,7 @@ public class ScoreFrame extends JFrame {
 				for (int i = 0; i < num; i++) {
 					score = scores.get(i);
 					
-					gradeImg[i] = new ImageIcon(path + "트로피.png");
+					gradeImg[i] = new ImageIcon(path + "trophy.png");
 					gradeLabel[i] = new JLabel(gradeImg[i]);
 
 					name = score.getUsername();
@@ -149,7 +149,7 @@ public class ScoreFrame extends JFrame {
 
 		class MyGradePanel extends GraphicPanel {
 
-			MyGradePanel(String path, String filename, int width, int height, CenterPanel p) {
+			MyGradePanel(String path, String filename, int width, int height) {
 				super(path, filename, width, height);
 
 				setVisible(true);

@@ -8,7 +8,7 @@ import java.util.Vector;
 
 import com.cgLee079.kakaotp.dict.UserDictionary;
 import com.cgLee079.kakaotp.io.ScoreManager;
-import com.cgLee079.kakaotp.model.FallingWordLabel;
+import com.cgLee079.kakaotp.model.FwLabel;
 import com.cgLee079.kakaotp.model.Score;
 import com.cgLee079.kakaotp.model.User;
 import com.cgLee079.kakaotp.view.PlayPanel;
@@ -27,8 +27,8 @@ public class Play {
 	private int count;
 	private boolean[] item;
 
-	private Vector<FallingWordLabel> fallingWordLabels;
-	private Vector<FallingAni> fallingAnis;
+	private Vector<FwLabel> fwLabels;
+	private Vector<FWAni> fwAnis;
 	private WordMaker wordMaker;
 	private SpeedUpper speedUpper;
 
@@ -43,9 +43,9 @@ public class Play {
 		this.count 		= 10;
 		this.item		= new boolean[4];
 		this.dictionary	= new UserDictionary(user.getUsername());
-		this.fallingWordLabels	= new Vector<FallingWordLabel>();
+		this.fwLabels	= new Vector<FwLabel>();
 		this.speedUpper 		= new SpeedUpper();
-		this.fallingAnis 		= new Vector<FallingAni>();
+		this.fwAnis 		= new Vector<FWAni>();
 		this.wordMaker			= new WordMaker(); // 단어 생성 시작
 		
 		Arrays.fill(item, false);
@@ -67,19 +67,13 @@ public class Play {
 		this.user = user;
 	}
 
-
-
 	public UserDictionary getDictionary() {
 		return dictionary;
 	}
 
-
-
 	public void setDictionary(UserDictionary dictionary) {
 		this.dictionary = dictionary;
 	}
-
-
 
 	public boolean isIsplay() {
 		return isplay;
@@ -97,25 +91,17 @@ public class Play {
 		this.iskorean = iskorean;
 	}
 
-
-
 	public int getHeart() {
 		return heart;
 	}
-
-
 
 	public void setHeart(int heart) {
 		this.heart = heart;
 	}
 
-
-
 	public int getLevel() {
 		return level;
 	}
-
-
 
 	public void setLevel(int level) {
 		this.level = level;
@@ -129,56 +115,44 @@ public class Play {
 		this.point = point;
 	}
 
-
-
 	public double getSpeed() {
 		return speed;
 	}
-
-
 
 	public void setSpeed(double speed) {
 		this.speed = speed;
 	}
 
-
-
 	public int getCount() {
 		return count;
 	}
-
-
 
 	public void setCount(int count) {
 		this.count = count;
 	}
 
-
-
 	public boolean[] getItem() {
 		return item;
 	}
-
-
 
 	public void setItem(boolean[] item) {
 		this.item = item;
 	}
 
-	public Vector<FallingWordLabel> getFallingWordLabels() {
-		return fallingWordLabels;
+	public Vector<FwLabel> getFwLabels() {
+		return fwLabels;
 	}
 
-	public void setFallingWordLabels(Vector<FallingWordLabel> fallingWordLabels) {
-		this.fallingWordLabels = fallingWordLabels;
+	public void setFwLabels(Vector<FwLabel> fwLabels) {
+		this.fwLabels = fwLabels;
 	}
 
-	public Vector<FallingAni> getFallingAnis() {
-		return fallingAnis;
+	public Vector<FWAni> getFwAnis() {
+		return fwAnis;
 	}
 
-	public void setFallingAnis(Vector<FallingAni> fallingAnis) {
-		this.fallingAnis = fallingAnis;
+	public void setFwAnis(Vector<FWAni> fwAnis) {
+		this.fwAnis = fwAnis;
 	}
 
 	public WordMaker getWordMaker() {
@@ -213,7 +187,7 @@ public class Play {
 	public void levelUp() {
 		level++;
 		playPanel.drawLevel(level);
-		clearFallingWordLabels();
+		clearFwLabels();
 	}
 
 	public void scoreUp() {// 점수 증가
@@ -256,33 +230,33 @@ public class Play {
 		}
 	}
 	
-	public void clearFallingWordLabels() { // 떨어지는 단어 모두 삭제
-		for (int index = 0; index < fallingWordLabels.size(); index++) {
-			fallingWordLabels.get(index).setVisible(false);
-			fallingWordLabels.get(index).setValid(false);
+	public void clearFwLabels() { // 떨어지는 단어 모두 삭제
+		for (int index = 0; index < fwLabels.size(); index++) {
+			fwLabels.get(index).setVisible(false);
+			fwLabels.get(index).setValid(false);
 		}
-		fallingWordLabels.removeAllElements();
+		fwLabels.removeAllElements();
 	}
 	
-	public void checkFallingWord(String text) {
+	public void checkFwLabels(String text) {
 		String renderWord = dictionary.render(text); // 번역글자 : 한글 -> 영어 -> null
 
 		if (!this.iskorean && renderWord != null) {// 영어 입력차례에서, 한글을  입력한 경우
 			return ;
 		}
 
-		int size = fallingWordLabels.size();
+		int size = fwLabels.size();
 		for (int index = 0; index < size; index++) { // 떨어지는  라벨들 중
-			FallingWordLabel fwLabel = fallingWordLabels.get(index); // 떨어지는 라벨 
-			String fallWord = fallingWordLabels.get(index).getText(); // 떨어지는 라벨의 단어
+			FwLabel fwLabel = fwLabels.get(index); // 떨어지는 라벨 
+			String fallWord = fwLabels.get(index).getText(); // 떨어지는 라벨의 단어
 
 			if (fallWord.equalsIgnoreCase(text)) { // 떨어지는 단어와 입력 단어가 같을경우
 				fwLabel.setText(renderWord); // 한글 -> 영어로, 영어-> null로
 
 				if (fwLabel.getLanguage() == false) {
-					InputEnglish(fwLabel);
+					setEnglishTurn(fwLabel);
 				} else {
-					InputKorean(fwLabel);
+					setKoreanTurn(fwLabel);
 				}
 
 				break;
@@ -290,7 +264,7 @@ public class Play {
 		}
 	}
 
-	public void InputEnglish(FallingWordLabel fwLabel) {
+	public void setEnglishTurn(FwLabel fwLabel) {
 		String english = fwLabel.getText();
 		fwLabel.setVisible(false);
 
@@ -325,16 +299,16 @@ public class Play {
 		}
 
 		// 배열에서 제거
-		fallingWordLabels.remove(fwLabel);
+		fwLabels.remove(fwLabel);
 
 		// 점수 흭득
 		scoreUp();
 
 		// 한글 입력차례로 변환
-		setKoreanTurn();
+		setIskorean(true); 
 	}
 
-	public void InputKorean(FallingWordLabel fwLabel) {
+	public void setKoreanTurn(FwLabel fwLabel) {
 		fwLabel.setLanguage(false);
 		if (fwLabel.getHaveItem()) {
 			fwLabel.setHaveItem_e(); // 아이템을 가진 영단어 폰트 셋
@@ -342,7 +316,7 @@ public class Play {
 			fwLabel.setEnglish(); // 아이템 가지지 않은 영단어 폰트 셋
 		}
 
-		setEnglishTurn(); // 영어차례로 변환
+		setIskorean(false); // 영어차례로 변환
 	}
 	
 	public void startGame() {
@@ -354,8 +328,8 @@ public class Play {
 		speedUpper.interrupt();
 		wordMaker.interrupt();
 		
-		for (int i = 0; i < fallingAnis.size(); i++){
-			fallingAnis.get(i).interrupt();
+		for (int i = 0; i < fwAnis.size(); i++){
+			fwAnis.get(i).interrupt();
 		}
 			
 	}
@@ -364,8 +338,8 @@ public class Play {
 		this.isplay = false;
 		speedUpper.suspend();
 		wordMaker.suspend();
-		for (int i = 0; i < fallingAnis.size(); i++){
-			fallingAnis.get(i).suspend();
+		for (int i = 0; i < fwAnis.size(); i++){
+			fwAnis.get(i).suspend();
 		}
 	}
 
@@ -373,8 +347,8 @@ public class Play {
 		this.isplay = true;
 		speedUpper.resume();
 		wordMaker.resume();
-		for (int i = 0; i < fallingAnis.size(); i++){
-			fallingAnis.get(i).resume();
+		for (int i = 0; i < fwAnis.size(); i++){
+			fwAnis.get(i).resume();
 		}
 	}
 	
@@ -404,8 +378,8 @@ public class Play {
 	class WordMaker extends Thread {
 		public void run() {
 			while (true) {
-				FallingAni fallingAni = new FallingAni();
-				fallingAnis.add(fallingAni);
+				FWAni fallingAni = new FWAni();
+				fwAnis.add(fallingAni);
 				fallingAni.start();
 
 				try {
@@ -418,16 +392,16 @@ public class Play {
 	}
 
 	// 라벨 하나 하나 떨어지는 쓰레드
-	class FallingAni extends Thread {
+	class FWAni extends Thread {
 		public void run() {
 			// 좌표값 설정
 			int x = (int) (Math.random() * 400);
 			int y = 50;
 
 			// 단어를 랜덤하게 받아와 라벨 생성.
-			FallingWordLabel fwLabel = new FallingWordLabel(dictionary.rand());
+			FwLabel fwLabel = new FwLabel(dictionary.rand());
 			fwLabel.setLocation(x, y); // 위치 설정
-			fallingWordLabels.add(fwLabel); // 떨어지는 라벨 추가
+			fwLabels.add(fwLabel); // 떨어지는 라벨 추가
 			playPanel.drawFallingWord(fwLabel);
 
 			// y<410까지 떨어트림
@@ -443,7 +417,7 @@ public class Play {
 
 			if (y >= 410 && fwLabel.getValid() == true) {
 				pain(20); // 체력 감소
-				fallingWordLabels.remove(fwLabel); // 배열에서 제거
+				fwLabels.remove(fwLabel); // 배열에서 제거
 
 				// 영어 라벨이 다 떨어지면, 한글 차례로
 				if (fwLabel.getLanguage() == false){
@@ -451,7 +425,7 @@ public class Play {
 				}
 			}
 
-			fallingAnis.remove(this);
+			fwAnis.remove(this);
 
 			return;
 		}
@@ -470,10 +444,10 @@ public class Play {
 			// 떨어지는 모든 단어를 성공 단어에 추가
 			// case 1: 한글 입력상태에서 아이템 사용
 			// case 2: 영문 입력상테에서 아이템 사용
-			int size = fallingWordLabels.size();
+			int size = fwLabels.size();
 			for (int index = 0; index < size; index++) {
 				
-				FallingWordLabel fwLabel = fallingWordLabels.get(index);
+				FwLabel fwLabel = fwLabels.get(index);
 
 				korean = fwLabel.getText();
 				english = dictionary.render(korean);
@@ -489,7 +463,7 @@ public class Play {
 			}
 
 			// 모든 떨어지는 라벨 제거
-			clearFallingWordLabels();
+			clearFwLabels();
 		}
 	}
 
