@@ -61,7 +61,6 @@ public class ScoreFrame extends JFrame {
 			setLayout(null);
 			setPreferredSize(new Dimension(500, 420));
 
-			
 			gradePanel = new GradePanel(path, "frame", 390, 410);
 			myGradePanel = new MyGradePanel(path, "myScore", 320, 290);
 			this.add(gradePanel);
