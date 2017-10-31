@@ -187,8 +187,7 @@ public class MakeUserFrame extends JFrame {
 					startFrame.updateUser();
 				}
 
-				JFrame topFrame = (JFrame) (SubmitPanel.this.getTopLevelAncestor());
-				topFrame.dispose();
+				MakeUserFrame.this.dispose();
 			}
 		}
 

@@ -36,7 +36,6 @@ public class StartFrame extends JFrame {
 	private LevelListPanel levelListPanel;
 	private SubmitPanel submitPanel;
 
-	
 	public StartFrame(){
 		setSize(400, 250);
 
@@ -107,7 +106,7 @@ public class StartFrame extends JFrame {
 	}
 
 	class StartPanel extends JPanel {
-		StartPanel(){
+		private StartPanel(){
 			setLayout(null);
 			String path = "images/StartFrame/";
 			userListPanel = new UserListPanel(path, "UserListPa", 300, 40);
@@ -194,23 +193,14 @@ public class StartFrame extends JFrame {
 	}
 	
 	class SubmitPanel extends JPanel {
-		UserListPanel userListPanel;
-		LevelListPanel levelListPanel;
-		GraphicButton[] submitBtn;
+		private UserListPanel userListPanel;
+		private LevelListPanel levelListPanel;
+		private GraphicButton[] submitBtn;
 
-		SubmitPanel() {
+		private SubmitPanel() {
 			setLayout(null);
 			setBackground(null);
-			makeBtn();
-		}
-		
-		public SubmitPanel(UserListPanel userListPanel, LevelListPanel levelListPanel){
-			this();
-			this.userListPanel = userListPanel;
-			this.levelListPanel = levelListPanel;
-		}
-
-		void makeBtn() {
+			
 			String path = "images/StartFrame/";
 			submitBtn = new GraphicButton[2];
 			submitBtn[0] = new GraphicButton(path, "SubmitBtn", 100, 35);
@@ -224,6 +214,12 @@ public class StartFrame extends JFrame {
 				submitBtn[i].setLocation(40 + (i * 120), 0);
 				add(submitBtn[i]);
 			}
+		}
+		
+		private SubmitPanel(UserListPanel userListPanel, LevelListPanel levelListPanel){
+			this();
+			this.userListPanel = userListPanel;
+			this.levelListPanel = levelListPanel;
 		}
 
 		class SubmitAction implements ActionListener {
@@ -249,7 +245,7 @@ public class StartFrame extends JFrame {
 						GlobalGraphic.path = "images/MainFrame/Apeach/";
 					}
 
-					String levelID =  getSelectedLevel();
+					String levelID = getSelectedLevel();
 					int level = 0;
 					double speed = 0;
 					
@@ -272,8 +268,8 @@ public class StartFrame extends JFrame {
 					Play play = new Play(user, level, speed);
 					mainFrame.setContentPane(new PlayPanel(play));
 				}
-				JFrame topFrame = (JFrame) (SubmitPanel.this.getTopLevelAncestor());
-				topFrame.dispose();
+				
+				StartFrame.this.dispose();
 
 			}
 		}

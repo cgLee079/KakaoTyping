@@ -18,8 +18,6 @@ public class WordPlusFrame extends JFrame {
 	private EnglishInputPanel enInputPanel;
 	private JButton plusBtn;
 	private JLabel topLabel;
-	private JTextArea koTextArea;
-	private JTextArea enTextArea;
 
 	public WordPlusFrame() {
 		setSize(400, 400);
@@ -41,6 +39,8 @@ public class WordPlusFrame extends JFrame {
 	}
 
 	class KoreaInputPanel extends JPanel {
+		private JTextArea koTextArea;
+		
 		KoreaInputPanel() {
 			setBackground(Color.WHITE);
 			setLayout(new BorderLayout());
@@ -56,7 +56,9 @@ public class WordPlusFrame extends JFrame {
 	}
 
 	class EnglishInputPanel extends JPanel {
-		EnglishInputPanel() {
+		private JTextArea enTextArea;
+		
+		private EnglishInputPanel() {
 			setBackground(Color.WHITE);
 			setLayout(new BorderLayout());
 			Border border = BorderFactory.createEtchedBorder();

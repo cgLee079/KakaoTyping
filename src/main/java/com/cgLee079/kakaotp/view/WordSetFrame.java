@@ -12,6 +12,7 @@ import java.awt.geom.RoundRectangle2D;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -25,13 +26,15 @@ import com.cgLee079.kakaotp.graphic.GameFontP;
 import com.cgLee079.kakaotp.graphic.GlobalGraphic;
 import com.cgLee079.kakaotp.graphic.GraphicButton;
 import com.cgLee079.kakaotp.graphic.GraphicPanel;
+import com.cgLee079.kakaotp.io.UserManager;
+import com.cgLee079.kakaotp.model.User;
 
 //AllWordList 프레임
 public class WordSetFrame extends JFrame {
-	WordListPanel wordListPanel;
-	UserListPanel userListPanel;
-	SetButtonPanel setButtonPanel;
-	SubmitButtonPanel submitButtonPanel;
+	private WordListPanel wordListPanel;
+	private UserListPanel userListPanel;
+	private SetButtonPanel setButtonPanel;
+	private SubmitButtonPanel submitButtonPanel;
 
 	public WordSetFrame() {
 		setLayout(null);
@@ -69,10 +72,47 @@ public class WordSetFrame extends JFrame {
 
 	}
 
-	class WordListPanel extends JPanel {
-		WordListTable wordListTable;
+	public void updateUser(){
+		JComboBox<String>  userComboBox = userListPanel.getUserComboBox();
+		
+		userComboBox.removeAllItems();
+		userComboBox.addItem(null);
+		
+		UserManager userManager = UserManager.getInstance();
+		ArrayList<User> users = userManager.readUser();
+		
+		User user = null;
+		int size = users.size();
+		for(int i = 0; i < size ; i++){
+			user = users.get(i);
+			userComboBox.addItem(user.getUsername() + ". " + user.getCharacter());
+		}
+	}
+	
+	public void loadDictionary(String user) {
+		DefaultTableModel model = wordListPanel.getWordListTable().getModel();
+		int rowCnt = model.getRowCount();
+		for (int i = 0 ; i < rowCnt; i++){
+			model.removeRow(i);
+		}
+		
+		UserDictionary dictionary = new UserDictionary(user);
+		
+		// WordList에 모든 단어 add
+		for (int index = 0; index < dictionary.getNumOfWord(); index++) {
+			String content[] = new String[3];
+			content[0] = dictionary.getWord(index);
+			content[1] = dictionary.render(content[0]);
+			content[2] = dictionary.getSuccess(content[0]).toString();
+			model.insertRow(0, content);
+		}
 
-		WordListPanel() {
+	}
+	
+	class WordListPanel extends JPanel {
+		private WordListTable wordListTable;
+
+		private WordListPanel() {
 			setBackground(null);
 			JScrollPane scroll = new JScrollPane(wordListTable = new WordListTable());
 
@@ -81,14 +121,18 @@ public class WordSetFrame extends JFrame {
 
 			add(scroll);
 		}
+		
+		public WordListTable getWordListTable() {
+			return wordListTable;
+		}
 
 		class WordListTable extends JTable {
-			DefaultTableModel model;
-			String[] header = { "한글", "영어", "성공횟수" };
+			private DefaultTableModel model;
 
 			WordListTable() {
 				this.setFont(new GameFontP(13));
 				// Table에 add할수 있도록
+				String[] header = { "한글", "영어", "성공횟수" };
 				model = new DefaultTableModel(header, 0);
 				this.setModel(model);
 			}
@@ -98,28 +142,17 @@ public class WordSetFrame extends JFrame {
 				return false;
 			}
 
-			public void loadDictionary(String user) {
-				model = new DefaultTableModel(header, 0);
-				this.setModel(model);
-
-				UserDictionary dictionary = new UserDictionary(user);
-				// WordList에 모든 단어 add
-				for (int index = 0; index < dictionary.getNumOfWord(); index++) {
-					String content[] = new String[3];
-					content[0] = dictionary.getWord(index);
-					content[1] = dictionary.render(content[0]);
-					content[2] = dictionary.getSuccess(content[0]).toString();
-					model.insertRow(0, content);
-				}
-
+			public DefaultTableModel getModel() {
+				return model;
 			}
+			
 		}
 	}
 
 	class UserListPanel extends GraphicPanel {
 		private JComboBox<String> userComboBox;
 
-		UserListPanel(String path, String FILENAME, int width, int height) {
+		private UserListPanel(String path, String FILENAME, int width, int height) {
 			super(path, FILENAME, width, height);
 			setLayout(null);
 			this.setBackground(null);
@@ -128,48 +161,27 @@ public class WordSetFrame extends JFrame {
 			userComboBox.setSize(150, 20);
 			userComboBox.setLocation(70, 10);
 			userComboBox.setBackground(Color.WHITE);
+			userComboBox.addItemListener(new ItemListener(){
+				public void itemStateChanged(ItemEvent e) {
+					if (e.getItem() != null) {
+						String userInfo = (String) e.getItem();
+						String[] spliter = userInfo.split("\t");
+						String username = spliter[1];
 
-			userComboBox.addItemListener(new UserListItemListener());
-
-			try {
-				readUser();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
+						loadDictionary(username);
+					}
+				}
+			});
+			
+			updateUser();
+			
 			add(userComboBox);
 		}
-
-		public void readUser() throws IOException {
-			userComboBox.addItem(null);
-			BufferedReader in = new BufferedReader(new FileReader("resources/User.txt"));
-			String line = "";
-			String[] spliter;
-
-			while ((line = in.readLine()) != null) {
-				String item;
-				spliter = line.split("\t");
-				item = spliter[0] + "." + "\t" + spliter[1];
-				userComboBox.addItem(item);
-			}
-
+		
+		public JComboBox<String> getUserComboBox() {
+			return userComboBox;
 		}
 
-		class UserListItemListener implements ItemListener {
-
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				if (e.getItem() != null) {
-					String userInfo = (String) e.getItem();
-					String[] spliter = userInfo.split("\t");
-					String user = spliter[1];
-
-					WordSetFrame topFrame = (WordSetFrame) UserListPanel.this.getTopLevelAncestor();
-					topFrame.wordListPanel.wordListTable.loadDictionary(user);
-				}
-			}
-		}
 	}
 
 	class SetButtonPanel extends JPanel {
@@ -178,17 +190,13 @@ public class WordSetFrame extends JFrame {
 
 		SetButtonPanel() {
 			setBackground(null);
-			makeBtn();
-		}
-
-		void makeBtn() {
+			
 			wordPlusBtn = new GraphicButton("images/WordSetFrame/", "wordPlusBtn", 100, 40);
 			successResetBtn = new GraphicButton("images/WordSetFrame/", "SuccessResetBtn", 100, 40);
 
 			add(wordPlusBtn);
 			add(successResetBtn);
 		}
-
 	}
 
 	class SubmitButtonPanel extends JPanel {
@@ -198,10 +206,7 @@ public class WordSetFrame extends JFrame {
 		SubmitButtonPanel() {
 			setBackground(null);
 			setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
-			makeBtn();
-		}
-
-		void makeBtn() {
+			
 			wordPlusBtn = new GraphicButton("images/WordSetFrame/", "SubmitBtn", 100, 35);
 			wordPlusBtn.addActionListener(new SubmitAction());
 
@@ -219,8 +224,7 @@ public class WordSetFrame extends JFrame {
 				if (btn.getId() == "SubmitBtn");
 				else if (btn.getId() == "ConcealBtn");
 
-				JFrame topFrame = (JFrame) (SubmitButtonPanel.this.getTopLevelAncestor());
-				topFrame.dispose();
+				WordSetFrame.this.dispose();
 			}
 		}
 	}
