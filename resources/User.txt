@@ -2,3 +2,5 @@ LYAN	22
 MUZI	changoo
 APEACH	어피치
 LYAN	55
+LYAN	22
+MUZI	ddd

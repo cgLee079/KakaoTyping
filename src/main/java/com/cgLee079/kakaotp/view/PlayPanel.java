@@ -53,6 +53,7 @@ public class PlayPanel extends JPanel {
 	public PlayPanel(Play play) {
 		this();
 		this.play = play;
+		play.setPlayPanel(this);
 		addKeyListener(new KeyEventor(PlayPanel.this, play));
 		
 		drawLevel(play.getLevel());

@@ -24,7 +24,7 @@ public class KeyEventor extends KeyAdapter {
 		
 		case KeyEvent.VK_ESCAPE:
 			play.pauseGame();
-			pauseFrame = new PauseFrame();
+			pauseFrame = new PauseFrame(play);
 			break;
 
 		case KeyEvent.VK_F1: // item1 모두 지우기

@@ -6,6 +6,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Vector;
 
+import javax.swing.text.NumberFormatter;
+
 import com.cgLee079.kakaotp.dict.UserDictionary;
 import com.cgLee079.kakaotp.io.ScoreManager;
 import com.cgLee079.kakaotp.model.Score;
@@ -247,16 +249,16 @@ public class Play {
 		int size = fwLabels.size();
 		for (int index = 0; index < size; index++) { // 떨어지는  라벨들 중
 			FwLabel fwLabel = fwLabels.get(index); // 떨어지는 라벨 
-			String fallWord = fwLabels.get(index).getText(); // 떨어지는 라벨의 단어
+			String fallWord = fwLabel.getText(); // 떨어지는 라벨의 단어
 
 			if (fallWord.equalsIgnoreCase(text)) { // 떨어지는 단어와 입력 단어가 같을경우
-				fwLabel.setText(renderWord); // 한글 -> 영어로, 영어-> null로
-
 				if (fwLabel.getLanguage() == false) {
 					setEnglishTurn(fwLabel);
 				} else {
 					setKoreanTurn(fwLabel);
 				}
+				
+				fwLabel.setText(renderWord); // 한글 -> 영어로, 영어-> null로
 
 				break;
 			}
@@ -360,7 +362,9 @@ public class Play {
 	}
 
 	class SpeedUpper extends Thread {
+		
 		public void run() {
+			NumberFormatter numberFormatter = new NumberFormatter();
 			while (true) {
 				speedUp(0.01);
 				playPanel.drawSpeed(speed);

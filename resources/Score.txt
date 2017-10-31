@@ -4,3 +4,5 @@ MUZI	changoo	0
 APEACH	얍	20
 APEACH	어피치	0
 APEACH	어피치	0
+LYAN	22	0
+LYAN	22	0

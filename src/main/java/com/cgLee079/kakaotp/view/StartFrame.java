@@ -56,6 +56,8 @@ public class StartFrame extends JFrame {
 	public StartFrame(MainFrame mainFrame){
 		this();
 		this.mainFrame = mainFrame;
+		
+		updateUser();
 	}
 	
 	public void updateUser(){
@@ -71,7 +73,7 @@ public class StartFrame extends JFrame {
 		int size = users.size();
 		for(int i = 0; i < size ; i++){
 			user = users.get(i);
-			userComboBox.addItem(user.getUsername() + ". " + user.getCharacter());
+			userComboBox.addItem(user.getUsername() + "\t" + user.getCharacter());
 		}
 	}
 	
@@ -84,8 +86,9 @@ public class StartFrame extends JFrame {
 		}
 		
 		String[] spliter = str.split("\t");
-		String character = spliter[0];
-		String username = spliter[1];
+		
+		String username = spliter[0];
+		String character = spliter[1];
 		
 		return new User(username, character);
 	}
@@ -170,8 +173,6 @@ public class StartFrame extends JFrame {
 			userComboBox.setSelectedIndex(-1);
 			userComboBox.setSelectedItem(-1);
 
-			updateUser();
-
 			this.add(userComboBox);
 
 			String btnPath = "images/StartFrame/";
@@ -234,13 +235,13 @@ public class StartFrame extends JFrame {
 					}
 						
 					String character= user.getCharacter();
-					if (character.equals("MUZI.")) {
+					if (character.equals("MUZI")) {
 						GlobalGraphic.baseColor = new Color(251, 233, 13);
 						GlobalGraphic.path = "images/MainFrame/Muzi/";
-					} else if (character.equals("LYAN.")) {
+					} else if (character.equals("LYAN")) {
 						GlobalGraphic.baseColor = new Color(215, 209, 137);
 						GlobalGraphic.path = "images/MainFrame/Lyan/";
-					} else if (character.equals("APEACH.")) {
+					} else if (character.equals("APEACH")) {
 						GlobalGraphic.baseColor = new Color(247, 171, 171);
 						GlobalGraphic.path = "images/MainFrame/Apeach/";
 					}
