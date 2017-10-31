@@ -109,7 +109,7 @@ public class ScoreFrame extends JFrame {
 				JLabel[] nameLabel 	= new JLabel[num];
 
 				String name = " ";// 이름 저장
-				String faceType = " ";// 캐릭터 타입 저장
+				String character = " ";// 캐릭터 타입 저장
 
 				for (int i = 0; i < num; i++) {
 					score = scores.get(i);
@@ -119,8 +119,8 @@ public class ScoreFrame extends JFrame {
 
 					name = score.getUsername();
 
-					faceType = score.getCharacter();
-					images[i] = new ImageIcon(path + faceType + "Face.png");// faceType 별로 이모티콘  분류
+					character = score.getCharacter();
+					images[i] = new ImageIcon(path + character + "_face.png");// faceType 별로 이모티콘  분류
 					faceLabel[i] = new JLabel(images[i]);
 
 					scoreLabel[i] = new JLabel(score.getPoint().toString());
