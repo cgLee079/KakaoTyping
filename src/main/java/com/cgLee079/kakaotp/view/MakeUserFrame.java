@@ -24,8 +24,8 @@ import com.cgLee079.kakaotp.io.UserManager;
 import com.cgLee079.kakaotp.view.StartFrame.UserListPanel;
 
 public class MakeUserFrame extends JFrame {
-	UserListPanel userListPanel;
-	ChoiceCharacterPanel choiceChracterPanel;
+	StartFrame startFrame;
+	CharacterChoicePanel characterChoicePanel;
 	UserInputPanel userInputPanel;
 	SubmitPanel submitPanel;
 
@@ -44,9 +44,9 @@ public class MakeUserFrame extends JFrame {
 		this.setShape(new RoundRectangle2D.Float(0, 0, this.getWidth(), this.getHeight(), 100, 100));
 		setLayout(null);
 
-		choiceChracterPanel = new ChoiceCharacterPanel();
-		choiceChracterPanel.setLocation(0, 50);
-		choiceChracterPanel.setSize(400, 150);
+		characterChoicePanel = new CharacterChoicePanel();
+		characterChoicePanel.setLocation(0, 50);
+		characterChoicePanel.setSize(400, 150);
 
 		userInputPanel = new UserInputPanel();
 		userInputPanel.setLocation(0, 200);
@@ -56,29 +56,44 @@ public class MakeUserFrame extends JFrame {
 		submitPanel.setLocation(0, 250);
 		submitPanel.setSize(400, 50);
 
-		add(choiceChracterPanel);
+		add(characterChoicePanel);
 		add(userInputPanel);
 		add(submitPanel);
 	}
 	
-	public MakeUserFrame(UserListPanel userListPanel){
+	public MakeUserFrame(StartFrame startFrame){
 		this();
-		this.userListPanel = userListPanel;
+		this.startFrame = startFrame;
 	}
 
-	class ChoiceCharacterPanel extends JPanel {
-		JLabel choiceLabel;
-		GraphicRadioButton[] choiceBtn;
-		ButtonGroup chracterBtnGroup;
+	public String getSelectedCharater(){
+		ButtonGroup chracterBtnGroup = characterChoicePanel.getChracterBtnGroup();
+		String charaterID = null;
+		
+		Enumeration<AbstractButton> enums = chracterBtnGroup.getElements();
+		while (enums.hasMoreElements()) {
+			GraphicRadioButton radiobtn = (GraphicRadioButton) enums.nextElement();
+			if (radiobtn.isSelected()){
+				charaterID = radiobtn.getId();
+			}
+		}
+		
+		return charaterID;
+	}
+	
+	public String getInsertedUsername(){
+		return userInputPanel.getUsernameTextField().getText();
+	}
 
-		private ChoiceCharacterPanel() {
+	class CharacterChoicePanel extends JPanel {
+		private JLabel choiceLabel;
+		private GraphicRadioButton[] choiceBtn;
+		private ButtonGroup chracterBtnGroup;
+
+		private CharacterChoicePanel() {
 			setSize(400, 250);
 			setBackground(null);
 
-			makeBtn();
-		}
-
-		private void makeBtn() {
 			chracterBtnGroup = new ButtonGroup();
 
 			String path = "images/MakeUserFrame/";
@@ -88,50 +103,34 @@ public class MakeUserFrame extends JFrame {
 			choiceBtn[2] = new GraphicRadioButton(path, "ApeachBtn", 100, 100);
 
 			for (int i = 0; i < 3; i++) {
-				choiceBtn[i].addActionListener(new ChoiceActionListener());
-			}
-
-			for (int i = 0; i < 3; i++) {
 				chracterBtnGroup.add(choiceBtn[i]);
 				add(choiceBtn[i]);
 			}
 		}
 		
-		public String getCharaterSelect(){
-			String charaterID = null;
-			
-			Enumeration<AbstractButton> enums = this.chracterBtnGroup.getElements();
-			while (enums.hasMoreElements()) {
-				GraphicRadioButton radiobtn = (GraphicRadioButton) enums.nextElement();
-				if (radiobtn.isSelected()){
-					charaterID = radiobtn.getId();
-				}
-			}
-			
-			return charaterID;
-		}
-
-		class ChoiceActionListener implements ActionListener {
-			public void actionPerformed(ActionEvent e) {
-				GraphicRadioButton btn = (GraphicRadioButton) e.getSource();
-
-			}
+		public ButtonGroup getChracterBtnGroup() {
+			return chracterBtnGroup;
 		}
 	}
 
 	class UserInputPanel extends JPanel {
-		JTextField userTextField;
+		private JTextField usernameTextField;
 
 		private UserInputPanel() {
 			setLayout(new FlowLayout());
 			setBackground(null);
-			userTextField = new JTextField("", 15);
-			add(userTextField);
+			usernameTextField = new JTextField("", 15);
+			add(usernameTextField);
 		}
+
+		public JTextField getUsernameTextField() {
+			return usernameTextField;
+		}
+		
 	}
 	
 	class SubmitPanel extends JPanel {
-		GraphicButton[] submitBtn;
+		private GraphicButton[] submitBtn;
 
 		private SubmitPanel() {
 			setLayout(null);
@@ -156,15 +155,14 @@ public class MakeUserFrame extends JFrame {
 		}
 
 		class SubmitActionListener implements ActionListener {
-			String character;
-
 			public void actionPerformed(ActionEvent e) {
-
+				String character = null;
+				
 				GraphicButton btn = (GraphicButton) e.getSource();
 				if (btn.getId().equals("SubmitBtn")) {
 
 					String characterID = null;
-					characterID = choiceChracterPanel.getCharaterSelect();
+					characterID = getSelectedCharater();
 					if (characterID == null) {
 						JOptionPane.showMessageDialog(null, "캐릭터를 선택해주세요", "경고!", JOptionPane.WARNING_MESSAGE);
 						return;
@@ -178,7 +176,7 @@ public class MakeUserFrame extends JFrame {
 						character = "APEACH";
 					}
 
-					String username = userInputPanel.userTextField.getText();
+					String username = getInsertedUsername();
 					if (username.equals("")) {
 						JOptionPane.showMessageDialog(null, "이름을 입력해주세요", "경고!", JOptionPane.WARNING_MESSAGE);
 						return;
@@ -186,17 +184,12 @@ public class MakeUserFrame extends JFrame {
 
 					UserManager userManager = UserManager.getInstance();
 					userManager.writeUser(character, username);					
-					userListPanel.updateUser();
+					startFrame.updateUser();
 				}
 
 				JFrame topFrame = (JFrame) (SubmitPanel.this.getTopLevelAncestor());
 				topFrame.dispose();
 			}
-
-			public void makeUserDictinary() throws IOException {
-
-			}
-
 		}
 
 	}

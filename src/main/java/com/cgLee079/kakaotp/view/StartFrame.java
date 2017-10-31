@@ -58,6 +58,53 @@ public class StartFrame extends JFrame {
 		this();
 		this.mainFrame = mainFrame;
 	}
+	
+	public void updateUser(){
+		JComboBox<String>  userComboBox = userListPanel.getUserComboBox();
+		
+		userComboBox.removeAllItems();
+		userComboBox.addItem(null);
+		
+		UserManager userManager = UserManager.getInstance();
+		ArrayList<User> users = userManager.readUser();
+		
+		User user = null;
+		int size = users.size();
+		for(int i = 0; i < size ; i++){
+			user = users.get(i);
+			userComboBox.addItem(user.getUsername() + ". " + user.getCharacter());
+		}
+	}
+	
+	public User getSelectedUser() {
+		JComboBox<String>  userComboBox = userListPanel.getUserComboBox();
+		
+		String str = (String) userComboBox.getSelectedItem();
+		if(str == null){
+			return null;
+		}
+		
+		String[] spliter = str.split("\t");
+		String character = spliter[0];
+		String username = spliter[1];
+		
+		return new User(username, character);
+	}
+	
+	public String getSelectedLevel(){
+		ButtonGroup levelBtnGroup = levelListPanel.getLevelBtnGroup();
+		
+		String levelID = null;
+		Enumeration<AbstractButton> enums = levelBtnGroup.getElements();
+		while (enums.hasMoreElements()) {
+			GraphicRadioButton radiobtn = (GraphicRadioButton) enums.nextElement();
+			if (radiobtn.isSelected()) {
+				levelID = radiobtn.getId();
+			}
+		}
+		
+		return levelID;
+	}
 
 	class StartPanel extends JPanel {
 		StartPanel(){
@@ -81,16 +128,16 @@ public class StartFrame extends JFrame {
 	}
 
 	class LevelListPanel extends JPanel {
-		String level;
-		GraphicRadioButton levelbtn[];
-		ButtonGroup levelBtnGroup;
+		private String level;
+		private GraphicRadioButton levelbtn[];
+		private ButtonGroup levelBtnGroup;
 
-		LevelListPanel() {
+		private LevelListPanel() {
 			setBackground(null);
 			makeBtn();
 		}
 
-		void makeBtn() {
+		private void makeBtn() {
 			levelBtnGroup = new ButtonGroup();
 			levelbtn = new GraphicRadioButton[3];
 			levelbtn[0] = new GraphicRadioButton("images/StartFrame/", "levelBtn1", 70, 35);
@@ -103,25 +150,16 @@ public class StartFrame extends JFrame {
 			}
 		}
 		
-		public String getLevelSelect(){
-			String levelbtn = null;
-			Enumeration<AbstractButton> enums = levelBtnGroup.getElements();
-			while (enums.hasMoreElements()) {
-				GraphicRadioButton radiobtn = (GraphicRadioButton) enums.nextElement();
-				if (radiobtn.isSelected()) {
-					levelbtn = radiobtn.getId();
-				}
-			}
-			
-			return levelbtn;
+		public ButtonGroup getLevelBtnGroup() {
+			return levelBtnGroup;
 		}
-		
+
 	}
 
 	class UserListPanel extends GraphicPanel {
-		JComboBox<String> userComboBox;
+		private JComboBox<String> userComboBox;
 
-		UserListPanel(String path, String filename, int width, int height) {
+		private UserListPanel(String path, String filename, int width, int height) {
 			super(path, filename, width, height);
 			setLayout(null);
 			setBackground(null);
@@ -141,40 +179,18 @@ public class StartFrame extends JFrame {
 			GraphicButton wordPlusBtn = new GraphicButton(btnPath, "UserPlusBtn", 30, 30);
 			wordPlusBtn.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e) {
-					new MakeUserFrame(UserListPanel.this);
+					new MakeUserFrame(StartFrame.this);
 				}
 			});
 			
 			wordPlusBtn.setLocation(240, 5);
-
 			this.add(wordPlusBtn);
 		}
 
-		public void updateUser(){
-			userComboBox.removeAllItems();
-			userComboBox.addItem(null);
-			
-			UserManager userManager = UserManager.getInstance();
-			ArrayList<String> users = userManager.readUser();
-			
-			int size = users.size();
-			for(int i = 0; i < size ; i++){
-				userComboBox.addItem(users.get(i));
-			}
+		public JComboBox<String> getUserComboBox() {
+			return userComboBox;
 		}
 
-		public User getSelectedUser() {
-			String str = (String) userComboBox.getSelectedItem();
-			if(str == null){
-				return null;
-			}
-			
-			String[] spliter = str.split("\t");
-			String character = spliter[0];
-			String username = spliter[1];
-			
-			return new User(username, character);
-		}
 	}
 	
 	class SubmitPanel extends JPanel {
@@ -215,7 +231,7 @@ public class StartFrame extends JFrame {
 				GraphicButton btn = (GraphicButton) e.getSource();
 				if (btn.getId() == "SubmitBtn") {
 					
-					User user = SubmitPanel.this.userListPanel.getSelectedUser();
+					User user = getSelectedUser();
 					if (user == null) {
 						JOptionPane.showMessageDialog(null, "유저를 선택해주세요", "경고!", JOptionPane.WARNING_MESSAGE);
 						return;
@@ -233,7 +249,7 @@ public class StartFrame extends JFrame {
 						GlobalGraphic.path = "images/MainFrame/Apeach/";
 					}
 
-					String levelID =  SubmitPanel.this.levelListPanel.getLevelSelect();
+					String levelID =  getSelectedLevel();
 					int level = 0;
 					double speed = 0;
 					
