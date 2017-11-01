@@ -1,5 +1,7 @@
 package com.cgLee079.kakaotp.play;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Timer;
@@ -205,7 +207,7 @@ public class Play {
 	
 	public void pain(int value){
 		this.heart -= value;
-		playPanel.drawPain(value);
+		playPanel.drawPain(heart);
 		
 		if(heart <= 0){
 			gameOver();
@@ -364,10 +366,11 @@ public class Play {
 	class SpeedUpper extends Thread {
 		
 		public void run() {
-			NumberFormatter numberFormatter = new NumberFormatter();
+			NumberFormat formatter = new DecimalFormat("#0.00");    
+			
 			while (true) {
 				speedUp(0.01);
-				playPanel.drawSpeed(speed);
+				playPanel.drawSpeed(formatter.format(speed));
 				
 				try {
 					sleep(100);

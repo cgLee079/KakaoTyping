@@ -54,11 +54,11 @@ public class PlayPanel extends JPanel {
 		this();
 		this.play = play;
 		play.setPlayPanel(this);
-		addKeyListener(new KeyEventor(PlayPanel.this, play));
+		addKeyListener(new KeyEventor((MainFrame)this.getTopLevelAncestor(), play));
 		
 		drawLevel(play.getLevel());
 		drawPoint(play.getPoint());
-		drawSpeed(play.getSpeed());
+		drawSpeed(play.getSpeed() + "");
 		drawUsername(play.getUser().getUsername());
 
 		play.startGame();
@@ -78,8 +78,8 @@ public class PlayPanel extends JPanel {
 		northPanel.getPointPanel().getPointLabel().setText(point + "");
 	}
 	
-	public void drawSpeed(double speed){
-		westPanel.getSpeedPanel().getSpeedLabel().setText(speed + "");
+	public void drawSpeed(String speed){
+		westPanel.getSpeedPanel().getSpeedLabel().setText(speed);
 	}
 	
 	public void drawItemBtn(int index, boolean enabled){

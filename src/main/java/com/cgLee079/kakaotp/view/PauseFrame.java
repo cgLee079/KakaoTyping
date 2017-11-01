@@ -15,6 +15,7 @@ import com.cgLee079.kakaotp.graphic.GraphicButton;
 import com.cgLee079.kakaotp.play.Play;
 
 public class PauseFrame extends JFrame {
+	private MainFrame mainFrame;
 	private Play play;
 	
 	public PauseFrame() {
@@ -34,9 +35,10 @@ public class PauseFrame extends JFrame {
 		add(new ButtonPanel());
 	}
 	
-	public PauseFrame (Play play){
+	public PauseFrame(MainFrame mainFrame, Play play){
 		this();
 		this.play = play;
+		this.mainFrame = mainFrame;
 	}
 
 	class ButtonPanel extends JPanel {
@@ -66,13 +68,14 @@ public class PauseFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				GraphicButton btn = (GraphicButton) e.getSource();
 				if (btn.getId().equals("homebtn")){
+					mainFrame.drawHome();
+					PauseFrame.this.dispose();
 				} else if (btn.getId().equals("resumebtn")){
 					play.resumeGame();
 					PauseFrame.this.dispose();
 				} else if (btn.getId().equals("exitbtn")){
 					System.exit(0);
 				}
-				
 			}
 
 		}

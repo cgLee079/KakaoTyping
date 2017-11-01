@@ -22,7 +22,7 @@ import com.cgLee079.kakaotp.graphic.GraphicButton;
 
 
 public class MainFrame extends JFrame{
-	private MainPanel mainPanel;
+	private HomePanel homePanel;
 	
 	public MainFrame(){
 		setSize(800,550);
@@ -36,12 +36,15 @@ public class MainFrame extends JFrame{
 		Dimension windowSize = Toolkit.getDefaultToolkit().getScreenSize();		
 		setLocation((windowSize.width - frameSize.width) / 2, (windowSize.height - frameSize.height) / 2);
 		
-		mainPanel = new MainPanel();
-		this.setContentPane(mainPanel);
-		
+		drawHome();
 		createMenuBar();
 	}
 	
+	public void drawHome(){
+		homePanel = new HomePanel();
+		this.setContentPane(homePanel);
+	}
+
 	private void createMenuBar(){
 		JMenuBar menuBar 	= new JMenuBar();
 		JMenu fileMenu 		= new JMenu("File");
@@ -90,9 +93,9 @@ public class MainFrame extends JFrame{
 		}
 	}
 	
-	class MainPanel extends JPanel{
+	class HomePanel extends JPanel{
 		
-		MainPanel(){
+		HomePanel(){
 			setLayout(null);
 			MakeButton();
 		}

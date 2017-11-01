@@ -5,16 +5,17 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.JTextField;
 
+import com.cgLee079.kakaotp.view.MainFrame;
 import com.cgLee079.kakaotp.view.PauseFrame;
 import com.cgLee079.kakaotp.view.PlayPanel;
 
 public class KeyEventor extends KeyAdapter {
-	PlayPanel playPanel;
+	MainFrame mainFrame;
 	Play play;
 	PauseFrame pauseFrame;
 	
-	public KeyEventor(PlayPanel playPanel, Play play){
-		this.playPanel 	= playPanel;
+	public KeyEventor(MainFrame mainFrame, Play play){
+		this.mainFrame 	= mainFrame;
 		this.play 		= play;
 	}
 	
@@ -24,7 +25,7 @@ public class KeyEventor extends KeyAdapter {
 		
 		case KeyEvent.VK_ESCAPE:
 			play.pauseGame();
-			pauseFrame = new PauseFrame(play);
+			pauseFrame = new PauseFrame(mainFrame, play);
 			break;
 
 		case KeyEvent.VK_F1: // item1 모두 지우기
