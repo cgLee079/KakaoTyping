@@ -1,4 +1,4 @@
-package com.cgLee079.kakaotp.view;
+package com.cglee079.kakaotp.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -9,9 +9,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.geom.RoundRectangle2D;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JComboBox;
@@ -21,13 +18,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import com.cgLee079.kakaotp.dict.UserDictionary;
-import com.cgLee079.kakaotp.graphic.GameFontP;
-import com.cgLee079.kakaotp.graphic.GlobalGraphic;
-import com.cgLee079.kakaotp.graphic.GraphicButton;
-import com.cgLee079.kakaotp.graphic.GraphicPanel;
-import com.cgLee079.kakaotp.io.UserManager;
-import com.cgLee079.kakaotp.model.User;
+import com.cglee079.kakaotp.dict.UserDictionary;
+import com.cglee079.kakaotp.graphic.GameFontP;
+import com.cglee079.kakaotp.graphic.GlobalGraphic;
+import com.cglee079.kakaotp.graphic.GraphicButton;
+import com.cglee079.kakaotp.graphic.GraphicPanel;
+import com.cglee079.kakaotp.io.UserManager;
+import com.cglee079.kakaotp.model.User;
 
 //AllWordList 프레임
 public class WordSetFrame extends JFrame {

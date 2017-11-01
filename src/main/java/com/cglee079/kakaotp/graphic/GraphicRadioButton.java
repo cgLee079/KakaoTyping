@@ -1,4 +1,4 @@
-package com.cgLee079.kakaotp.graphic;
+package com.cglee079.kakaotp.graphic;
 
 import javax.swing.ImageIcon;
 import javax.swing.JRadioButton;

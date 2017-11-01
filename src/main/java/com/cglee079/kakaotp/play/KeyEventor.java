@@ -1,13 +1,12 @@
-package com.cgLee079.kakaotp.play;
+package com.cglee079.kakaotp.play;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JTextField;
 
-import com.cgLee079.kakaotp.view.MainFrame;
-import com.cgLee079.kakaotp.view.PauseFrame;
-import com.cgLee079.kakaotp.view.PlayPanel;
+import com.cglee079.kakaotp.view.MainFrame;
+import com.cglee079.kakaotp.view.PauseFrame;
 
 public class KeyEventor extends KeyAdapter {
 	MainFrame mainFrame;

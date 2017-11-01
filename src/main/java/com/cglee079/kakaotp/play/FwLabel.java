@@ -1,13 +1,13 @@
-package com.cgLee079.kakaotp.play;
+package com.cglee079.kakaotp.play;
 
 import java.awt.Color;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import com.cgLee079.kakaotp.graphic.GameFontB;
-import com.cgLee079.kakaotp.graphic.GameFontP;
-import com.cgLee079.kakaotp.graphic.GlobalGraphic;
+import com.cglee079.kakaotp.graphic.GameFontB;
+import com.cglee079.kakaotp.graphic.GameFontP;
+import com.cglee079.kakaotp.graphic.GlobalGraphic;
 
 public class FwLabel extends JLabel {
 	// 라벨의 Item 보유

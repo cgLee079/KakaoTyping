@@ -1,4 +1,4 @@
-package com.cgLee079.kakaotp.view;
+package com.cglee079.kakaotp.view;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -10,9 +10,9 @@ import java.awt.geom.RoundRectangle2D;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import com.cgLee079.kakaotp.graphic.GlobalGraphic;
-import com.cgLee079.kakaotp.graphic.GraphicButton;
-import com.cgLee079.kakaotp.play.Play;
+import com.cglee079.kakaotp.graphic.GlobalGraphic;
+import com.cglee079.kakaotp.graphic.GraphicButton;
+import com.cglee079.kakaotp.play.Play;
 
 public class PauseFrame extends JFrame {
 	private MainFrame mainFrame;

@@ -1,4 +1,4 @@
-package com.cgLee079.kakaotp.view;
+package com.cglee079.kakaotp.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -14,14 +14,14 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
-import com.cgLee079.kakaotp.graphic.GameFontB;
-import com.cgLee079.kakaotp.graphic.GameFontP;
-import com.cgLee079.kakaotp.graphic.GlobalGraphic;
-import com.cgLee079.kakaotp.graphic.GraphicButton;
-import com.cgLee079.kakaotp.graphic.GraphicPanel;
-import com.cgLee079.kakaotp.play.FwLabel;
-import com.cgLee079.kakaotp.play.KeyEventor;
-import com.cgLee079.kakaotp.play.Play;
+import com.cglee079.kakaotp.graphic.GameFontB;
+import com.cglee079.kakaotp.graphic.GameFontP;
+import com.cglee079.kakaotp.graphic.GlobalGraphic;
+import com.cglee079.kakaotp.graphic.GraphicButton;
+import com.cglee079.kakaotp.graphic.GraphicPanel;
+import com.cglee079.kakaotp.play.FwLabel;
+import com.cglee079.kakaotp.play.KeyEventor;
+import com.cglee079.kakaotp.play.Play;
 
 public class PlayPanel extends JPanel {
 	private EastPanel eastPanel;

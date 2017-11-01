@@ -1,4 +1,4 @@
-package com.cgLee079.kakaotp.view;
+package com.cglee079.kakaotp.view;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -6,7 +6,6 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
-import java.io.IOException;
 import java.util.Enumeration;
 
 import javax.swing.AbstractButton;
@@ -17,11 +16,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.cgLee079.kakaotp.graphic.GlobalGraphic;
-import com.cgLee079.kakaotp.graphic.GraphicButton;
-import com.cgLee079.kakaotp.graphic.GraphicRadioButton;
-import com.cgLee079.kakaotp.io.UserManager;
-import com.cgLee079.kakaotp.view.StartFrame.UserListPanel;
+import com.cglee079.kakaotp.graphic.GlobalGraphic;
+import com.cglee079.kakaotp.graphic.GraphicButton;
+import com.cglee079.kakaotp.graphic.GraphicRadioButton;
+import com.cglee079.kakaotp.io.UserManager;
 
 public class MakeUserFrame extends JFrame {
 	StartFrame startFrame;

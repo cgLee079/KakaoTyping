@@ -1,17 +1,12 @@
-package com.cgLee079.kakaotp.view;
+package com.cglee079.kakaotp.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
@@ -22,13 +17,13 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import com.cgLee079.kakaotp.graphic.GlobalGraphic;
-import com.cgLee079.kakaotp.graphic.GraphicButton;
-import com.cgLee079.kakaotp.graphic.GraphicPanel;
-import com.cgLee079.kakaotp.graphic.GraphicRadioButton;
-import com.cgLee079.kakaotp.io.UserManager;
-import com.cgLee079.kakaotp.model.User;
-import com.cgLee079.kakaotp.play.Play;
+import com.cglee079.kakaotp.graphic.GlobalGraphic;
+import com.cglee079.kakaotp.graphic.GraphicButton;
+import com.cglee079.kakaotp.graphic.GraphicPanel;
+import com.cglee079.kakaotp.graphic.GraphicRadioButton;
+import com.cglee079.kakaotp.io.UserManager;
+import com.cglee079.kakaotp.model.User;
+import com.cglee079.kakaotp.play.Play;
 
 public class StartFrame extends JFrame {
 	private MainFrame mainFrame;

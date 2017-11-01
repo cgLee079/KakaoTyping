@@ -1,4 +1,4 @@
-package com.cgLee079.kakaotp.play;
+package com.cglee079.kakaotp.play;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -8,14 +8,12 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Vector;
 
-import javax.swing.text.NumberFormatter;
-
-import com.cgLee079.kakaotp.dict.UserDictionary;
-import com.cgLee079.kakaotp.io.ScoreManager;
-import com.cgLee079.kakaotp.model.Score;
-import com.cgLee079.kakaotp.model.User;
-import com.cgLee079.kakaotp.view.PlayPanel;
-import com.cgLee079.kakaotp.view.ScoreFrame;
+import com.cglee079.kakaotp.dict.UserDictionary;
+import com.cglee079.kakaotp.io.ScoreManager;
+import com.cglee079.kakaotp.model.Score;
+import com.cglee079.kakaotp.model.User;
+import com.cglee079.kakaotp.view.PlayPanel;
+import com.cglee079.kakaotp.view.ScoreFrame;
 
 public class Play {
 	PlayPanel playPanel;

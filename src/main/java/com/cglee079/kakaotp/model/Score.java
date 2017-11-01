@@ -1,4 +1,4 @@
-package com.cgLee079.kakaotp.model;
+package com.cglee079.kakaotp.model;
 
 public class Score {
 	private String character;

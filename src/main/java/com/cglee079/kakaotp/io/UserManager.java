@@ -1,4 +1,4 @@
-package com.cgLee079.kakaotp.io;
+package com.cglee079.kakaotp.io;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.cgLee079.kakaotp.model.User;
+import com.cglee079.kakaotp.model.User;
 
 public class UserManager {
 	private static UserManager instance = null;

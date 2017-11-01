@@ -1,4 +1,4 @@
-package com.cgLee079.kakaotp.dict;
+package com.cglee079.kakaotp.dict;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

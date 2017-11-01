@@ -1,4 +1,4 @@
-package com.cgLee079.kakaotp.io;
+package com.cglee079.kakaotp.io;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -8,10 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
-import com.cgLee079.kakaotp.model.Score;
-import com.cgLee079.kakaotp.view.PlayPanel;
+import com.cglee079.kakaotp.model.Score;
 
 public class ScoreManager {
 	private static ScoreManager instance = null;
