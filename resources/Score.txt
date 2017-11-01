@@ -6,3 +6,13 @@ APEACH	어피치	0
 APEACH	어피치	0
 LYAN	22	0
 LYAN	22	0
+LYAN	22	20
+APEACH	어피치	0
+LYAN	test	150
+LYAN	test	0
+LYAN	test	0
+LYAN	test	0
+LYAN	test	0
+LYAN	test	0
+LYAN	test	0
+LYAN	test	0

@@ -67,7 +67,7 @@ public class PauseFrame extends JFrame {
 		class ButtonActionListener implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				GraphicButton btn = (GraphicButton) e.getSource();
-				if (btn.getId().equals("homebtn")){
+				if (btn.getId().equals("Homebtn")){
 					mainFrame.drawHome();
 					PauseFrame.this.dispose();
 				} else if (btn.getId().equals("resumebtn")){

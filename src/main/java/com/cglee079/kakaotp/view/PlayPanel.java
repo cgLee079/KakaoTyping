@@ -29,6 +29,7 @@ public class PlayPanel extends JPanel {
 	private CenterPanel centerPanel;
 	private SouthPanel southPanel;
 	private WestPanel westPanel;
+	private MainFrame mainFrame;
 	private Play play;
 
 	public PlayPanel() {
@@ -50,11 +51,13 @@ public class PlayPanel extends JPanel {
 
 	}
 
-	public PlayPanel(Play play) {
+	public PlayPanel(MainFrame mainFrame, Play play) {
 		this();
+		this.mainFrame = mainFrame;
 		this.play = play;
+		
 		play.setPlayPanel(this);
-		addKeyListener(new KeyEventor((MainFrame)this.getTopLevelAncestor(), play));
+		addKeyListener(new KeyEventor(mainFrame, play));
 		
 		drawLevel(play.getLevel());
 		drawPoint(play.getPoint());

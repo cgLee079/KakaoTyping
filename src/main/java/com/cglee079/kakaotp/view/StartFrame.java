@@ -262,7 +262,7 @@ public class StartFrame extends JFrame {
 					}
 					
 					Play play = new Play(user, level, speed);
-					mainFrame.setContentPane(new PlayPanel(play));
+					mainFrame.setContentPane(new PlayPanel(mainFrame, play));
 				}
 				
 				StartFrame.this.dispose();

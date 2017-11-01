@@ -30,7 +30,7 @@ public class UserDictionary {
 		String path = "resources/UserDictionary";
 		String filename = user + "_Dictionary.txt";
 		File dictFile = new File(path, filename);
-
+		
 		if (!dictFile.exists()) {
 			dictFile.createNewFile();
 			initDictionary(dictFile);

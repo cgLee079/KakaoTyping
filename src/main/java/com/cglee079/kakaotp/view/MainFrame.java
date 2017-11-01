@@ -1,5 +1,7 @@
 package com.cglee079.kakaotp.view;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
@@ -9,15 +11,30 @@ import java.awt.event.InputEvent;
 import java.awt.geom.RoundRectangle2D;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.KeyStroke;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
 
+import com.cglee079.kakaotp.graphic.GameFontB;
+import com.cglee079.kakaotp.graphic.GameFontP;
+import com.cglee079.kakaotp.graphic.GlobalGraphic;
 import com.cglee079.kakaotp.graphic.GraphicButton;
+import com.cglee079.kakaotp.graphic.GraphicPanel;
+import com.cglee079.kakaotp.play.FwLabel;
+import com.cglee079.kakaotp.play.KeyEventor;
+import com.cglee079.kakaotp.play.Play;
 
 
 public class MainFrame extends JFrame{
@@ -42,6 +59,7 @@ public class MainFrame extends JFrame{
 	public void drawHome(){
 		homePanel = new HomePanel();
 		this.setContentPane(homePanel);
+		this.revalidate();
 	}
 
 	private void createMenuBar(){
@@ -108,11 +126,11 @@ public class MainFrame extends JFrame{
 			btn[2] = new GraphicButton(path, "Helpbtn", 100, 35);
 			btn[3] = new GraphicButton(path, "Exitbtn", 100, 35);
 			
-			for(int i=0; i < 4; i++){
+			for(int i = 0; i < 4; i++){
 				btn[i].addActionListener(new MenuActionListener());
 			}
 			
-			for(int i=0; i < 4; i++){
+			for(int i = 0; i < 4; i++){
 				btn[i].setLocation(330, 280+(i*40));
 				add(btn[i]);
 			}		
@@ -122,12 +140,10 @@ public class MainFrame extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				GraphicButton btn = (GraphicButton)e.getSource();
-
 				if(btn.getId().equals("Startbtn")) { new StartFrame((MainFrame) btn.getTopLevelAncestor()); }
-				else if(btn.getId().equals("WordSetBtn")) { new WordSetFrame(); }
+				else if(btn.getId().equals("WordSetbtn")){new WordSetFrame(); }
 				else if(btn.getId().equals("Help"));
 				else if(btn.getId().equals("Exitbtn")){ System.exit(0); }
-				
 			}
 		}
 				

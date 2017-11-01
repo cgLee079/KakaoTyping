@@ -354,7 +354,7 @@ public class Play {
 	}
 	
 	public void gameOver() {
-		stopGame();
+		//stopGame();
 		Score score = new Score(user.getCharacter(), user.getUsername(), point);
 		ScoreManager scoreManager = ScoreManager.getInstance();
 		scoreManager.addScore(score);

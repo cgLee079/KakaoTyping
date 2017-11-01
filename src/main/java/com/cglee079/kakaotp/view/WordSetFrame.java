@@ -67,6 +67,7 @@ public class WordSetFrame extends JFrame {
 		add(setButtonPanel);
 		add(submitButtonPanel);
 
+		updateUser();
 	}
 
 	public void updateUser(){
@@ -82,18 +83,18 @@ public class WordSetFrame extends JFrame {
 		int size = users.size();
 		for(int i = 0; i < size ; i++){
 			user = users.get(i);
-			userComboBox.addItem(user.getUsername() + ". " + user.getCharacter());
+			userComboBox.addItem(user.getCharacter() + "\t" + user.getUsername());
 		}
 	}
 	
-	public void loadDictionary(String user) {
+	public void loadDictionary(String username) {
 		DefaultTableModel model = wordListPanel.getWordListTable().getModel();
 		int rowCnt = model.getRowCount();
 		for (int i = 0 ; i < rowCnt; i++){
-			model.removeRow(i);
+			model.removeRow(0);
 		}
 		
-		UserDictionary dictionary = new UserDictionary(user);
+		UserDictionary dictionary = new UserDictionary(username);
 		
 		// WordList에 모든 단어 add
 		for (int index = 0; index < dictionary.getNumOfWord(); index++) {
@@ -170,8 +171,6 @@ public class WordSetFrame extends JFrame {
 				}
 			});
 			
-			updateUser();
-			
 			add(userComboBox);
 		}
 		
@@ -189,6 +188,11 @@ public class WordSetFrame extends JFrame {
 			setBackground(null);
 			
 			wordPlusBtn = new GraphicButton("images/WordSetFrame/", "wordPlusBtn", 100, 40);
+			wordPlusBtn.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					new WordPlusFrame();
+				}
+			});
 			successResetBtn = new GraphicButton("images/WordSetFrame/", "SuccessResetBtn", 100, 40);
 
 			add(wordPlusBtn);
@@ -197,21 +201,21 @@ public class WordSetFrame extends JFrame {
 	}
 
 	class SubmitButtonPanel extends JPanel {
-		GraphicButton wordPlusBtn;
-		GraphicButton successResetBtn;
+		GraphicButton submitBtn;
+		GraphicButton concealBtn;
 
 		SubmitButtonPanel() {
 			setBackground(null);
 			setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 			
-			wordPlusBtn = new GraphicButton("images/WordSetFrame/", "SubmitBtn", 100, 35);
-			wordPlusBtn.addActionListener(new SubmitAction());
+			submitBtn = new GraphicButton("images/WordSetFrame/", "SubmitBtn", 100, 35);
+			submitBtn.addActionListener(new SubmitAction());
 
-			successResetBtn = new GraphicButton("images/WordSetFrame/", "ConcealBtn", 100, 35);
-			successResetBtn.addActionListener(new SubmitAction());
+			concealBtn = new GraphicButton("images/WordSetFrame/", "ConcealBtn", 100, 35);
+			concealBtn.addActionListener(new SubmitAction());
 
-			add(wordPlusBtn);
-			add(successResetBtn);
+			add(submitBtn);
+			add(concealBtn);
 		}
 
 		class SubmitAction implements ActionListener {
