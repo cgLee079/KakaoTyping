@@ -45,7 +45,7 @@ public class KeyEventor extends KeyAdapter {
 			break;
 
 		case KeyEvent.VK_ENTER: // Enter 입력시 단어 비교,
-			SoundPlayer.play("enter");
+			SoundPlayer.play("enter.wav");
 			String text = wordTextField.getText(); // TextField에서 입력값 받아옴
 			play.checkFwLabels(text); // 단어 비교
 			wordTextField.setText("");// textField 클리어

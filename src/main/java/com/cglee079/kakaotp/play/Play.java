@@ -188,7 +188,7 @@ public class Play {
 	} // 속도 업
 
 	public void levelUp() {
-		SoundPlayer.play("levelup");
+		SoundPlayer.play("levelup.wav");
 		
 		level++;
 		playPanel.drawLevel(level);
@@ -358,7 +358,7 @@ public class Play {
 	}
 	
 	public void gameOver() {
-		SoundPlayer.play("gameOver");
+		SoundPlayer.play("gameOver.wav");
 		//stopGame();
 		Score score = new Score(user.getCharacter(), user.getUsername(), point);
 		ScoreManager scoreManager = ScoreManager.getInstance();

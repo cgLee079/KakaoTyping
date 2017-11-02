@@ -10,9 +10,11 @@ import javax.sound.sampled.Line;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+import com.cglee079.kakaotp.util.PathManager;
+
 public class SoundPlayer {
 	public synchronized static void play(String fileName){
-		String audioFile = "sounds/" + fileName+ ".wav";
+		String audioFile = PathManager.SOUND + fileName;
 
 		Clip clip;
 		File soundFile = new File(audioFile);

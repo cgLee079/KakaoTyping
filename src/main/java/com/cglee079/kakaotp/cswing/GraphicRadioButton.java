@@ -39,10 +39,10 @@ public class GraphicRadioButton extends JRadioButton {
 	
 	class BtnMouseListener extends MouseAdapter{
 		public void mouseEntered(MouseEvent e){
-			SoundPlayer.play("btn_enter");			
+			SoundPlayer.play("btn_enter.wav");			
 		}
 		public void mousePressed(MouseEvent e){
-			SoundPlayer.play("btn_click");
+			SoundPlayer.play("btn_click.wav");
 		}
 	}
 	

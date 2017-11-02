@@ -66,7 +66,7 @@ public class MainFrame extends JFrame{
 		Thread bgmTh = new Thread(){
 			public void run(){
 				while(true){
-					SoundPlayer.play("bgm");
+					SoundPlayer.play("bgm.wav");
 					try{
 						sleep(1000*130);
 					}catch(InterruptedException e){
