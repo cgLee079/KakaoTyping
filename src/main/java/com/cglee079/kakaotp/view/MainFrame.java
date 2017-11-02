@@ -21,11 +21,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
-import com.cglee079.kakaotp.graphic.GraphicButton;
-import com.cglee079.kakaotp.graphic.MainPoint;
+import com.cglee079.kakaotp.cswing.GraphicButton;
 import com.cglee079.kakaotp.sound.SoundPlayer;
+import com.cglee079.kakaotp.util.MainPosition;
+import com.cglee079.kakaotp.util.PathManager;
 
 public class MainFrame extends JFrame{
+	private final String PATH = PathManager.MAIN_FRAME;
 	private HomePanel homePanel;
 	private Point mouseClickedLocation = new Point(0, 0);
 	
@@ -41,8 +43,8 @@ public class MainFrame extends JFrame{
 		Dimension windowSize = Toolkit.getDefaultToolkit().getScreenSize();		
 		setLocation((windowSize.width - frameSize.width) / 2, (windowSize.height - frameSize.height) / 2);
 		
-		MainPoint.x = (MainFrame.this.getWidth()/2) + (this.getLocationOnScreen().x -  MainFrame.this.mouseClickedLocation.x);
-		MainPoint.y = (MainFrame.this.getHeight()/2) + (this.getLocationOnScreen().y -  MainFrame.this.mouseClickedLocation.y);
+		MainPosition.x = (MainFrame.this.getWidth()/2) + (this.getLocationOnScreen().x -  MainFrame.this.mouseClickedLocation.x);
+		MainPosition.y = (MainFrame.this.getHeight()/2) + (this.getLocationOnScreen().y -  MainFrame.this.mouseClickedLocation.y);
 		
 		this.addMouseListener(new MouseAdapter() {
 			  public void mousePressed(MouseEvent e) {
@@ -56,8 +58,8 @@ public class MainFrame extends JFrame{
 		    	MainFrame.this.setLocation(e.getLocationOnScreen().x -  MainFrame.this.mouseClickedLocation.x,
 		    			 e.getLocationOnScreen().y -  MainFrame.this.mouseClickedLocation.y);
 		    	
-		        MainPoint.x = (MainFrame.this.getWidth()/2) + (e.getLocationOnScreen().x -  MainFrame.this.mouseClickedLocation.x);
-		        MainPoint.y = (MainFrame.this.getHeight()/2) + (e.getLocationOnScreen().y -  MainFrame.this.mouseClickedLocation.y);
+		        MainPosition.x = (MainFrame.this.getWidth()/2) + (e.getLocationOnScreen().x -  MainFrame.this.mouseClickedLocation.x);
+		        MainPosition.y = (MainFrame.this.getHeight()/2) + (e.getLocationOnScreen().y -  MainFrame.this.mouseClickedLocation.y);
 		    }
 		});
 		
@@ -144,13 +146,11 @@ public class MainFrame extends JFrame{
 		private HomePanel(){
 			setLayout(null);
 			
-			String path = "images/MainFrame/MainPage/";
-			
 			GraphicButton btn[] = new GraphicButton[4];
-			btn[0] = new GraphicButton(path, "Startbtn", 100, 35);
-			btn[1] = new GraphicButton(path, "WordSetbtn", 100, 35);
-			btn[2] = new GraphicButton(path, "Helpbtn", 100, 35);
-			btn[3] = new GraphicButton(path, "Exitbtn", 100, 35);
+			btn[0] = new GraphicButton(PATH, "Startbtn", 100, 35);
+			btn[1] = new GraphicButton(PATH, "WordSetbtn", 100, 35);
+			btn[2] = new GraphicButton(PATH, "Helpbtn", 100, 35);
+			btn[3] = new GraphicButton(PATH, "Exitbtn", 100, 35);
 			
 			for(int i = 0; i < 4; i++){
 				btn[i].addActionListener(new MenuActionListener());
@@ -175,8 +175,8 @@ public class MainFrame extends JFrame{
 				
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);
-			ImageIcon background = new ImageIcon("images/MainFrame/MainPage/Background.png");	
-			g.drawImage(background.getImage(), 0, 0, null);	
+			ImageIcon homeBg = new ImageIcon(PATH + "HomeBg.png");	
+			g.drawImage(homeBg.getImage(), 0, 0, null);	
 			setOpaque(false);
 		}	
 	}		

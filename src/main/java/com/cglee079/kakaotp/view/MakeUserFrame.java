@@ -1,8 +1,6 @@
 package com.cglee079.kakaotp.view;
 
-import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
@@ -16,28 +14,30 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.cglee079.kakaotp.graphic.GlobalGraphic;
-import com.cglee079.kakaotp.graphic.GraphicButton;
-import com.cglee079.kakaotp.graphic.GraphicRadioButton;
+import com.cglee079.kakaotp.cswing.GraphicButton;
+import com.cglee079.kakaotp.cswing.GraphicRadioButton;
 import com.cglee079.kakaotp.io.UserManager;
+import com.cglee079.kakaotp.util.ColorManager;
+import com.cglee079.kakaotp.util.MainPosition;
+import com.cglee079.kakaotp.util.PathManager;
 
 public class MakeUserFrame extends JFrame {
-	StartFrame startFrame;
-	CharacterChoicePanel characterChoicePanel;
-	UserInputPanel userInputPanel;
-	SubmitPanel submitPanel;
+	private final String PATH = PathManager.MAKEUSER_FRAME;
+	
+	private StartFrame startFrame;
+	private CharacterChoicePanel characterChoicePanel;
+	private UserInputPanel userInputPanel;
+	private SubmitPanel submitPanel;
 
 	public MakeUserFrame() {
 		setSize(400, 320);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);// 크기 고정
 		setUndecorated(true);
-		this.getContentPane().setBackground(GlobalGraphic.basic2);
+		this.getContentPane().setBackground(ColorManager.BASIC2);
 		setVisible(true);
 
-		Dimension frameSize = getSize();
-		Dimension windowSize = Toolkit.getDefaultToolkit().getScreenSize();
-		setLocation((windowSize.width - frameSize.width) / 2, (windowSize.height - frameSize.height) / 2);
+		setLocation(MainPosition.x-(this.getWidth()/2), MainPosition.y-(this.getHeight()/2));
 
 		this.setShape(new RoundRectangle2D.Float(0, 0, this.getWidth(), this.getHeight(), 100, 100));
 		setLayout(null);
@@ -84,7 +84,6 @@ public class MakeUserFrame extends JFrame {
 	}
 
 	class CharacterChoicePanel extends JPanel {
-		private JLabel choiceLabel;
 		private GraphicRadioButton[] choiceBtn;
 		private ButtonGroup chracterBtnGroup;
 
@@ -94,11 +93,10 @@ public class MakeUserFrame extends JFrame {
 
 			chracterBtnGroup = new ButtonGroup();
 
-			String path = "images/MakeUserFrame/";
 			choiceBtn = new GraphicRadioButton[3];
-			choiceBtn[0] = new GraphicRadioButton(path, "MuziBtn", 100, 100);
-			choiceBtn[1] = new GraphicRadioButton(path, "LyanBtn", 100, 100);
-			choiceBtn[2] = new GraphicRadioButton(path, "ApeachBtn", 100, 100);
+			choiceBtn[0] = new GraphicRadioButton(PATH, "MuziBtn", 100, 100);
+			choiceBtn[1] = new GraphicRadioButton(PATH, "LyanBtn", 100, 100);
+			choiceBtn[2] = new GraphicRadioButton(PATH, "ApeachBtn", 100, 100);
 
 			for (int i = 0; i < 3; i++) {
 				chracterBtnGroup.add(choiceBtn[i]);
@@ -142,10 +140,9 @@ public class MakeUserFrame extends JFrame {
 		}
 
 		private void makeBtn() {
-			String path = "images/MakeUserFrame/";
 			submitBtn = new GraphicButton[2];
-			submitBtn[0] = new GraphicButton(path, "SubmitBtn", 100, 35);
-			submitBtn[1] = new GraphicButton(path, "ConcealBtn", 100, 35);
+			submitBtn[0] = new GraphicButton(PATH, "SubmitBtn", 100, 35);
+			submitBtn[1] = new GraphicButton(PATH, "ConcealBtn", 100, 35);
 
 			for (int i = 0; i < 2; i++) {
 				submitBtn[i].addActionListener(new SubmitActionListener());

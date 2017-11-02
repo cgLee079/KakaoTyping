@@ -12,15 +12,17 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import com.cglee079.kakaotp.cswing.GraphicButton;
+import com.cglee079.kakaotp.cswing.GraphicPanel;
 import com.cglee079.kakaotp.dict.UserDictionary;
-import com.cglee079.kakaotp.graphic.GameFontP;
-import com.cglee079.kakaotp.graphic.GlobalGraphic;
-import com.cglee079.kakaotp.graphic.GraphicButton;
-import com.cglee079.kakaotp.graphic.GraphicPanel;
-import com.cglee079.kakaotp.graphic.MainPoint;
+import com.cglee079.kakaotp.font.GameFontP;
 import com.cglee079.kakaotp.model.User;
+import com.cglee079.kakaotp.util.ColorManager;
+import com.cglee079.kakaotp.util.MainPosition;
+import com.cglee079.kakaotp.util.PathManager;
 
 public class WordPlusFrame extends JFrame {
+	private final String PATH = PathManager.WORDPLUS_FRAME;
 	private InputPanel inputPanel;
 	private WordSetFrame wordSetFrame;
 	private User user;
@@ -36,10 +38,10 @@ public class WordPlusFrame extends JFrame {
 		setUndecorated(true);
 		setVisible(true);
 		setShape(new RoundRectangle2D.Float(0, 0, this.getWidth(), this.getHeight(), 100, 100));
-		setLocation(MainPoint.x - (this.getWidth() / 2), MainPoint.y - (this.getHeight() / 2));
-		getContentPane().setBackground(GlobalGraphic.basic3);
+		setLocation(MainPosition.x - (this.getWidth() / 2), MainPosition.y - (this.getHeight() / 2));
+		getContentPane().setBackground(ColorManager.BASIC3);
 
-		GraphicPanel inputWordPanel = new GraphicPanel("images/WordPlusFrame/", "inputYourWord", 400, 70);
+		GraphicPanel inputWordPanel = new GraphicPanel(PATH, "inputYourWord", 400, 70);
 		add(inputWordPanel, BorderLayout.NORTH);
 
 		inputPanel = new InputPanel();
@@ -80,10 +82,10 @@ public class WordPlusFrame extends JFrame {
 		private SubmitPanel() {
 			setBackground(null);
 
-			submitBtn = new GraphicButton("images/WordPlusFrame/", "SubmitBtn", 100, 35);
+			submitBtn = new GraphicButton(PATH, "SubmitBtn", 100, 35);
 			submitBtn.addActionListener(new SubmitAction());
 
-			concealBtn = new GraphicButton("images/WordPlusFrame/", "ConcealBtn", 100, 35);
+			concealBtn = new GraphicButton(PATH, "ConcealBtn", 100, 35);
 			concealBtn.addActionListener(new SubmitAction());
 
 			add(submitBtn);

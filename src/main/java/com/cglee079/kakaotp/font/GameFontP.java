@@ -1,4 +1,4 @@
-package com.cglee079.kakaotp.graphic;
+package com.cglee079.kakaotp.font;
 
 import java.awt.Font;
 

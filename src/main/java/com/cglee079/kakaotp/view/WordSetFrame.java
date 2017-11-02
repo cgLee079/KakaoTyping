@@ -13,21 +13,25 @@ import java.util.ArrayList;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import com.cglee079.kakaotp.cswing.GraphicButton;
+import com.cglee079.kakaotp.cswing.GraphicPanel;
 import com.cglee079.kakaotp.dict.UserDictionary;
-import com.cglee079.kakaotp.graphic.GameFontP;
-import com.cglee079.kakaotp.graphic.GlobalGraphic;
-import com.cglee079.kakaotp.graphic.GraphicButton;
-import com.cglee079.kakaotp.graphic.GraphicPanel;
+import com.cglee079.kakaotp.font.GameFontP;
 import com.cglee079.kakaotp.io.UserManager;
 import com.cglee079.kakaotp.model.User;
+import com.cglee079.kakaotp.util.ColorManager;
+import com.cglee079.kakaotp.util.MainPosition;
+import com.cglee079.kakaotp.util.PathManager;
 
 //AllWordList 프레임
 public class WordSetFrame extends JFrame {
+	private final String PATH = PathManager.WORDSET_FRAME;
 	private WordListPanel wordListPanel;
 	private UserListPanel userListPanel;
 	private SetButtonPanel setButtonPanel;
@@ -40,18 +44,16 @@ public class WordSetFrame extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);// 크기 고정
 		setUndecorated(true);
-		getContentPane().setBackground(GlobalGraphic.basic2);
+		getContentPane().setBackground(ColorManager.BASIC2);
 		setVisible(true);
 		this.setShape(new RoundRectangle2D.Float(0, 0, this.getWidth(), this.getHeight(), 100, 100));
-		Dimension frameSize = getSize();
-		Dimension windowSize = Toolkit.getDefaultToolkit().getScreenSize();
-		setLocation((windowSize.width - frameSize.width) / 2, (windowSize.height - frameSize.height) / 2);
-
+		setLocation(MainPosition.x - (this.getWidth()/2), MainPosition.y - (this.getHeight()/2));
+		
 		wordListPanel = new WordListPanel();
 		wordListPanel.setLocation(30, 20);
 		wordListPanel.setSize(250, 305);
 
-		userListPanel = new UserListPanel("images/WordSetFrame/", "UserListPanel", 250, 40);
+		userListPanel = new UserListPanel(PATH, "UserListPanel", 250, 40);
 		userListPanel.setLocation(300, 40);
 
 		setButtonPanel = new SetButtonPanel();
@@ -166,8 +168,8 @@ public class WordSetFrame extends JFrame {
 	class UserListPanel extends GraphicPanel {
 		private JComboBox<String> userComboBox;
 
-		private UserListPanel(String path, String FILENAME, int width, int height) {
-			super(path, FILENAME, width, height);
+		private UserListPanel(String path, String filename, int width, int height) {
+			super(path, filename, width, height);
 			setLayout(null);
 			this.setBackground(null);
 
@@ -197,37 +199,49 @@ public class WordSetFrame extends JFrame {
 	}
 
 	class SetButtonPanel extends JPanel {
-		GraphicButton wordPlusBtn;
-		GraphicButton successResetBtn;
+		private GraphicButton wordPlusBtn;
+		private GraphicButton successResetBtn;
 
-		SetButtonPanel() {
+		private SetButtonPanel() {
 			setBackground(null);
 			
-			wordPlusBtn = new GraphicButton("images/WordSetFrame/", "wordPlusBtn", 100, 40);
+			wordPlusBtn = new GraphicButton(PATH, "wordPlusBtn", 100, 40);
 			wordPlusBtn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					new WordPlusFrame(WordSetFrame.this, getSelectedUser());
 				}
 			});
-			successResetBtn = new GraphicButton("images/WordSetFrame/", "SuccessResetBtn", 100, 40);
-
+			successResetBtn = new GraphicButton(PATH, "SuccessResetBtn", 100, 40);
+			successResetBtn.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					User user = getSelectedUser();
+					String username = user.getUsername();
+					UserDictionary userDictionary = new UserDictionary(username);
+					userDictionary.successReset();
+					userDictionary.writeWordUserDictionary();			
+					loadDictionary(username);
+					
+					JOptionPane.showMessageDialog(WordSetFrame.this, "성공횟수가 초기화 되었습니다", "확인",JOptionPane.INFORMATION_MESSAGE);
+				}
+			});
+			
 			add(wordPlusBtn);
 			add(successResetBtn);
 		}
 	}
 
 	class SubmitButtonPanel extends JPanel {
-		GraphicButton submitBtn;
-		GraphicButton concealBtn;
+		private GraphicButton submitBtn;
+		private GraphicButton concealBtn;
 
-		SubmitButtonPanel() {
+		private SubmitButtonPanel() {
 			setBackground(null);
 			setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 			
-			submitBtn = new GraphicButton("images/WordSetFrame/", "SubmitBtn", 100, 35);
+			submitBtn = new GraphicButton(PATH, "SubmitBtn", 100, 35);
 			submitBtn.addActionListener(new SubmitAction());
 
-			concealBtn = new GraphicButton("images/WordSetFrame/", "ConcealBtn", 100, 35);
+			concealBtn = new GraphicButton(PATH, "ConcealBtn", 100, 35);
 			concealBtn.addActionListener(new SubmitAction());
 
 			add(submitBtn);

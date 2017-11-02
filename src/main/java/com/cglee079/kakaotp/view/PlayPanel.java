@@ -15,17 +15,19 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
-import com.cglee079.kakaotp.graphic.GameFontB;
-import com.cglee079.kakaotp.graphic.GameFontP;
-import com.cglee079.kakaotp.graphic.GlobalGraphic;
-import com.cglee079.kakaotp.graphic.GraphicButton;
-import com.cglee079.kakaotp.graphic.GraphicPanel;
-import com.cglee079.kakaotp.play.FwLabel;
+import com.cglee079.kakaotp.cswing.FwLabel;
+import com.cglee079.kakaotp.cswing.GraphicButton;
+import com.cglee079.kakaotp.cswing.GraphicPanel;
+import com.cglee079.kakaotp.cswing.TimerLabel;
+import com.cglee079.kakaotp.font.GameFontB;
+import com.cglee079.kakaotp.font.GameFontP;
 import com.cglee079.kakaotp.play.KeyEventor;
 import com.cglee079.kakaotp.play.Play;
-import com.cglee079.kakaotp.play.TimerLabel;
+import com.cglee079.kakaotp.util.ColorManager;
+import com.cglee079.kakaotp.util.PathManager;
 
 public class PlayPanel extends JPanel {
+	private final String PATH = PathManager.characterPath;
 	private EastPanel eastPanel;
 	private NorthPanel northPanel;
 	private CenterPanel centerPanel;
@@ -36,13 +38,11 @@ public class PlayPanel extends JPanel {
 
 	public PlayPanel() {
 		this.setBackground(Color.WHITE);
-		String npPath = GlobalGraphic.path + "NorthPanel/";
-		String cpPath = GlobalGraphic.path + "CenterPanel/";
 		westPanel 	= new WestPanel();
 		southPanel 	= new SouthPanel();
 		eastPanel 	= new EastPanel();
-		northPanel 	= new NorthPanel(npPath, "background", 800, 60);
-		centerPanel = new CenterPanel(cpPath, "background", 500, 420);
+		northPanel 	= new NorthPanel(PATH, "NorthBg", 800, 60);
+		centerPanel = new CenterPanel(PATH, "CenterBg", 500, 420);
 
 		this.setLayout(new BorderLayout());
 		add(southPanel, BorderLayout.SOUTH);
@@ -127,9 +127,8 @@ public class PlayPanel extends JPanel {
 			super(path, filename, width, height);
 			setLayout(null);
 
-			String panelPath = GlobalGraphic.path + "NorthPanel/";
-			levelPanel = new LevelPanel(panelPath, "levelBg", 130, 50);
-			scorePanel = new PointPanel(panelPath, "scoreBg", 130, 50);
+			levelPanel = new LevelPanel(PATH, "levelBg", 130, 50);
+			scorePanel = new PointPanel(PATH, "scoreBg", 130, 50);
 
 			levelPanel.setLocation(250, 0);
 			scorePanel.setLocation(400, 0);
@@ -169,6 +168,7 @@ public class PlayPanel extends JPanel {
 
 			private PointPanel(String path, String filename, int width, int height) {
 				super(path, filename, width, height);
+				
 				setLayout(null);
 				pointLabel = new JLabel();
 				pointLabel.setFont(new GameFontB(17));
@@ -189,14 +189,11 @@ public class PlayPanel extends JPanel {
 		private ItemPanel itemPanel;
 
 		private WestPanel() {
-			setBackground(GlobalGraphic.baseColor);
+			setBackground(ColorManager.baseColor);
 			setPreferredSize(new Dimension(150, 0));
 
-			String itemPath = GlobalGraphic.path + "WestPanel/";
-			String speedPath = GlobalGraphic.path + "WestPanel/";
-
-			speedPanel = new SpeedPanel(speedPath, "SpeedPanel", 130, 150);
-			itemPanel = new ItemPanel(itemPath, "ItemPanel", 130, 240);
+			speedPanel = new SpeedPanel(PATH, "SpeedPanel", 130, 150);
+			itemPanel = new ItemPanel(PATH, "ItemPanel", 130, 240);
 
 			add(speedPanel);
 			add(itemPanel);
@@ -224,7 +221,7 @@ public class PlayPanel extends JPanel {
 				speedLabel.setFont(new GameFontB(20));
 				speedLabel.setLocation(40, 45);
 				speedLabel.setSize(120, 50);
-				speedLabel.setForeground(GlobalGraphic.basic);
+				speedLabel.setForeground(ColorManager.BASIC);
 				add(speedLabel);
 			}
 
@@ -242,11 +239,10 @@ public class PlayPanel extends JPanel {
 				setLayout(null);
 				setBackground(null);
 
-				String btnpath = GlobalGraphic.path + "WestPanel/";
-				itemBtn[0] = new GraphicButton(btnpath, "ItemBtn1", 100, 35);
-				itemBtn[1] = new GraphicButton(btnpath, "ItemBtn2", 100, 35);
-				itemBtn[2] = new GraphicButton(btnpath, "ItemBtn3", 100, 35);
-				itemBtn[3] = new GraphicButton(btnpath, "ItemBtn4", 100, 35);
+				itemBtn[0] = new GraphicButton(PATH, "ItemBtn1", 100, 35);
+				itemBtn[1] = new GraphicButton(PATH, "ItemBtn2", 100, 35);
+				itemBtn[2] = new GraphicButton(PATH, "ItemBtn3", 100, 35);
+				itemBtn[3] = new GraphicButton(PATH, "ItemBtn4", 100, 35);
 
 				for (int i = 0; i < 4; i++) {
 					itemBtn[i].setLocation(15, 10 + (i * 37));
@@ -273,17 +269,17 @@ public class PlayPanel extends JPanel {
 			super(path, filename, width, height);
 			setLayout(null);
 
-			itemLabel = new TimerLabel(new ImageIcon(path + "Item.gif"));
+			itemLabel = new TimerLabel(new ImageIcon(PATH + "Item.gif"));
 			itemLabel.setSize(200,200);
 			itemLabel.setLocation(150,100);
 			add(itemLabel);
 			
-			levelUpLabel = new TimerLabel(new ImageIcon(path + "levelUp.gif"));
+			levelUpLabel = new TimerLabel(new ImageIcon(PATH + "levelUp.gif"));
 			levelUpLabel.setSize(200,200);
 			levelUpLabel.setLocation(150,100);
 			add(levelUpLabel);
 			
-			heartGagePanel = new HeartGagePanel(path, "HeartGageBg", 200, 30);
+			heartGagePanel = new HeartGagePanel(PATH, "HeartGageBg", 200, 30);
 			heartGagePanel.setLocation(150, 10);
 			add(heartGagePanel);
 
@@ -328,12 +324,11 @@ public class PlayPanel extends JPanel {
 		private SuccessWordPanel successWordPanel;
 
 		private EastPanel() {
-			setBackground(GlobalGraphic.baseColor);
+			setBackground(ColorManager.baseColor);
 			setPreferredSize(new Dimension(150, 0));
 			setLayout(null);
 
-			String infoPath = GlobalGraphic.path + "EastPanel/";
-			infoPanel = new InfoPanel(infoPath, "face", 130, 180);
+			infoPanel = new InfoPanel(PATH, "face", 130, 180);
 			infoPanel.setLocation(10, 10);
 			this.add(infoPanel);
 
@@ -407,7 +402,7 @@ public class PlayPanel extends JPanel {
 		private JTextField wordTextField;
 		
 		public SouthPanel(){		
-			setBackground(GlobalGraphic.baseColor);
+			setBackground(ColorManager.baseColor);
 			setPreferredSize(new Dimension(0,40));
 
 			inputWordPanel = new JPanel();	

@@ -8,6 +8,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Vector;
 
+import com.cglee079.kakaotp.cswing.FwLabel;
 import com.cglee079.kakaotp.dict.UserDictionary;
 import com.cglee079.kakaotp.io.ScoreManager;
 import com.cglee079.kakaotp.model.Score;

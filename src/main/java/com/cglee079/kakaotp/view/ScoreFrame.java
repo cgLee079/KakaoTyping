@@ -12,14 +12,17 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.cglee079.kakaotp.graphic.GameFontB;
-import com.cglee079.kakaotp.graphic.GameFontP;
-import com.cglee079.kakaotp.graphic.GlobalGraphic;
-import com.cglee079.kakaotp.graphic.GraphicPanel;
+import com.cglee079.kakaotp.cswing.GraphicPanel;
+import com.cglee079.kakaotp.font.GameFontB;
+import com.cglee079.kakaotp.font.GameFontP;
 import com.cglee079.kakaotp.io.ScoreManager;
 import com.cglee079.kakaotp.model.Score;
+import com.cglee079.kakaotp.util.ColorManager;
+import com.cglee079.kakaotp.util.MainPosition;
+import com.cglee079.kakaotp.util.PathManager;
 
 public class ScoreFrame extends JFrame {
+	private final String PATH = PathManager.SCORE_FRAME;
 	private Score score;
 	private int level;
 	
@@ -28,14 +31,10 @@ public class ScoreFrame extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
 		setVisible(true);
-		setBackground(GlobalGraphic.basic);
+		setBackground(ColorManager.BASIC);
+		setLocation(MainPosition.x - (this.getWidth()/2), MainPosition.y - (this.getHeight()/2));
 
-		Dimension frameSize = getSize();
-		Dimension windowSize = Toolkit.getDefaultToolkit().getScreenSize();
-		setLocation((windowSize.width - frameSize.width) / 2, (windowSize.height - frameSize.height) / 2);
-
-		String npPath = "images/ScoreFrame/NorthPanel/";
-		GraphicPanel northPanel = new GraphicPanel(npPath, "Background", 800, 60);
+		GraphicPanel northPanel = new GraphicPanel(PATH, "NorthBg", 800, 60);
 		CenterPanel centerPanel = new CenterPanel();
 		
 		add(centerPanel, BorderLayout.CENTER);
@@ -50,24 +49,23 @@ public class ScoreFrame extends JFrame {
 	}
 
 	class CenterPanel extends JPanel {
-		String path = "images/ScoreFrame/CenterPanel/";
 		private GradePanel gradePanel;
 		private MyGradePanel myGradePanel;
 		
 		private CenterPanel() {
 			setVisible(true);
-			setBackground(GlobalGraphic.baseColor);
+			setBackground(ColorManager.baseColor);
 
 			setLayout(null);
 			setPreferredSize(new Dimension(500, 420));
 
-			gradePanel = new GradePanel(path, "frame", 390, 410);
-			myGradePanel = new MyGradePanel(path, "myScore", 320, 290);
+			gradePanel = new GradePanel(PATH, "frame", 390, 410);
+			myGradePanel = new MyGradePanel(PATH, "myScore", 320, 290);
 			this.add(gradePanel);
 			this.add(myGradePanel);
 
 			String myCharacter = score.getCharacter(); // 캐릭터 이미지
-			ImageIcon myCharacterImageICon = new ImageIcon(path + myCharacter + "_score.gif");
+			ImageIcon myCharacterImageICon = new ImageIcon(PATH + myCharacter + "_score.gif");
 			JLabel myCharacterLabel = new JLabel(myCharacterImageICon);
 			myCharacterLabel.setLocation(630, 300);
 			myCharacterLabel.setSize(130, 130);
@@ -108,13 +106,13 @@ public class ScoreFrame extends JFrame {
 				for (int i = 0; i < num; i++) {
 					score = scores.get(i);
 					
-					gradeImg[i] = new ImageIcon(path + "trophy.png");
+					gradeImg[i] = new ImageIcon(PATH + "trophy.png");
 					gradeLabel[i] = new JLabel(gradeImg[i]);
 
 					name = score.getUsername();
 
 					character = score.getCharacter();
-					images[i] = new ImageIcon(path + character + "_face.png");// faceType 별로 이모티콘  분류
+					images[i] = new ImageIcon(PATH + character + "_face.png");// faceType 별로 이모티콘  분류
 					faceLabel[i] = new JLabel(images[i]);
 
 					scoreLabel[i] = new JLabel(score.getPoint().toString());
@@ -168,7 +166,7 @@ public class ScoreFrame extends JFrame {
 
 			public void setGradeLabel(JLabel source, int x, int y, int fontSize) {
 				source.setSize(x, y);
-				source.setForeground(GlobalGraphic.baseColor);
+				source.setForeground(ColorManager.baseColor);
 				source.setHorizontalAlignment(JLabel.CENTER);
 				source.setVerticalAlignment(JLabel.CENTER);
 				source.setFont(new GameFontP(fontSize));

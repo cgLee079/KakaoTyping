@@ -10,11 +10,14 @@ import java.awt.geom.RoundRectangle2D;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import com.cglee079.kakaotp.graphic.GlobalGraphic;
-import com.cglee079.kakaotp.graphic.GraphicButton;
+import com.cglee079.kakaotp.cswing.GraphicButton;
 import com.cglee079.kakaotp.play.Play;
+import com.cglee079.kakaotp.util.ColorManager;
+import com.cglee079.kakaotp.util.MainPosition;
+import com.cglee079.kakaotp.util.PathManager;
 
 public class PauseFrame extends JFrame {
+	private final String PATH = PathManager.PAUSE_FRAME;
 	private MainFrame mainFrame;
 	private Play play;
 	
@@ -25,12 +28,10 @@ public class PauseFrame extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);// 크기 고정
 		setUndecorated(true);
-		setBackground(GlobalGraphic.baseColor);
+		setBackground(ColorManager.baseColor);
 		setVisible(true);
 		setShape(new RoundRectangle2D.Float(0, 0, this.getWidth(), this.getHeight(), 50, 50));
-		Dimension frameSize = getSize();
-		Dimension windowSize = Toolkit.getDefaultToolkit().getScreenSize();
-		setLocation((windowSize.width - frameSize.width) / 2, (windowSize.height - frameSize.height) / 2);
+		setLocation(MainPosition.x - (this.getWidth()/2), MainPosition.y - (this.getHeight()/2));
 
 		add(new ButtonPanel());
 	}
@@ -50,13 +51,13 @@ public class PauseFrame extends JFrame {
 			setPreferredSize(new Dimension(200, 200));
 			setBackground(null);
 			
-			homeBtn = new GraphicButton("images/PauseFrame/", "Homebtn", 120, 50);
+			homeBtn = new GraphicButton(PATH, "Homebtn", 120, 50);
 			homeBtn.addActionListener(new ButtonActionListener());
 
-			resumeBtn = new GraphicButton("images/PauseFrame/", "resumebtn", 120, 50);
+			resumeBtn = new GraphicButton(PATH, "resumebtn", 120, 50);
 			resumeBtn.addActionListener(new ButtonActionListener());
 
-			exitBtn = new GraphicButton("images/PauseFrame/", "exitbtn", 120, 50);
+			exitBtn = new GraphicButton(PATH, "exitbtn", 120, 50);
 			exitBtn.addActionListener(new ButtonActionListener());
 
 			add(homeBtn);
@@ -67,15 +68,21 @@ public class PauseFrame extends JFrame {
 		class ButtonActionListener implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				GraphicButton btn = (GraphicButton) e.getSource();
-				if (btn.getId().equals("Homebtn")){
+				
+				switch (btn.getId()){
+				case "Homebtn" :
 					mainFrame.drawHome();
 					PauseFrame.this.dispose();
-				} else if (btn.getId().equals("resumebtn")){
+					break;
+				case "resumebtn" :
 					play.resumeGame();
 					PauseFrame.this.dispose();
-				} else if (btn.getId().equals("exitbtn")){
+					break;
+				case "exitbtn" :
 					System.exit(0);
+					break;
 				}
+				
 			}
 
 		}

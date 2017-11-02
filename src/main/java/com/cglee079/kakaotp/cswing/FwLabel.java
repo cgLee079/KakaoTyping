@@ -1,13 +1,13 @@
-package com.cglee079.kakaotp.play;
+package com.cglee079.kakaotp.cswing;
 
 import java.awt.Color;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import com.cglee079.kakaotp.graphic.GameFontB;
-import com.cglee079.kakaotp.graphic.GameFontP;
-import com.cglee079.kakaotp.graphic.GlobalGraphic;
+import com.cglee079.kakaotp.font.GameFontB;
+import com.cglee079.kakaotp.font.GameFontP;
+import com.cglee079.kakaotp.util.PathManager;
 
 public class FwLabel extends JLabel {
 	// 라벨의 Item 보유
@@ -41,14 +41,14 @@ public class FwLabel extends JLabel {
 
 	// Item 가지고 있을때 한글 폰트
 	public void setHaveItem_k() {
-		String path = GlobalGraphic.path + "CenterPanel/";
+		String path = PathManager.characterPath + "CenterPanel/";
 		this.setIcon(new ImageIcon(path + "itemIcon" + ".png"));
 		this.setFont(new GameFontB(18));
 	}
 
 	// Item 가지고 있을 때 영어 폰트
 	public void setHaveItem_e() {
-		String path = GlobalGraphic.path + "CenterPanel/";
+		String path = PathManager.characterPath + "CenterPanel/";
 		this.setIcon(new ImageIcon(path + "itemIcon" + ".png"));
 		this.setFont(new GameFontB(18));
 		this.setForeground(Color.blue);

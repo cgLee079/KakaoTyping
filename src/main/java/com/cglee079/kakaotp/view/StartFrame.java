@@ -17,15 +17,18 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import com.cglee079.kakaotp.graphic.GlobalGraphic;
-import com.cglee079.kakaotp.graphic.GraphicButton;
-import com.cglee079.kakaotp.graphic.GraphicPanel;
-import com.cglee079.kakaotp.graphic.GraphicRadioButton;
+import com.cglee079.kakaotp.cswing.GraphicButton;
+import com.cglee079.kakaotp.cswing.GraphicPanel;
+import com.cglee079.kakaotp.cswing.GraphicRadioButton;
 import com.cglee079.kakaotp.io.UserManager;
 import com.cglee079.kakaotp.model.User;
 import com.cglee079.kakaotp.play.Play;
+import com.cglee079.kakaotp.util.ColorManager;
+import com.cglee079.kakaotp.util.MainPosition;
+import com.cglee079.kakaotp.util.PathManager;
 
 public class StartFrame extends JFrame {
+	private final String PATH = PathManager.START_FRAME;
 	private MainFrame mainFrame;
 	private UserListPanel userListPanel;
 	private LevelListPanel levelListPanel;
@@ -39,13 +42,10 @@ public class StartFrame extends JFrame {
 		setUndecorated(true);
 		setVisible(true);
 		setContentPane(new StartPanel());
-		getContentPane().setBackground(GlobalGraphic.basic2);
+		getContentPane().setBackground(ColorManager.BASIC2);
 		
 		setShape(new RoundRectangle2D.Float(0, 0, this.getWidth(), this.getHeight(), 100, 100));
-		Dimension frameSize = getSize();
-		Dimension windowSize = Toolkit.getDefaultToolkit().getScreenSize();
-		setLocation((windowSize.width - frameSize.width) / 2, (windowSize.height - frameSize.height) / 2);
-
+		setLocation(MainPosition.x - (this.getWidth()/2), MainPosition.y - (this.getHeight()/2));
 	}
 	
 	public StartFrame(MainFrame mainFrame){
@@ -106,8 +106,7 @@ public class StartFrame extends JFrame {
 	class StartPanel extends JPanel {
 		private StartPanel(){
 			setLayout(null);
-			String path = "images/StartFrame/";
-			userListPanel = new UserListPanel(path, "UserListPa", 300, 40);
+			userListPanel = new UserListPanel(PATH, "UserListPa", 300, 40);
 			userListPanel.setLocation(40, 50);
 			add(userListPanel);
 
@@ -137,9 +136,9 @@ public class StartFrame extends JFrame {
 		private void makeBtn() {
 			levelBtnGroup = new ButtonGroup();
 			levelbtn = new GraphicRadioButton[3];
-			levelbtn[0] = new GraphicRadioButton("images/StartFrame/", "levelBtn1", 70, 35);
-			levelbtn[1] = new GraphicRadioButton("images/StartFrame/", "levelBtn2", 70, 35);
-			levelbtn[2] = new GraphicRadioButton("images/StartFrame/", "levelBtn3", 70, 35);
+			levelbtn[0] = new GraphicRadioButton(PATH, "levelBtn1", 70, 35);
+			levelbtn[1] = new GraphicRadioButton(PATH, "levelBtn2", 70, 35);
+			levelbtn[2] = new GraphicRadioButton(PATH, "levelBtn3", 70, 35);
 
 			for (int i = 0; i < 3; i++) {
 				levelBtnGroup.add(levelbtn[i]);
@@ -170,8 +169,7 @@ public class StartFrame extends JFrame {
 
 			this.add(userComboBox);
 
-			String btnPath = "images/StartFrame/";
-			GraphicButton wordPlusBtn = new GraphicButton(btnPath, "UserPlusBtn", 30, 30);
+			GraphicButton wordPlusBtn = new GraphicButton(PATH, "UserPlusBtn", 30, 30);
 			wordPlusBtn.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e) {
 					new MakeUserFrame(StartFrame.this);
@@ -197,10 +195,9 @@ public class StartFrame extends JFrame {
 			setLayout(null);
 			setBackground(null);
 			
-			String path = "images/StartFrame/";
 			submitBtn = new GraphicButton[2];
-			submitBtn[0] = new GraphicButton(path, "SubmitBtn", 100, 35);
-			submitBtn[1] = new GraphicButton(path, "ConcealBtn", 100, 35);
+			submitBtn[0] = new GraphicButton(PATH, "SubmitBtn", 100, 35);
+			submitBtn[1] = new GraphicButton(PATH, "ConcealBtn", 100, 35);
 
 			for (int i = 0; i < 2; i++) {
 				submitBtn[i].addActionListener(new SubmitAction());
@@ -229,16 +226,20 @@ public class StartFrame extends JFrame {
 						return;
 					}
 						
-					String character= user.getCharacter();
-					if (character.equals("MUZI")) {
-						GlobalGraphic.baseColor = new Color(251, 233, 13);
-						GlobalGraphic.path = "images/MainFrame/Muzi/";
-					} else if (character.equals("LYAN")) {
-						GlobalGraphic.baseColor = new Color(215, 209, 137);
-						GlobalGraphic.path = "images/MainFrame/Lyan/";
-					} else if (character.equals("APEACH")) {
-						GlobalGraphic.baseColor = new Color(247, 171, 171);
-						GlobalGraphic.path = "images/MainFrame/Apeach/";
+					String character = user.getCharacter();
+					switch (character){
+					case "MUZI":
+						ColorManager.baseColor 		= ColorManager.MUZI;
+						PathManager.characterPath 	= PathManager.MUZI;
+						break;
+					case "APEACH":
+						ColorManager.baseColor 		= ColorManager.APEACH;
+						PathManager.characterPath	= PathManager.APEACH;
+						break;
+					case "LYAN":
+						ColorManager.baseColor 		= ColorManager.LYAN;
+						PathManager.characterPath 	= PathManager.LYAN;
+						break;
 					}
 
 					String levelID = getSelectedLevel();

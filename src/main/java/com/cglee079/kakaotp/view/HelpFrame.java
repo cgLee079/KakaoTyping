@@ -11,38 +11,43 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.cglee079.kakaotp.graphic.GlobalGraphic;
-import com.cglee079.kakaotp.graphic.GraphicButton;
-import com.cglee079.kakaotp.graphic.MainPoint;
+import com.cglee079.kakaotp.cswing.GraphicButton;
+import com.cglee079.kakaotp.util.ColorManager;
+import com.cglee079.kakaotp.util.MainPosition;
+import com.cglee079.kakaotp.util.PathManager;
 
 public class HelpFrame extends JFrame {
-	private int numOfPage = 7;
-	private ImageIcon image[] = new ImageIcon[numOfPage];
+	private final String PATH = PathManager.HELP_FRAME;
+	private final String PREFIX = "help";
+	private final int NUM_OF_PAGE = 7;
+	private int page;
+	
+	private ImageIcon[] image = new ImageIcon[NUM_OF_PAGE];
+	private JLabel helpLabel;
+	
 
-	private Integer page;
-	private String fileName = "help";
-	private JLabel helpLa;
+	
 
 	public HelpFrame() {
 		setSize(600, 500);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
 		setUndecorated(true);
-		getContentPane().setBackground(GlobalGraphic.basic2);
+		getContentPane().setBackground(ColorManager.BASIC2);
 		setVisible(true);
 		setShape(new RoundRectangle2D.Float(0, 0, this.getWidth(), this.getHeight(), 50, 50));
-		setLocation(MainPoint.x - (this.getWidth() / 2), MainPoint.y - (this.getHeight() / 2));
+		setLocation(MainPosition.x - (this.getWidth() / 2), MainPosition.y - (this.getHeight() / 2));
 
-		for (Integer page = 0; page < numOfPage; page++)
-			image[page] = new ImageIcon("images/HelpFrame/" + fileName + page.toString() + ".png");
+		for (Integer page = 0; page < NUM_OF_PAGE; page++)
+			image[page] = new ImageIcon(PATH + PREFIX + page + ".png");
 
 		page = 0;
-		helpLa = new JLabel(image[page]);
+		helpLabel = new JLabel(image[page]);
 
 		ButtonPanel buttonPanel = new ButtonPanel();
 		buttonPanel.setPreferredSize(new Dimension(750, 70));
 
-		add(helpLa, BorderLayout.CENTER);
+		add(helpLabel, BorderLayout.CENTER);
 		add(buttonPanel, BorderLayout.SOUTH);
 
 		revalidate();
@@ -56,16 +61,16 @@ public class HelpFrame extends JFrame {
 		private ButtonPanel() {
 
 			this.setBackground(null);
-			leftBtn = new GraphicButton("images/HelpFrame/", "leftBtn", 70, 40);
+			leftBtn = new GraphicButton(PATH, "leftBtn", 70, 40);
 			leftBtn.addActionListener(new ButtonActionListener());
 			leftBtn.setEnabled(false);
 			add(leftBtn);
 
-			rightBtn = new GraphicButton("images/HelpFrame/", "rightBtn", 70, 40);
+			rightBtn = new GraphicButton(PATH, "rightBtn", 70, 40);
 			rightBtn.addActionListener(new ButtonActionListener());
 			add(rightBtn);
 
-			confirmBtn = new GraphicButton("images/HelpFrame/", "confirmBtn", 100, 35);
+			confirmBtn = new GraphicButton(PATH, "confirmBtn", 100, 35);
 			confirmBtn.addActionListener(new ButtonActionListener());
 			add(confirmBtn);
 
@@ -77,11 +82,11 @@ public class HelpFrame extends JFrame {
 				
 				switch (btn.getId()) {
 				case "leftBtn":
-					if (page == numOfPage - 1) {
+					if (page == NUM_OF_PAGE - 1) {
 						rightBtn.setEnabled(true);
 					}
 					page--;
-					helpLa.setIcon(image[page]);
+					helpLabel.setIcon(image[page]);
 					if (page == 0) {
 						leftBtn.setEnabled(false);
 					}
@@ -93,8 +98,8 @@ public class HelpFrame extends JFrame {
 						leftBtn.setEnabled(true);
 					}
 					page++;
-					helpLa.setIcon(image[page]);
-					if (page == numOfPage - 1) {
+					helpLabel.setIcon(image[page]);
+					if (page == NUM_OF_PAGE - 1) {
 						rightBtn.setEnabled(false);
 					}
 					ButtonPanel.this.repaint();

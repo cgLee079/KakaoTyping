@@ -157,5 +157,11 @@ public class UserDictionary {
 	public void plusSuccess(String korean) {
 		success.replace(korean, getSuccess(korean).intValue() + 1);
 	}
+	
+	public void successReset(){
+		for(int i = 0; i < list.size();i++){
+			success.replace(list.get(i), 0);			
+		}
+	}
 
 }
