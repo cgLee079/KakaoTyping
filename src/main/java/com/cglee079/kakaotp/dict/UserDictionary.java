@@ -11,24 +11,26 @@ import java.util.Random;
 import java.util.Vector;
 
 public class UserDictionary {
+	private String username;
 	private Vector<String> list = new Vector<String>(); // 목록
 	private HashMap<String, String> render = new HashMap<String, String>(); // 번역
 	private HashMap<String, Integer> success = new HashMap<String, Integer>(); // 성공횟수
 
-	public UserDictionary(String user) {
+	public UserDictionary(String username) {
+		this.username = username;
 		try {
-			readWordUserDictionary(user);
+			readWordUserDictionary(username);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	// 파일에서 단어를 입력시킴
-	private void readWordUserDictionary(String user) throws IOException {
+	private void readWordUserDictionary(String username) throws IOException {
 		String line = ""; // readline 읽을 String변수
 
 		String path = "resources/UserDictionary";
-		String filename = user + "_Dictionary.txt";
+		String filename = username + "_Dictionary.txt";
 		File dictFile = new File(path, filename);
 		
 		if (!dictFile.exists()) {
@@ -84,24 +86,29 @@ public class UserDictionary {
 		
 	}
 
-	public void writeWordUserDictionary(String user) throws IOException {
+	public void writeWordUserDictionary() {
 		String korean;
 		String english;
 		String successCnt;
 
-		BufferedWriter out = new BufferedWriter(new FileWriter("resources/UserDictionary" + user + "_Dictionary.txt"));
+		BufferedWriter out = null;
 		String s;
 
-		for (int i = 0; i < list.size(); i++) {
-			korean = getWord(i);
-			english = render(korean);
-			successCnt = getSuccess(korean).toString();
-
-			s = korean + "\t" + english + "\t" + successCnt;
-			out.write(s);
-			out.newLine();
+		try {
+			out = new BufferedWriter(new FileWriter("resources/UserDictionary" + username + "_Dictionary.txt"));
+			for (int i = 0; i < list.size(); i++) {
+				korean = getWord(i);
+				english = render(korean);
+				successCnt = getSuccess(korean).toString();
+	
+				s = korean + "\t" + english + "\t" + successCnt;
+				out.write(s);
+				out.newLine();
+			}
+			out.close();
+		}catch (IOException e){
+			e.printStackTrace();
 		}
-		out.close();
 	}
 
 	// 단어의 갯수 리턴

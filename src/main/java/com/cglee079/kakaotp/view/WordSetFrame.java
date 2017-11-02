@@ -87,6 +87,22 @@ public class WordSetFrame extends JFrame {
 		}
 	}
 	
+	public User getSelectedUser() {
+		JComboBox<String>  userComboBox = userListPanel.getUserComboBox();
+		
+		String str = (String) userComboBox.getSelectedItem();
+		if(str == null){
+			return null;
+		}
+		
+		String[] spliter = str.split("\t");
+		
+		String username = spliter[0];
+		String character = spliter[1];
+		
+		return new User(username, character);
+	}
+	
 	public void loadDictionary(String username) {
 		DefaultTableModel model = wordListPanel.getWordListTable().getModel();
 		int rowCnt = model.getRowCount();
@@ -190,7 +206,7 @@ public class WordSetFrame extends JFrame {
 			wordPlusBtn = new GraphicButton("images/WordSetFrame/", "wordPlusBtn", 100, 40);
 			wordPlusBtn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					new WordPlusFrame();
+					new WordPlusFrame(WordSetFrame.this, getSelectedUser());
 				}
 			});
 			successResetBtn = new GraphicButton("images/WordSetFrame/", "SuccessResetBtn", 100, 40);
