@@ -12,6 +12,7 @@ import com.cglee079.kakaotp.dict.UserDictionary;
 import com.cglee079.kakaotp.io.ScoreManager;
 import com.cglee079.kakaotp.model.Score;
 import com.cglee079.kakaotp.model.User;
+import com.cglee079.kakaotp.sound.SoundPlayer;
 import com.cglee079.kakaotp.view.PlayPanel;
 import com.cglee079.kakaotp.view.ScoreFrame;
 
@@ -186,6 +187,8 @@ public class Play {
 	} // 속도 업
 
 	public void levelUp() {
+		SoundPlayer.play("levelup");
+		
 		level++;
 		playPanel.drawLevel(level);
 		clearFwLabels();
@@ -354,6 +357,7 @@ public class Play {
 	}
 	
 	public void gameOver() {
+		SoundPlayer.play("gameOver");
 		//stopGame();
 		Score score = new Score(user.getCharacter(), user.getUsername(), point);
 		ScoreManager scoreManager = ScoreManager.getInstance();

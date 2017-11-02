@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,6 +23,7 @@ import com.cglee079.kakaotp.graphic.GraphicPanel;
 import com.cglee079.kakaotp.play.FwLabel;
 import com.cglee079.kakaotp.play.KeyEventor;
 import com.cglee079.kakaotp.play.Play;
+import com.cglee079.kakaotp.play.TimerLabel;
 
 public class PlayPanel extends JPanel {
 	private EastPanel eastPanel;
@@ -264,11 +266,23 @@ public class PlayPanel extends JPanel {
 	/**/
 	class CenterPanel extends GraphicPanel {
 		private HeartGagePanel heartGagePanel;
+		private TimerLabel levelUpLabel;
+		private TimerLabel itemLabel;
 
 		public CenterPanel(String path, String filename, int width, int height) {
 			super(path, filename, width, height);
 			setLayout(null);
 
+			itemLabel = new TimerLabel(new ImageIcon(path + "Item.gif"));
+			itemLabel.setSize(200,200);
+			itemLabel.setLocation(150,100);
+			add(itemLabel);
+			
+			levelUpLabel = new TimerLabel(new ImageIcon(path + "levelUp.gif"));
+			levelUpLabel.setSize(200,200);
+			levelUpLabel.setLocation(150,100);
+			add(levelUpLabel);
+			
 			heartGagePanel = new HeartGagePanel(path, "HeartGageBg", 200, 30);
 			heartGagePanel.setLocation(150, 10);
 			add(heartGagePanel);

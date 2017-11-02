@@ -5,13 +5,14 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.JTextField;
 
+import com.cglee079.kakaotp.sound.SoundPlayer;
 import com.cglee079.kakaotp.view.MainFrame;
 import com.cglee079.kakaotp.view.PauseFrame;
 
 public class KeyEventor extends KeyAdapter {
-	MainFrame mainFrame;
-	Play play;
-	PauseFrame pauseFrame;
+	private MainFrame mainFrame;
+	private Play play;
+	private PauseFrame pauseFrame;
 	
 	public KeyEventor(MainFrame mainFrame, Play play){
 		this.mainFrame 	= mainFrame;
@@ -44,6 +45,7 @@ public class KeyEventor extends KeyAdapter {
 			break;
 
 		case KeyEvent.VK_ENTER: // Enter 입력시 단어 비교,
+			SoundPlayer.play("enter");
 			String text = wordTextField.getText(); // TextField에서 입력값 받아옴
 			play.checkFwLabels(text); // 단어 비교
 			wordTextField.setText("");// textField 클리어

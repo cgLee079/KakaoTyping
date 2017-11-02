@@ -1,7 +1,12 @@
 package com.cglee079.kakaotp.graphic;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.ImageIcon;
 import javax.swing.JRadioButton;
+
+import com.cglee079.kakaotp.sound.SoundPlayer;
 
 public class GraphicRadioButton extends JRadioButton {
 	private String path;
@@ -28,5 +33,17 @@ public class GraphicRadioButton extends JRadioButton {
 		setIcon(new ImageIcon(path + filename + ".png"));
 		setSelectedIcon(new ImageIcon(path + filename + "_select" + ".png"));
 		setRolloverIcon(new ImageIcon(path + filename + "_enter" + ".png"));
+		
+		addMouseListener(new BtnMouseListener());
 	}
+	
+	class BtnMouseListener extends MouseAdapter{
+		public void mouseEntered(MouseEvent e){
+			SoundPlayer.play("btn_enter");			
+		}
+		public void mousePressed(MouseEvent e){
+			SoundPlayer.play("btn_click");
+		}
+	}
+	
 }
