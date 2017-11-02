@@ -10,7 +10,7 @@ import java.awt.geom.RoundRectangle2D;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import com.cglee079.kakaotp.cswing.GraphicButton;
+import com.cglee079.kakaotp.cswing.GButton;
 import com.cglee079.kakaotp.play.Play;
 import com.cglee079.kakaotp.util.ColorManager;
 import com.cglee079.kakaotp.util.MainPosition;
@@ -43,21 +43,21 @@ public class PauseFrame extends JFrame {
 	}
 
 	class ButtonPanel extends JPanel {
-		private GraphicButton homeBtn;
-		private GraphicButton resumeBtn;
-		private GraphicButton exitBtn;
+		private GButton homeBtn;
+		private GButton resumeBtn;
+		private GButton exitBtn;
 
 		private ButtonPanel() {
 			setPreferredSize(new Dimension(200, 200));
 			setBackground(null);
 			
-			homeBtn = new GraphicButton(PATH, "Homebtn", 120, 50);
+			homeBtn = new GButton(PATH, "Homebtn", 120, 50);
 			homeBtn.addActionListener(new ButtonActionListener());
 
-			resumeBtn = new GraphicButton(PATH, "resumebtn", 120, 50);
+			resumeBtn = new GButton(PATH, "resumebtn", 120, 50);
 			resumeBtn.addActionListener(new ButtonActionListener());
 
-			exitBtn = new GraphicButton(PATH, "exitbtn", 120, 50);
+			exitBtn = new GButton(PATH, "exitbtn", 120, 50);
 			exitBtn.addActionListener(new ButtonActionListener());
 
 			add(homeBtn);
@@ -67,7 +67,7 @@ public class PauseFrame extends JFrame {
 
 		class ButtonActionListener implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
-				GraphicButton btn = (GraphicButton) e.getSource();
+				GButton btn = (GButton) e.getSource();
 				
 				switch (btn.getId()){
 				case "Homebtn" :

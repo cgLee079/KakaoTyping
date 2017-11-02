@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.cglee079.kakaotp.cswing.GraphicPanel;
+import com.cglee079.kakaotp.cswing.GPanel;
 import com.cglee079.kakaotp.font.GameFontB;
 import com.cglee079.kakaotp.font.GameFontP;
 import com.cglee079.kakaotp.io.ScoreIO;
@@ -34,7 +34,7 @@ public class ScoreFrame extends JFrame {
 		setBackground(ColorManager.BASIC);
 		setLocation(MainPosition.x - (this.getWidth()/2), MainPosition.y - (this.getHeight()/2));
 
-		GraphicPanel northPanel = new GraphicPanel(PATH, "NorthBg", 800, 60);
+		GPanel northPanel = new GPanel(PATH, "NorthBg", 800, 60);
 		CenterPanel centerPanel = new CenterPanel();
 		
 		add(centerPanel, BorderLayout.CENTER);
@@ -72,7 +72,7 @@ public class ScoreFrame extends JFrame {
 			this.add(myCharacterLabel);
 		}
 
-		class GradePanel extends GraphicPanel {
+		class GradePanel extends GPanel {
 			private int num = 4;// 전체 화면에 표시할 등수 표시 갯수
 
 			private GradePanel(String path, String filename, int width, int height) {
@@ -138,7 +138,7 @@ public class ScoreFrame extends JFrame {
 			}
 		}
 
-		class MyGradePanel extends GraphicPanel {
+		class MyGradePanel extends GPanel {
 			private MyGradePanel(String path, String filename, int width, int height) {
 				super(path, filename, width, height);
 

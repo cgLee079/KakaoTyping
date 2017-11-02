@@ -12,8 +12,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-import com.cglee079.kakaotp.cswing.GraphicButton;
-import com.cglee079.kakaotp.cswing.GraphicPanel;
+import com.cglee079.kakaotp.cswing.GButton;
+import com.cglee079.kakaotp.cswing.GPanel;
 import com.cglee079.kakaotp.dict.UserDictionary;
 import com.cglee079.kakaotp.font.GameFontP;
 import com.cglee079.kakaotp.model.User;
@@ -41,7 +41,7 @@ public class WordPlusFrame extends JFrame {
 		setLocation(MainPosition.x - (this.getWidth() / 2), MainPosition.y - (this.getHeight() / 2));
 		getContentPane().setBackground(ColorManager.BASIC3);
 
-		GraphicPanel inputWordPanel = new GraphicPanel(PATH, "inputYourWord", 400, 70);
+		GPanel inputWordPanel = new GPanel(PATH, "inputYourWord", 400, 70);
 		add(inputWordPanel, BorderLayout.NORTH);
 
 		inputPanel = new InputPanel();
@@ -76,16 +76,16 @@ public class WordPlusFrame extends JFrame {
 	}
 
 	class SubmitPanel extends JPanel {
-		private GraphicButton submitBtn;
-		private GraphicButton concealBtn;
+		private GButton submitBtn;
+		private GButton concealBtn;
 
 		private SubmitPanel() {
 			setBackground(null);
 
-			submitBtn = new GraphicButton(PATH, "SubmitBtn", 100, 35);
+			submitBtn = new GButton(PATH, "SubmitBtn", 100, 35);
 			submitBtn.addActionListener(new SubmitAction());
 
-			concealBtn = new GraphicButton(PATH, "ConcealBtn", 100, 35);
+			concealBtn = new GButton(PATH, "ConcealBtn", 100, 35);
 			concealBtn.addActionListener(new SubmitAction());
 
 			add(submitBtn);
@@ -95,7 +95,7 @@ public class WordPlusFrame extends JFrame {
 
 		class SubmitAction implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
-				GraphicButton btn = (GraphicButton) e.getSource();
+				GButton btn = (GButton) e.getSource();
 				
 				switch(btn.getId()) {
 				case "SubmitBtn" :

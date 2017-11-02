@@ -17,9 +17,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import com.cglee079.kakaotp.cswing.GraphicButton;
-import com.cglee079.kakaotp.cswing.GraphicPanel;
-import com.cglee079.kakaotp.cswing.GraphicRadioButton;
+import com.cglee079.kakaotp.cswing.GButton;
+import com.cglee079.kakaotp.cswing.GPanel;
+import com.cglee079.kakaotp.cswing.GRadioButton;
 import com.cglee079.kakaotp.io.UserIO;
 import com.cglee079.kakaotp.model.User;
 import com.cglee079.kakaotp.play.Play;
@@ -94,7 +94,7 @@ public class StartFrame extends JFrame {
 		String levelID = null;
 		Enumeration<AbstractButton> enums = levelBtnGroup.getElements();
 		while (enums.hasMoreElements()) {
-			GraphicRadioButton radiobtn = (GraphicRadioButton) enums.nextElement();
+			GRadioButton radiobtn = (GRadioButton) enums.nextElement();
 			if (radiobtn.isSelected()) {
 				levelID = radiobtn.getId();
 			}
@@ -124,17 +124,17 @@ public class StartFrame extends JFrame {
 	}
 
 	class LevelListPanel extends JPanel {
-		private GraphicRadioButton levelbtn[];
+		private GRadioButton levelbtn[];
 		private ButtonGroup levelBtnGroup;
 
 		private LevelListPanel() {
 			setBackground(null);
 			
 			levelBtnGroup = new ButtonGroup();
-			levelbtn = new GraphicRadioButton[3];
-			levelbtn[0] = new GraphicRadioButton(PATH, "levelBtn1", 70, 35);
-			levelbtn[1] = new GraphicRadioButton(PATH, "levelBtn2", 70, 35);
-			levelbtn[2] = new GraphicRadioButton(PATH, "levelBtn3", 70, 35);
+			levelbtn = new GRadioButton[3];
+			levelbtn[0] = new GRadioButton(PATH, "levelBtn1", 70, 35);
+			levelbtn[1] = new GRadioButton(PATH, "levelBtn2", 70, 35);
+			levelbtn[2] = new GRadioButton(PATH, "levelBtn3", 70, 35);
 
 			for (int i = 0; i < 3; i++) {
 				levelBtnGroup.add(levelbtn[i]);
@@ -149,7 +149,7 @@ public class StartFrame extends JFrame {
 
 	}
 
-	class UserListPanel extends GraphicPanel {
+	class UserListPanel extends GPanel {
 		private JComboBox<String> userComboBox;
 
 		private UserListPanel(String path, String filename, int width, int height) {
@@ -166,7 +166,7 @@ public class StartFrame extends JFrame {
 
 			this.add(userComboBox);
 
-			GraphicButton wordPlusBtn = new GraphicButton(PATH, "UserPlusBtn", 30, 30);
+			GButton wordPlusBtn = new GButton(PATH, "UserPlusBtn", 30, 30);
 			wordPlusBtn.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e) {
 					new MakeUserFrame(StartFrame.this);
@@ -186,15 +186,15 @@ public class StartFrame extends JFrame {
 	class SubmitPanel extends JPanel {
 		private UserListPanel userListPanel;
 		private LevelListPanel levelListPanel;
-		private GraphicButton[] submitBtn;
+		private GButton[] submitBtn;
 
 		private SubmitPanel() {
 			setLayout(null);
 			setBackground(null);
 			
-			submitBtn = new GraphicButton[2];
-			submitBtn[0] = new GraphicButton(PATH, "SubmitBtn", 100, 35);
-			submitBtn[1] = new GraphicButton(PATH, "ConcealBtn", 100, 35);
+			submitBtn = new GButton[2];
+			submitBtn[0] = new GButton(PATH, "SubmitBtn", 100, 35);
+			submitBtn[1] = new GButton(PATH, "ConcealBtn", 100, 35);
 
 			for (int i = 0; i < 2; i++) {
 				submitBtn[i].addActionListener(new SubmitAction());
@@ -214,7 +214,7 @@ public class StartFrame extends JFrame {
 
 		class SubmitAction implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
-				GraphicButton btn = (GraphicButton) e.getSource();
+				GButton btn = (GButton) e.getSource();
 				if (btn.getId() == "SubmitBtn") {
 					
 					User user = getSelectedUser();

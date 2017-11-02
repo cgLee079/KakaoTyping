@@ -4,13 +4,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
-import javax.swing.JRadioButton;
+import javax.swing.JButton;
 
 import com.cglee079.kakaotp.sound.SoundPlayer;
 
-public class GraphicRadioButton extends JRadioButton {
-	private String path;
-	private String id;
+public class GButton extends JButton {
+	String path;
+	String id;
 
 	public String getPath() {
 		return path;
@@ -20,7 +20,7 @@ public class GraphicRadioButton extends JRadioButton {
 		return id;
 	}
 
-	public GraphicRadioButton(String path, String filename, int width, int height) {
+	public GButton(String path, String filename, int width, int height) {
 		this.path = path;
 		this.id = filename;
 
@@ -31,7 +31,6 @@ public class GraphicRadioButton extends JRadioButton {
 		setSize(width, height);
 
 		setIcon(new ImageIcon(path + filename + ".png"));
-		setSelectedIcon(new ImageIcon(path + filename + "_select" + ".png"));
 		setRolloverIcon(new ImageIcon(path + filename + "_enter" + ".png"));
 		
 		addMouseListener(new BtnMouseListener());
@@ -45,5 +44,5 @@ public class GraphicRadioButton extends JRadioButton {
 			SoundPlayer.play("btn_click.wav");
 		}
 	}
-	
+
 }

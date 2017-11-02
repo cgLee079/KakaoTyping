@@ -19,8 +19,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import com.cglee079.kakaotp.cswing.GraphicButton;
-import com.cglee079.kakaotp.cswing.GraphicPanel;
+import com.cglee079.kakaotp.cswing.GButton;
+import com.cglee079.kakaotp.cswing.GPanel;
 import com.cglee079.kakaotp.dict.UserDictionary;
 import com.cglee079.kakaotp.font.GameFontP;
 import com.cglee079.kakaotp.io.UserIO;
@@ -165,7 +165,7 @@ public class WordSetFrame extends JFrame {
 		}
 	}
 
-	class UserListPanel extends GraphicPanel {
+	class UserListPanel extends GPanel {
 		private JComboBox<String> userComboBox;
 
 		private UserListPanel(String path, String filename, int width, int height) {
@@ -199,19 +199,19 @@ public class WordSetFrame extends JFrame {
 	}
 
 	class SetButtonPanel extends JPanel {
-		private GraphicButton wordPlusBtn;
-		private GraphicButton successResetBtn;
+		private GButton wordPlusBtn;
+		private GButton successResetBtn;
 
 		private SetButtonPanel() {
 			setBackground(null);
 			
-			wordPlusBtn = new GraphicButton(PATH, "wordPlusBtn", 100, 40);
+			wordPlusBtn = new GButton(PATH, "wordPlusBtn", 100, 40);
 			wordPlusBtn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					new WordPlusFrame(WordSetFrame.this, getSelectedUser());
 				}
 			});
-			successResetBtn = new GraphicButton(PATH, "SuccessResetBtn", 100, 40);
+			successResetBtn = new GButton(PATH, "SuccessResetBtn", 100, 40);
 			successResetBtn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					User user = getSelectedUser();
@@ -231,17 +231,17 @@ public class WordSetFrame extends JFrame {
 	}
 
 	class SubmitButtonPanel extends JPanel {
-		private GraphicButton submitBtn;
-		private GraphicButton concealBtn;
+		private GButton submitBtn;
+		private GButton concealBtn;
 
 		private SubmitButtonPanel() {
 			setBackground(null);
 			setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 			
-			submitBtn = new GraphicButton(PATH, "SubmitBtn", 100, 35);
+			submitBtn = new GButton(PATH, "SubmitBtn", 100, 35);
 			submitBtn.addActionListener(new SubmitAction());
 
-			concealBtn = new GraphicButton(PATH, "ConcealBtn", 100, 35);
+			concealBtn = new GButton(PATH, "ConcealBtn", 100, 35);
 			concealBtn.addActionListener(new SubmitAction());
 
 			add(submitBtn);
@@ -251,7 +251,7 @@ public class WordSetFrame extends JFrame {
 		class SubmitAction implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				
-				GraphicButton btn = (GraphicButton) e.getSource();
+				GButton btn = (GButton) e.getSource();
 				if (btn.getId() == "SubmitBtn");
 				else if (btn.getId() == "ConcealBtn");
 

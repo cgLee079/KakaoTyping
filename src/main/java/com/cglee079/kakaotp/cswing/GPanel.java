@@ -6,10 +6,10 @@ import java.awt.Graphics;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-public class GraphicPanel extends JPanel {
-	ImageIcon imgIcon;
+public class GPanel extends JPanel {
+	private ImageIcon imgIcon;
 
-	public GraphicPanel(String path, String filename, int width, int height) {
+	public GPanel(String path, String filename, int width, int height) {
 		imgIcon = new ImageIcon(path + filename + ".png");
 		this.setPreferredSize(new Dimension(width, height));
 		this.setSize(width, height);

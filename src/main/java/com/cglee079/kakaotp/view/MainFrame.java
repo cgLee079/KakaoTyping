@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
-import com.cglee079.kakaotp.cswing.GraphicButton;
+import com.cglee079.kakaotp.cswing.GButton;
 import com.cglee079.kakaotp.sound.SoundPlayer;
 import com.cglee079.kakaotp.util.MainPosition;
 import com.cglee079.kakaotp.util.PathManager;
@@ -145,11 +145,11 @@ public class MainFrame extends JFrame{
 		private HomePanel(){
 			setLayout(null);
 			
-			GraphicButton btn[] = new GraphicButton[4];
-			btn[0] = new GraphicButton(PATH, "Startbtn", 100, 35);
-			btn[1] = new GraphicButton(PATH, "WordSetbtn", 100, 35);
-			btn[2] = new GraphicButton(PATH, "Helpbtn", 100, 35);
-			btn[3] = new GraphicButton(PATH, "Exitbtn", 100, 35);
+			GButton btn[] = new GButton[4];
+			btn[0] = new GButton(PATH, "Startbtn", 100, 35);
+			btn[1] = new GButton(PATH, "WordSetbtn", 100, 35);
+			btn[2] = new GButton(PATH, "Helpbtn", 100, 35);
+			btn[3] = new GButton(PATH, "Exitbtn", 100, 35);
 			
 			for(int i = 0; i < 4; i++){
 				btn[i].addActionListener(new MenuActionListener());
@@ -164,7 +164,7 @@ public class MainFrame extends JFrame{
 		class MenuActionListener implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				GraphicButton btn = (GraphicButton)e.getSource();
+				GButton btn = (GButton)e.getSource();
 				
 				switch (btn.getId()){
 				case "Startbtn":

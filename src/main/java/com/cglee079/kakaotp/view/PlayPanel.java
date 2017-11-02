@@ -16,8 +16,8 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import com.cglee079.kakaotp.cswing.FwLabel;
-import com.cglee079.kakaotp.cswing.GraphicButton;
-import com.cglee079.kakaotp.cswing.GraphicPanel;
+import com.cglee079.kakaotp.cswing.GButton;
+import com.cglee079.kakaotp.cswing.GPanel;
 import com.cglee079.kakaotp.cswing.TimerLabel;
 import com.cglee079.kakaotp.font.GameFontB;
 import com.cglee079.kakaotp.font.GameFontP;
@@ -132,7 +132,7 @@ public class PlayPanel extends JPanel {
 	}
 	
 	/**/
-	class NorthPanel extends GraphicPanel {
+	class NorthPanel extends GPanel {
 		private LevelPanel levelPanel;
 		private PointPanel scorePanel;
 
@@ -158,7 +158,7 @@ public class PlayPanel extends JPanel {
 			return scorePanel;
 		}
 
-		class LevelPanel extends GraphicPanel {
+		class LevelPanel extends GPanel {
 			private JLabel levelLabel;
 
 			private LevelPanel(String path, String filename, int width, int height) {
@@ -179,7 +179,7 @@ public class PlayPanel extends JPanel {
 			}
 		}
 
-		class PointPanel extends GraphicPanel {
+		class PointPanel extends GPanel {
 			private JLabel pointLabel;
 
 			private PointPanel(String path, String filename, int width, int height) {
@@ -225,7 +225,7 @@ public class PlayPanel extends JPanel {
 		}
 
 
-		class SpeedPanel extends GraphicPanel {
+		class SpeedPanel extends GPanel {
 			private JLabel speedLabel = new JLabel();
 
 			SpeedPanel(String path, String filename, int width, int height) {
@@ -247,18 +247,18 @@ public class PlayPanel extends JPanel {
 
 		}
 
-		class ItemPanel extends GraphicPanel {
-			private GraphicButton itemBtn[] = new GraphicButton[4];
+		class ItemPanel extends GPanel {
+			private GButton itemBtn[] = new GButton[4];
 
 			private ItemPanel(String path, String filename, int width, int height) {
 				super(path, filename, width, height);
 				setLayout(null);
 				setBackground(null);
 
-				itemBtn[0] = new GraphicButton(PATH, "ItemBtn1", 100, 35);
-				itemBtn[1] = new GraphicButton(PATH, "ItemBtn2", 100, 35);
-				itemBtn[2] = new GraphicButton(PATH, "ItemBtn3", 100, 35);
-				itemBtn[3] = new GraphicButton(PATH, "ItemBtn4", 100, 35);
+				itemBtn[0] = new GButton(PATH, "ItemBtn1", 100, 35);
+				itemBtn[1] = new GButton(PATH, "ItemBtn2", 100, 35);
+				itemBtn[2] = new GButton(PATH, "ItemBtn3", 100, 35);
+				itemBtn[3] = new GButton(PATH, "ItemBtn4", 100, 35);
 
 				for (int i = 0; i < 4; i++) {
 					itemBtn[i].setLocation(15, 10 + (i * 37));
@@ -268,7 +268,7 @@ public class PlayPanel extends JPanel {
 			}
 
 			// 해당 인덱스의 아이템 버튼 리턴
-			public GraphicButton getItemBtn(int index) {
+			public GButton getItemBtn(int index) {
 				return itemBtn[index];
 			}
 		}
@@ -276,7 +276,7 @@ public class PlayPanel extends JPanel {
 	}
 	
 	/**/
-	class CenterPanel extends GraphicPanel {
+	class CenterPanel extends GPanel {
 		private HeartGagePanel heartGagePanel;
 		private TimerLabel levelUpLabel;
 		private TimerLabel itemLabel;
@@ -313,7 +313,7 @@ public class PlayPanel extends JPanel {
 			return itemLabel;
 		}
 
-		class HeartGagePanel extends GraphicPanel {
+		class HeartGagePanel extends GPanel {
 			private JProgressBar heartGageBar = new JProgressBar();
 
 			private HeartGagePanel(String path, String filename, int width, int height) {
@@ -370,7 +370,7 @@ public class PlayPanel extends JPanel {
 			return successWordPanel;
 		}
 
-		class InfoPanel extends GraphicPanel {
+		class InfoPanel extends GPanel {
 			private JLabel userLabel;
 
 			private InfoPanel(String path, String filename, int width, int height) {

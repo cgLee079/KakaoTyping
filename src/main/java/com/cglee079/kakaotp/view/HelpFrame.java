@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.cglee079.kakaotp.cswing.GraphicButton;
+import com.cglee079.kakaotp.cswing.GButton;
 import com.cglee079.kakaotp.util.ColorManager;
 import com.cglee079.kakaotp.util.MainPosition;
 import com.cglee079.kakaotp.util.PathManager;
@@ -54,23 +54,23 @@ public class HelpFrame extends JFrame {
 	}
 
 	class ButtonPanel extends JPanel {
-		private GraphicButton leftBtn;
-		private GraphicButton rightBtn;
-		private GraphicButton confirmBtn;
+		private GButton leftBtn;
+		private GButton rightBtn;
+		private GButton confirmBtn;
 
 		private ButtonPanel() {
 
 			this.setBackground(null);
-			leftBtn = new GraphicButton(PATH, "leftBtn", 70, 40);
+			leftBtn = new GButton(PATH, "leftBtn", 70, 40);
 			leftBtn.addActionListener(new ButtonActionListener());
 			leftBtn.setEnabled(false);
 			add(leftBtn);
 
-			rightBtn = new GraphicButton(PATH, "rightBtn", 70, 40);
+			rightBtn = new GButton(PATH, "rightBtn", 70, 40);
 			rightBtn.addActionListener(new ButtonActionListener());
 			add(rightBtn);
 
-			confirmBtn = new GraphicButton(PATH, "confirmBtn", 100, 35);
+			confirmBtn = new GButton(PATH, "confirmBtn", 100, 35);
 			confirmBtn.addActionListener(new ButtonActionListener());
 			add(confirmBtn);
 
@@ -78,7 +78,7 @@ public class HelpFrame extends JFrame {
 
 		class ButtonActionListener implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
-				GraphicButton btn = (GraphicButton) e.getSource();
+				GButton btn = (GButton) e.getSource();
 				
 				switch (btn.getId()) {
 				case "leftBtn":

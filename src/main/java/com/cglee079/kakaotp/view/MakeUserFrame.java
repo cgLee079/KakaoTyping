@@ -14,8 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.cglee079.kakaotp.cswing.GraphicButton;
-import com.cglee079.kakaotp.cswing.GraphicRadioButton;
+import com.cglee079.kakaotp.cswing.GButton;
+import com.cglee079.kakaotp.cswing.GRadioButton;
 import com.cglee079.kakaotp.io.UserIO;
 import com.cglee079.kakaotp.util.ColorManager;
 import com.cglee079.kakaotp.util.MainPosition;
@@ -70,7 +70,7 @@ public class MakeUserFrame extends JFrame {
 		
 		Enumeration<AbstractButton> enums = chracterBtnGroup.getElements();
 		while (enums.hasMoreElements()) {
-			GraphicRadioButton radiobtn = (GraphicRadioButton) enums.nextElement();
+			GRadioButton radiobtn = (GRadioButton) enums.nextElement();
 			if (radiobtn.isSelected()){
 				charaterID = radiobtn.getId();
 			}
@@ -84,7 +84,7 @@ public class MakeUserFrame extends JFrame {
 	}
 
 	class CharacterChoicePanel extends JPanel {
-		private GraphicRadioButton[] choiceBtn;
+		private GRadioButton[] choiceBtn;
 		private ButtonGroup chracterBtnGroup;
 
 		private CharacterChoicePanel() {
@@ -93,10 +93,10 @@ public class MakeUserFrame extends JFrame {
 
 			chracterBtnGroup = new ButtonGroup();
 
-			choiceBtn = new GraphicRadioButton[3];
-			choiceBtn[0] = new GraphicRadioButton(PATH, "MuziBtn", 100, 100);
-			choiceBtn[1] = new GraphicRadioButton(PATH, "LyanBtn", 100, 100);
-			choiceBtn[2] = new GraphicRadioButton(PATH, "ApeachBtn", 100, 100);
+			choiceBtn = new GRadioButton[3];
+			choiceBtn[0] = new GRadioButton(PATH, "MuziBtn", 100, 100);
+			choiceBtn[1] = new GRadioButton(PATH, "LyanBtn", 100, 100);
+			choiceBtn[2] = new GRadioButton(PATH, "ApeachBtn", 100, 100);
 
 			for (int i = 0; i < 3; i++) {
 				chracterBtnGroup.add(choiceBtn[i]);
@@ -126,7 +126,7 @@ public class MakeUserFrame extends JFrame {
 	}
 	
 	class SubmitPanel extends JPanel {
-		private GraphicButton[] submitBtn;
+		private GButton[] submitBtn;
 
 		private SubmitPanel() {
 			setLayout(null);
@@ -140,9 +140,9 @@ public class MakeUserFrame extends JFrame {
 		}
 
 		private void makeBtn() {
-			submitBtn = new GraphicButton[2];
-			submitBtn[0] = new GraphicButton(PATH, "SubmitBtn", 100, 35);
-			submitBtn[1] = new GraphicButton(PATH, "ConcealBtn", 100, 35);
+			submitBtn = new GButton[2];
+			submitBtn[0] = new GButton(PATH, "SubmitBtn", 100, 35);
+			submitBtn[1] = new GButton(PATH, "ConcealBtn", 100, 35);
 
 			for (int i = 0; i < 2; i++) {
 				submitBtn[i].addActionListener(new SubmitActionListener());
@@ -153,7 +153,7 @@ public class MakeUserFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String character = null;
 				
-				GraphicButton btn = (GraphicButton) e.getSource();
+				GButton btn = (GButton) e.getSource();
 				if (btn.getId().equals("SubmitBtn")) {
 
 					String characterID = null;
