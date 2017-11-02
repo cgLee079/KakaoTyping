@@ -13,12 +13,10 @@ import com.cglee079.kakaotp.dict.UserDictionary;
 import com.cglee079.kakaotp.io.ScoreManager;
 import com.cglee079.kakaotp.model.Score;
 import com.cglee079.kakaotp.model.User;
-import com.cglee079.kakaotp.sound.SoundPlayer;
 import com.cglee079.kakaotp.view.PlayPanel;
-import com.cglee079.kakaotp.view.ScoreFrame;
 
 public class Play {
-	PlayPanel playPanel;
+	private PlayPanel playPanel;
 	private User user;
 	private UserDictionary dictionary;
 	private boolean isplay;
@@ -188,8 +186,6 @@ public class Play {
 	} // 속도 업
 
 	public void levelUp() {
-		SoundPlayer.play("levelup.wav");
-		
 		level++;
 		playPanel.drawLevel(level);
 		clearFwLabels();
@@ -216,9 +212,9 @@ public class Play {
 		}
 	}
 	
-	public void gain(int value){
-		this.heart += value;
-		playPanel.drawGain(value);
+	public void fullGain(){
+		this.heart = 100;
+		playPanel.drawGain(100);
 	}
 
 	public void useItem(int index){
@@ -325,22 +321,16 @@ public class Play {
 	}
 	
 	public void startGame() {
+		isplay = true;	
 		speedUpper.start();
 		wordMaker.start();
 	}
 
 	public void stopGame() {
-		speedUpper.interrupt();
-		wordMaker.interrupt();
-		
-		for (int i = 0; i < fwAnis.size(); i++){
-			fwAnis.get(i).interrupt();
-		}
-			
+		isplay = false;		
 	}
 
 	public void pauseGame() {
-		this.isplay = false;
 		speedUpper.suspend();
 		wordMaker.suspend();
 		for (int i = 0; i < fwAnis.size(); i++){
@@ -349,7 +339,6 @@ public class Play {
 	}
 
 	public void resumeGame() {
-		this.isplay = true;
 		speedUpper.resume();
 		wordMaker.resume();
 		for (int i = 0; i < fwAnis.size(); i++){
@@ -358,12 +347,11 @@ public class Play {
 	}
 	
 	public void gameOver() {
-		SoundPlayer.play("gameOver.wav");
-		//stopGame();
+		stopGame();
 		Score score = new Score(user.getCharacter(), user.getUsername(), point);
 		ScoreManager scoreManager = ScoreManager.getInstance();
 		scoreManager.addScore(score);
-		new ScoreFrame(score, level);
+		playPanel.gameOver(score, level);
 	}
 
 	class SpeedUpper extends Thread {
@@ -371,7 +359,7 @@ public class Play {
 		public void run() {
 			NumberFormat formatter = new DecimalFormat("#0.00");    
 			
-			while (true) {
+			while (isplay) {
 				speedUp(0.01);
 				playPanel.drawSpeed(formatter.format(speed));
 				
@@ -386,7 +374,7 @@ public class Play {
 
 	class WordMaker extends Thread {
 		public void run() {
-			while (true) {
+			while (isplay) {
 				FWAni fallingAni = new FWAni();
 				fwAnis.add(fallingAni);
 				fallingAni.start();
@@ -414,7 +402,7 @@ public class Play {
 			playPanel.drawFwLabel(fwLabel);
 
 			// y<410까지 떨어트림
-			while (y < 410 && !Thread.currentThread().isInterrupted()) {
+			while (y < 410 && isplay) {
 				y = (int) (y + speed);
 				fwLabel.setLocation(x, y);
 				try {
@@ -512,7 +500,7 @@ public class Play {
 
 	class Item4 extends Item {
 		public void call() {
-			gain(100);
+			fullGain();
 		}
 	}
 }

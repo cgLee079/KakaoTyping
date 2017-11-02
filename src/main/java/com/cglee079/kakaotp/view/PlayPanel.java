@@ -21,8 +21,10 @@ import com.cglee079.kakaotp.cswing.GraphicPanel;
 import com.cglee079.kakaotp.cswing.TimerLabel;
 import com.cglee079.kakaotp.font.GameFontB;
 import com.cglee079.kakaotp.font.GameFontP;
+import com.cglee079.kakaotp.model.Score;
 import com.cglee079.kakaotp.play.KeyEventor;
 import com.cglee079.kakaotp.play.Play;
+import com.cglee079.kakaotp.sound.SoundPlayer;
 import com.cglee079.kakaotp.util.ColorManager;
 import com.cglee079.kakaotp.util.PathManager;
 
@@ -76,6 +78,8 @@ public class PlayPanel extends JPanel {
 	}
 	
 	public void drawLevel(int level){
+		SoundPlayer.play("levelup.wav");
+		centerPanel.getLevelUpLabel().action(100);
 		northPanel.getLevelPanel().getLevelLabel().setText(level + "");
 	}
 	
@@ -88,6 +92,10 @@ public class PlayPanel extends JPanel {
 	}
 	
 	public void drawItemBtn(int index, boolean enabled){
+		if(!enabled){
+			SoundPlayer.play("item.wav");
+			centerPanel.getItemLabel().action(100);
+		}
 		JButton itemBtn = westPanel.getItemPanel().getItemBtn(index);
 		itemBtn.setEnabled(enabled);
 	}
@@ -116,6 +124,11 @@ public class PlayPanel extends JPanel {
 		content[0] = korean;
 		content[1] = english;
 		model.insertRow(0, content);
+	}
+	
+	public void gameOver(Score score, int level) {
+		SoundPlayer.play("gameOver.wav");
+		new ScoreFrame(score, level);
 	}
 	
 	/**/
@@ -288,6 +301,14 @@ public class PlayPanel extends JPanel {
 		public HeartGagePanel getHeartGagePanel() {
 			return heartGagePanel;
 		}
+		
+		public TimerLabel getLevelUpLabel() {
+			return levelUpLabel;
+		}
+
+		public TimerLabel getItemLabel() {
+			return itemLabel;
+		}
 
 		class HeartGagePanel extends GraphicPanel {
 			private JProgressBar heartGageBar = new JProgressBar();
@@ -417,5 +438,6 @@ public class PlayPanel extends JPanel {
 			return wordTextField;
 		}
 	}
+
 
 }
