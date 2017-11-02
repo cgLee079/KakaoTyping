@@ -61,8 +61,8 @@ public class StartFrame extends JFrame {
 		userComboBox.removeAllItems();
 		userComboBox.addItem(null);
 		
-		UserIO userManager = UserIO.getInstance();
-		ArrayList<User> users = userManager.readUser();
+		UserIO userIO = UserIO.getInstance();
+		ArrayList<User> users = userIO.readUser();
 		
 		User user = null;
 		int size = users.size();
@@ -124,16 +124,12 @@ public class StartFrame extends JFrame {
 	}
 
 	class LevelListPanel extends JPanel {
-		private String level;
 		private GraphicRadioButton levelbtn[];
 		private ButtonGroup levelBtnGroup;
 
 		private LevelListPanel() {
 			setBackground(null);
-			makeBtn();
-		}
-
-		private void makeBtn() {
+			
 			levelBtnGroup = new ButtonGroup();
 			levelbtn = new GraphicRadioButton[3];
 			levelbtn[0] = new GraphicRadioButton(PATH, "levelBtn1", 70, 35);
@@ -144,8 +140,9 @@ public class StartFrame extends JFrame {
 				levelBtnGroup.add(levelbtn[i]);
 				add(levelbtn[i]);
 			}
+			
 		}
-		
+
 		public ButtonGroup getLevelBtnGroup() {
 			return levelBtnGroup;
 		}
@@ -251,15 +248,19 @@ public class StartFrame extends JFrame {
 						return;
 					}
 
-					if (levelID.equals("levelBtn1")) {
+					switch (levelID){
+					case "levelBtn1":
 						level = 1;
 						speed = 10;
-					} else if (levelID.equals("levelBtn1")) {
+						break;
+					case "levelBtn2":
 						level = 5;
 						speed = 20;
-					} else if (levelID.equals("levelBtn3")) {
+						break;
+					case "levelBtn3":
 						level = 10;
 						speed = 30;
+						break;
 					}
 					
 					Play play = new Play(user, level, speed);

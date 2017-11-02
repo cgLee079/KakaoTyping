@@ -55,7 +55,6 @@ public class ScoreFrame extends JFrame {
 		private CenterPanel() {
 			setVisible(true);
 			setBackground(ColorManager.baseColor);
-
 			setLayout(null);
 			setPreferredSize(new Dimension(500, 420));
 
@@ -100,8 +99,8 @@ public class ScoreFrame extends JFrame {
 				JLabel[] gradeLabel = new JLabel[num];
 				JLabel[] nameLabel 	= new JLabel[num];
 
-				String name = " ";// 이름 저장
-				String character = " ";// 캐릭터 타입 저장
+				String name = "";// 이름 저장
+				String character = "";// 캐릭터 타입 저장
 
 				for (int i = 0; i < num; i++) {
 					score = scores.get(i);

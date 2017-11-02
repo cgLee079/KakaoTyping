@@ -39,14 +39,14 @@ public class PlayPanel extends JPanel {
 	private Play play;
 
 	public PlayPanel() {
-		this.setBackground(Color.WHITE);
+		setBackground(Color.WHITE);
 		westPanel 	= new WestPanel();
 		southPanel 	= new SouthPanel();
 		eastPanel 	= new EastPanel();
 		northPanel 	= new NorthPanel(PATH, "NorthBg", 800, 60);
 		centerPanel = new CenterPanel(PATH, "CenterBg", 500, 420);
 
-		this.setLayout(new BorderLayout());
+		setLayout(new BorderLayout());
 		add(southPanel, BorderLayout.SOUTH);
 		add(eastPanel, BorderLayout.EAST);
 		add(northPanel, BorderLayout.NORTH);
@@ -163,11 +163,14 @@ public class PlayPanel extends JPanel {
 
 			private LevelPanel(String path, String filename, int width, int height) {
 				super(path, filename, width, height);
+				
 				setLayout(null);
+				
 				levelLabel = new JLabel();
 				levelLabel.setFont(new GameFontB(17));
 				levelLabel.setSize(100, 40);
 				levelLabel.setLocation(90, 8);
+				
 				add(levelLabel);
 			}
 
@@ -422,7 +425,7 @@ public class PlayPanel extends JPanel {
 		private JPanel inputWordPanel; 
 		private JTextField wordTextField;
 		
-		public SouthPanel(){		
+		private SouthPanel(){		
 			setBackground(ColorManager.baseColor);
 			setPreferredSize(new Dimension(0,40));
 
@@ -431,7 +434,7 @@ public class PlayPanel extends JPanel {
 			wordTextField = new JTextField("", 20);
 			
 			inputWordPanel.add(wordTextField);
-			this.add(inputWordPanel);
+			add(inputWordPanel);
 		}
 
 		public JTextField getWordTextField() {

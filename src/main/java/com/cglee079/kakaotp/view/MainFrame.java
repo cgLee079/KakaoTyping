@@ -131,8 +131,7 @@ public class MainFrame extends JFrame{
 				JOptionPane.showMessageDialog(null, "version. 1.00\n2016.06.16", "Version",JOptionPane.INFORMATION_MESSAGE);
 				break;				
 			case "Developer" :
-				JOptionPane.showMessageDialog(null, "Hansung.Univ\nComputer Engneering\n\nLee Changoo / Seo Songi","Developer",
-												JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Hansung.Univ\nComputer Engneering\n\nLee Changoo / Seo Songi","Developer", JOptionPane.INFORMATION_MESSAGE);
 				break;				
 			case "exit":
 				System.exit(0);
@@ -166,10 +165,21 @@ public class MainFrame extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				GraphicButton btn = (GraphicButton)e.getSource();
-				if(btn.getId().equals("Startbtn")) { new StartFrame((MainFrame) btn.getTopLevelAncestor()); }
-				else if(btn.getId().equals("WordSetbtn")){new WordSetFrame(); }
-				else if(btn.getId().equals("Help")){ new HelpFrame(); }
-				else if(btn.getId().equals("Exitbtn")){ System.exit(0); }
+				
+				switch (btn.getId()){
+				case "Startbtn":
+					 new StartFrame(MainFrame.this);
+					break;
+				case "WordSetbtn":
+					new WordSetFrame(); 	
+					break;
+				case "Help":
+					new HelpFrame(); 
+					break;
+				case "Exitbtn":
+					System.exit(0);
+					break;
+				}
 			}
 		}
 				
