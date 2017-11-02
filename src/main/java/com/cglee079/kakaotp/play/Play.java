@@ -10,7 +10,7 @@ import java.util.Vector;
 
 import com.cglee079.kakaotp.cswing.FwLabel;
 import com.cglee079.kakaotp.dict.UserDictionary;
-import com.cglee079.kakaotp.io.ScoreManager;
+import com.cglee079.kakaotp.io.ScoreIO;
 import com.cglee079.kakaotp.model.Score;
 import com.cglee079.kakaotp.model.User;
 import com.cglee079.kakaotp.view.PlayPanel;
@@ -349,7 +349,7 @@ public class Play {
 	public void gameOver() {
 		stopGame();
 		Score score = new Score(user.getCharacter(), user.getUsername(), point);
-		ScoreManager scoreManager = ScoreManager.getInstance();
+		ScoreIO scoreManager = ScoreIO.getInstance();
 		scoreManager.addScore(score);
 		playPanel.gameOver(score, level);
 	}

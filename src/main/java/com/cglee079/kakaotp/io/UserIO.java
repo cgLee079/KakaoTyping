@@ -9,17 +9,17 @@ import java.util.ArrayList;
 
 import com.cglee079.kakaotp.model.User;
 
-public class UserManager {
-	private static UserManager instance = null;
+public class UserIO {
+	private static UserIO instance = null;
 	
-	public static UserManager getInstance(){
+	public static UserIO getInstance(){
 		if(instance == null){
-			instance = new UserManager();
+			instance = new UserIO();
 		}
 		return instance;
 	}
 	
-	private UserManager(){
+	private UserIO(){
 		
 	}
 	

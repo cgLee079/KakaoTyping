@@ -23,7 +23,7 @@ import com.cglee079.kakaotp.cswing.GraphicButton;
 import com.cglee079.kakaotp.cswing.GraphicPanel;
 import com.cglee079.kakaotp.dict.UserDictionary;
 import com.cglee079.kakaotp.font.GameFontP;
-import com.cglee079.kakaotp.io.UserManager;
+import com.cglee079.kakaotp.io.UserIO;
 import com.cglee079.kakaotp.model.User;
 import com.cglee079.kakaotp.util.ColorManager;
 import com.cglee079.kakaotp.util.MainPosition;
@@ -78,7 +78,7 @@ public class WordSetFrame extends JFrame {
 		userComboBox.removeAllItems();
 		userComboBox.addItem(null);
 		
-		UserManager userManager = UserManager.getInstance();
+		UserIO userManager = UserIO.getInstance();
 		ArrayList<User> users = userManager.readUser();
 		
 		User user = null;

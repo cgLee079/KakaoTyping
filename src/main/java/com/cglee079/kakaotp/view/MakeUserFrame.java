@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 
 import com.cglee079.kakaotp.cswing.GraphicButton;
 import com.cglee079.kakaotp.cswing.GraphicRadioButton;
-import com.cglee079.kakaotp.io.UserManager;
+import com.cglee079.kakaotp.io.UserIO;
 import com.cglee079.kakaotp.util.ColorManager;
 import com.cglee079.kakaotp.util.MainPosition;
 import com.cglee079.kakaotp.util.PathManager;
@@ -177,7 +177,7 @@ public class MakeUserFrame extends JFrame {
 						return;
 					}
 
-					UserManager userManager = UserManager.getInstance();
+					UserIO userManager = UserIO.getInstance();
 					userManager.writeUser(character, username);					
 					startFrame.updateUser();
 				}

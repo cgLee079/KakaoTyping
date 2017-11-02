@@ -11,15 +11,15 @@ import java.util.Comparator;
 
 import com.cglee079.kakaotp.model.Score;
 
-public class ScoreManager {
-	private static ScoreManager instance = null;
+public class ScoreIO {
+	private static ScoreIO instance = null;
 	
-	private ScoreManager() {
+	private ScoreIO() {
 	}
 	
-	public static ScoreManager getInstance() {
+	public static ScoreIO getInstance() {
 		if(instance == null){
-			instance = new ScoreManager();
+			instance = new ScoreIO();
 		}
 		return instance;
 	}

@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import com.cglee079.kakaotp.cswing.GraphicPanel;
 import com.cglee079.kakaotp.font.GameFontB;
 import com.cglee079.kakaotp.font.GameFontP;
-import com.cglee079.kakaotp.io.ScoreManager;
+import com.cglee079.kakaotp.io.ScoreIO;
 import com.cglee079.kakaotp.model.Score;
 import com.cglee079.kakaotp.util.ColorManager;
 import com.cglee079.kakaotp.util.MainPosition;
@@ -88,7 +88,7 @@ public class ScoreFrame extends JFrame {
 			}
 
 			private void drawGrade() {
-				ScoreManager scoreManager = ScoreManager.getInstance();
+				ScoreIO scoreManager = ScoreIO.getInstance();
 				ArrayList<Score> scores = scoreManager.getScores();
 				Score score = null;
 				

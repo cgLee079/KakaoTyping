@@ -20,7 +20,7 @@ import javax.swing.JPanel;
 import com.cglee079.kakaotp.cswing.GraphicButton;
 import com.cglee079.kakaotp.cswing.GraphicPanel;
 import com.cglee079.kakaotp.cswing.GraphicRadioButton;
-import com.cglee079.kakaotp.io.UserManager;
+import com.cglee079.kakaotp.io.UserIO;
 import com.cglee079.kakaotp.model.User;
 import com.cglee079.kakaotp.play.Play;
 import com.cglee079.kakaotp.util.ColorManager;
@@ -61,7 +61,7 @@ public class StartFrame extends JFrame {
 		userComboBox.removeAllItems();
 		userComboBox.addItem(null);
 		
-		UserManager userManager = UserManager.getInstance();
+		UserIO userManager = UserIO.getInstance();
 		ArrayList<User> users = userManager.readUser();
 		
 		User user = null;
