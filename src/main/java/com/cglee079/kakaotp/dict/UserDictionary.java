@@ -95,7 +95,7 @@ public class UserDictionary {
 		String s;
 
 		try {
-			out = new BufferedWriter(new FileWriter("resources/UserDictionary" + username + "_Dictionary.txt"));
+			out = new BufferedWriter(new FileWriter("resources/UserDictionary/" + username + "_Dictionary.txt"));
 			for (int i = 0; i < list.size(); i++) {
 				korean = getWord(i);
 				english = render(korean);
