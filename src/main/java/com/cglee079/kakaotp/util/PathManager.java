@@ -14,8 +14,8 @@ public class PathManager {
 	public static final String HELP_FRAME 		= "resources/images/HelpFrame/";
 	public static final String SCORE_FRAME 		= "resources/images/ScoreFrame/";
 	
-	public static final String MUZI 			= MAIN_FRAME + "Muzi/";
-	public static final String APEACH 			= MAIN_FRAME + "Apeach/";
-	public static final String LYAN 			= MAIN_FRAME + "Lyan/";
+	public static final String MUZI 			= MAIN_FRAME + "muzi/";
+	public static final String APEACH 			= MAIN_FRAME + "apeach/";
+	public static final String LYAN 			= MAIN_FRAME + "lyan/";
 	
 }

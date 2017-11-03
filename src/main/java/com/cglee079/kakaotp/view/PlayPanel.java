@@ -93,7 +93,7 @@ public class PlayPanel extends JPanel {
 	
 	public void drawItemBtn(int index, boolean enabled){
 		if(!enabled){
-			SoundPlayer.play("item.wav");
+			SoundPlayer.play("itemuse.wav");
 			centerPanel.getItemLabel().action(100);
 		}
 		JButton itemBtn = westPanel.getItemPanel().getItemBtn(index);

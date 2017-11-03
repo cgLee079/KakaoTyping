@@ -31,15 +31,15 @@ public class GRadioButton extends JRadioButton {
 		setSize(width, height);
 
 		setIcon(new ImageIcon(path + filename + ".png"));
-		setSelectedIcon(new ImageIcon(path + filename + "_select" + ".png"));
-		setRolloverIcon(new ImageIcon(path + filename + "_enter" + ".png"));
+		setSelectedIcon(new ImageIcon(path + filename + "_selected" + ".png"));
+		setRolloverIcon(new ImageIcon(path + filename + "_hover" + ".png"));
 		
 		addMouseListener(new BtnMouseListener());
 	}
 	
 	class BtnMouseListener extends MouseAdapter{
 		public void mouseEntered(MouseEvent e){
-			SoundPlayer.play("btn_enter.wav");			
+			SoundPlayer.play("btn_hover.wav");			
 		}
 		public void mousePressed(MouseEvent e){
 			SoundPlayer.play("btn_click.wav");
