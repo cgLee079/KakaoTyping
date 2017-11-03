@@ -43,8 +43,8 @@ public class PlayPanel extends JPanel {
 		westPanel 	= new WestPanel();
 		southPanel 	= new SouthPanel();
 		eastPanel 	= new EastPanel();
-		northPanel 	= new NorthPanel(PATH, "NorthBg", 800, 60);
-		centerPanel = new CenterPanel(PATH, "CenterBg", 500, 420);
+		northPanel 	= new NorthPanel(PATH, "bg_northpanel", 800, 60);
+		centerPanel = new CenterPanel(PATH, "bg_centerpanel", 500, 420);
 
 		setLayout(new BorderLayout());
 		add(southPanel, BorderLayout.SOUTH);
@@ -79,7 +79,7 @@ public class PlayPanel extends JPanel {
 	
 	public void drawLevel(int level){
 		SoundPlayer.play("levelup.wav");
-		centerPanel.getLevelUpLabel().action(100);
+		centerPanel.getLevelUpLabel().action(1000);
 		northPanel.getLevelPanel().getLevelLabel().setText(level + "");
 	}
 	
@@ -94,7 +94,7 @@ public class PlayPanel extends JPanel {
 	public void drawItemBtn(int index, boolean enabled){
 		if(!enabled){
 			SoundPlayer.play("itemuse.wav");
-			centerPanel.getItemLabel().action(100);
+			centerPanel.getItemLabel().action(1000);
 		}
 		JButton itemBtn = westPanel.getItemPanel().getItemBtn(index);
 		itemBtn.setEnabled(enabled);
@@ -356,7 +356,7 @@ public class PlayPanel extends JPanel {
 			setPreferredSize(new Dimension(150, 0));
 			setLayout(null);
 
-			infoPanel = new InfoPanel(PATH, "face", 130, 180);
+			infoPanel = new InfoPanel(PATH, "icon_face", 130, 180);
 			infoPanel.setLocation(10, 10);
 			this.add(infoPanel);
 

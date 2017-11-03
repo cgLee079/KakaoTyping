@@ -444,6 +444,8 @@ public class Play {
 				if (!fwLabel.isKorean()){// 모든 떨어지는 라벨 중 하나의 라벨은 영어를 가지고있음
 					english = korean;
 					korean = dictionary.renderReverse(english);
+					
+					Play.this.korean = true;
 				}
 
 				playPanel.addSuccessWord(korean, english); // 성공 단어에 추가

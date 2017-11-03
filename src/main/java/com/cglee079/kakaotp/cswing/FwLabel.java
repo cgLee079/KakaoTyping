@@ -34,7 +34,7 @@ public class FwLabel extends JLabel {
 	public void setKoreanFont() {
 		if(haveItem){ 
 			String path = PathManager.characterPath;
-			this.setIcon(new ImageIcon(path + "itemIcon" + ".png"));
+			this.setIcon(new ImageIcon(path + "icon_item" + ".png"));
 			this.setFont(new GameFontB(15));
 		} else {
 			this.setFont(new GameFontP(15));
@@ -45,7 +45,7 @@ public class FwLabel extends JLabel {
 	public void setEnglishFont() {
 		if(haveItem){ 
 			String path = PathManager.characterPath;
-			this.setIcon(new ImageIcon(path + "itemIcon" + ".png"));
+			this.setIcon(new ImageIcon(path + "icon_item" + ".png"));
 			this.setFont(new GameFontB(15));
 		} else {
 			this.setFont(new GameFontP(15));

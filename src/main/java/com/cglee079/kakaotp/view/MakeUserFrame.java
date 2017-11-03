@@ -154,7 +154,7 @@ public class MakeUserFrame extends JFrame {
 				String character = null;
 				
 				GButton btn = (GButton) e.getSource();
-				if (btn.getId().equals("btn_cancel")) {
+				if (btn.getId().equals("btn_submit")) {
 
 					String characterID = null;
 					characterID = getSelectedCharater();
