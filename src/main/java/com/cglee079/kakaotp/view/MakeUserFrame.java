@@ -37,7 +37,7 @@ public class MakeUserFrame extends JFrame {
 		this.getContentPane().setBackground(ColorManager.BASIC2);
 		setVisible(true);
 
-		setLocation(MainPosition.x-(this.getWidth()/2), MainPosition.y-(this.getHeight()/2));
+		setLocation(MainPosition.x - (this.getWidth()/2), MainPosition.y - (this.getHeight()/2));
 
 		this.setShape(new RoundRectangle2D.Float(0, 0, this.getWidth(), this.getHeight(), 100, 100));
 		setLayout(null);
@@ -94,9 +94,9 @@ public class MakeUserFrame extends JFrame {
 			chracterBtnGroup = new ButtonGroup();
 
 			choiceBtn = new GRadioButton[3];
-			choiceBtn[0] = new GRadioButton(PATH, "MuziBtn", 100, 100);
-			choiceBtn[1] = new GRadioButton(PATH, "LyanBtn", 100, 100);
-			choiceBtn[2] = new GRadioButton(PATH, "ApeachBtn", 100, 100);
+			choiceBtn[0] = new GRadioButton(PATH, "btn_muzi", 100, 100);
+			choiceBtn[1] = new GRadioButton(PATH, "btn_lyan", 100, 100);
+			choiceBtn[2] = new GRadioButton(PATH, "btn_apeach", 100, 100);
 
 			for (int i = 0; i < 3; i++) {
 				chracterBtnGroup.add(choiceBtn[i]);
@@ -141,8 +141,8 @@ public class MakeUserFrame extends JFrame {
 
 		private void makeBtn() {
 			submitBtn = new GButton[2];
-			submitBtn[0] = new GButton(PATH, "SubmitBtn", 100, 35);
-			submitBtn[1] = new GButton(PATH, "ConcealBtn", 100, 35);
+			submitBtn[0] = new GButton(PATH, "btn_submit", 100, 35);
+			submitBtn[1] = new GButton(PATH, "btn_cancel", 100, 35);
 
 			for (int i = 0; i < 2; i++) {
 				submitBtn[i].addActionListener(new SubmitActionListener());
@@ -154,7 +154,7 @@ public class MakeUserFrame extends JFrame {
 				String character = null;
 				
 				GButton btn = (GButton) e.getSource();
-				if (btn.getId().equals("SubmitBtn")) {
+				if (btn.getId().equals("btn_cancel")) {
 
 					String characterID = null;
 					characterID = getSelectedCharater();
@@ -163,11 +163,11 @@ public class MakeUserFrame extends JFrame {
 						return;
 					}
 
-					if (characterID.equals("MuziBtn")){
+					if (characterID.equals("btn_muzi")){
 						character = "MUZI";
-					} else if (characterID.equals("LyanBtn")){
+					} else if (characterID.equals("btn_lyan")){
 						character = "LYAN";
-					} else if (characterID.equals("ApeachBtn")){
+					} else if (characterID.equals("btn_apeach")){
 						character = "APEACH";
 					}
 

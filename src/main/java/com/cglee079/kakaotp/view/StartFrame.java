@@ -107,7 +107,7 @@ public class StartFrame extends JFrame {
 	class StartPanel extends JPanel {
 		private StartPanel(){
 			setLayout(null);
-			userListPanel = new UserListPanel(PATH, "UserListPa", 300, 40);
+			userListPanel = new UserListPanel(PATH, "bg_userlist", 300, 40);
 			userListPanel.setLocation(40, 50);
 			add(userListPanel);
 
@@ -133,9 +133,9 @@ public class StartFrame extends JFrame {
 			
 			levelBtnGroup = new ButtonGroup();
 			levelbtn = new GRadioButton[3];
-			levelbtn[0] = new GRadioButton(PATH, "levelBtn1", 70, 35);
-			levelbtn[1] = new GRadioButton(PATH, "levelBtn2", 70, 35);
-			levelbtn[2] = new GRadioButton(PATH, "levelBtn3", 70, 35);
+			levelbtn[0] = new GRadioButton(PATH, "btn_level1", 70, 35);
+			levelbtn[1] = new GRadioButton(PATH, "btn_level2", 70, 35);
+			levelbtn[2] = new GRadioButton(PATH, "btn_level3", 70, 35);
 
 			for (int i = 0; i < 3; i++) {
 				levelBtnGroup.add(levelbtn[i]);
@@ -167,7 +167,7 @@ public class StartFrame extends JFrame {
 
 			add(userComboBox);
 
-			GButton wordPlusBtn = new GButton(PATH, "UserPlusBtn", 30, 30);
+			GButton wordPlusBtn = new GButton(PATH, "btn_userplus", 30, 30);
 			wordPlusBtn.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e) {
 					new MakeUserFrame(StartFrame.this);
@@ -194,8 +194,8 @@ public class StartFrame extends JFrame {
 			setBackground(null);
 			
 			submitBtn = new GButton[2];
-			submitBtn[0] = new GButton(PATH, "SubmitBtn", 100, 35);
-			submitBtn[1] = new GButton(PATH, "ConcealBtn", 100, 35);
+			submitBtn[0] = new GButton(PATH, "btn_submit", 100, 35);
+			submitBtn[1] = new GButton(PATH, "btn_cancel", 100, 35);
 
 			for (int i = 0; i < 2; i++) {
 				submitBtn[i].addActionListener(new SubmitAction());
@@ -216,7 +216,7 @@ public class StartFrame extends JFrame {
 		class SubmitAction implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				GButton btn = (GButton) e.getSource();
-				if (btn.getId() == "SubmitBtn") {
+				if (btn.getId() == "btn_submit") {
 					
 					User user = getSelectedUser();
 					if (user == null) {
@@ -250,15 +250,15 @@ public class StartFrame extends JFrame {
 					}
 
 					switch (levelID){
-					case "levelBtn1":
+					case "btn_level1":
 						level = 1;
 						speed = 10;
 						break;
-					case "levelBtn2":
+					case "btn_level2":
 						level = 5;
 						speed = 20;
 						break;
-					case "levelBtn3":
+					case "btn_level3":
 						level = 10;
 						speed = 30;
 						break;

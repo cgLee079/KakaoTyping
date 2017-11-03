@@ -38,8 +38,9 @@ public class HelpFrame extends JFrame {
 		setShape(new RoundRectangle2D.Float(0, 0, this.getWidth(), this.getHeight(), 50, 50));
 		setLocation(MainPosition.x - (this.getWidth() / 2), MainPosition.y - (this.getHeight() / 2));
 
-		for (Integer page = 0; page < NUM_OF_PAGE; page++)
+		for (Integer page = 0; page < NUM_OF_PAGE; page++){
 			image[page] = new ImageIcon(PATH + PREFIX + page + ".png");
+		}
 
 		page = 0;
 		helpLabel = new JLabel(image[page]);
@@ -61,16 +62,16 @@ public class HelpFrame extends JFrame {
 		private ButtonPanel() {
 
 			this.setBackground(null);
-			leftBtn = new GButton(PATH, "leftBtn", 70, 40);
+			leftBtn = new GButton(PATH, "btn_left", 70, 40);
 			leftBtn.addActionListener(new ButtonActionListener());
 			leftBtn.setEnabled(false);
 			add(leftBtn);
 
-			rightBtn = new GButton(PATH, "rightBtn", 70, 40);
+			rightBtn = new GButton(PATH, "btn_right", 70, 40);
 			rightBtn.addActionListener(new ButtonActionListener());
 			add(rightBtn);
 
-			confirmBtn = new GButton(PATH, "confirmBtn", 100, 35);
+			confirmBtn = new GButton(PATH, "btn_confirm", 100, 35);
 			confirmBtn.addActionListener(new ButtonActionListener());
 			add(confirmBtn);
 
@@ -81,31 +82,37 @@ public class HelpFrame extends JFrame {
 				GButton btn = (GButton) e.getSource();
 				
 				switch (btn.getId()) {
-				case "leftBtn":
+				case "btn_left":
 					if (page == NUM_OF_PAGE - 1) {
 						rightBtn.setEnabled(true);
 					}
+					
 					page--;
 					helpLabel.setIcon(image[page]);
+					
 					if (page == 0) {
 						leftBtn.setEnabled(false);
 					}
+					
 					ButtonPanel.this.repaint();
 					break;
 
-				case "rightBtn":
+				case "btn_right":
 					if (page == 0) {
 						leftBtn.setEnabled(true);
 					}
+					
 					page++;
 					helpLabel.setIcon(image[page]);
+					
 					if (page == NUM_OF_PAGE - 1) {
 						rightBtn.setEnabled(false);
 					}
+					
 					ButtonPanel.this.repaint();
 					break;
 
-				case "confirmBtn":
+				case "btn_confirm":
 					HelpFrame.this.dispose();
 					break;
 				}

@@ -145,10 +145,10 @@ public class MainFrame extends JFrame{
 			setLayout(null);
 			
 			GButton btn[] = new GButton[4];
-			btn[0] = new GButton(PATH, "Startbtn", 100, 35);
-			btn[1] = new GButton(PATH, "WordSetbtn", 100, 35);
-			btn[2] = new GButton(PATH, "Helpbtn", 100, 35);
-			btn[3] = new GButton(PATH, "Exitbtn", 100, 35);
+			btn[0] = new GButton(PATH, "btn_start", 100, 35);
+			btn[1] = new GButton(PATH, "btn_wordset", 100, 35);
+			btn[2] = new GButton(PATH, "btn_help", 100, 35);
+			btn[3] = new GButton(PATH, "btn_exit", 100, 35);
 			
 			for(int i = 0; i < 4; i++){
 				btn[i].addActionListener(new MenuActionListener());
@@ -166,16 +166,16 @@ public class MainFrame extends JFrame{
 				GButton btn = (GButton)e.getSource();
 				
 				switch (btn.getId()){
-				case "Startbtn":
+				case "btn_start":
 					 new StartFrame(MainFrame.this);
 					break;
-				case "WordSetbtn":
+				case "btn_wordset":
 					new WordSetFrame(); 	
 					break;
-				case "Help":
+				case "btn_help":
 					new HelpFrame(); 
 					break;
-				case "Exitbtn":
+				case "btn_exit":
 					System.exit(0);
 					break;
 				}
@@ -184,7 +184,7 @@ public class MainFrame extends JFrame{
 				
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);
-			ImageIcon homeBg = new ImageIcon(PATH + "HomeBg.png");	
+			ImageIcon homeBg = new ImageIcon(PATH + "bg_home.png");	
 			g.drawImage(homeBg.getImage(), 0, 0, null);	
 			setOpaque(false);
 		}	

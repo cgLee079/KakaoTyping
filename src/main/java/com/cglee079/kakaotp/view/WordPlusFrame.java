@@ -41,7 +41,7 @@ public class WordPlusFrame extends JFrame {
 		setLocation(MainPosition.x - (this.getWidth() / 2), MainPosition.y - (this.getHeight() / 2));
 		getContentPane().setBackground(ColorManager.BASIC3);
 
-		GPanel inputWordPanel = new GPanel(PATH, "inputYourWord", 400, 70);
+		GPanel inputWordPanel = new GPanel(PATH, "bg_inputwordpanel", 400, 70);
 		add(inputWordPanel, BorderLayout.NORTH);
 
 		inputPanel = new InputPanel();
@@ -82,10 +82,10 @@ public class WordPlusFrame extends JFrame {
 		private SubmitPanel() {
 			setBackground(null);
 
-			submitBtn = new GButton(PATH, "SubmitBtn", 100, 35);
+			submitBtn = new GButton(PATH, "btn_submit", 100, 35);
 			submitBtn.addActionListener(new SubmitAction());
 
-			concealBtn = new GButton(PATH, "ConcealBtn", 100, 35);
+			concealBtn = new GButton(PATH, "btn_cancel", 100, 35);
 			concealBtn.addActionListener(new SubmitAction());
 
 			add(submitBtn);
@@ -98,7 +98,7 @@ public class WordPlusFrame extends JFrame {
 				GButton btn = (GButton) e.getSource();
 				
 				switch(btn.getId()) {
-				case "SubmitBtn" :
+				case "btn_submit" :
 					String korean[] = splite(koreanInput.getText());
 					String english[] = splite(englishInput.getText());
 
@@ -120,7 +120,7 @@ public class WordPlusFrame extends JFrame {
 					JOptionPane.showMessageDialog(WordPlusFrame.this, "단어가 추가되었습니다", "확인", JOptionPane.INFORMATION_MESSAGE);
 					break;
 					
-				case "ConcealBtn":
+				case "btn_cancel":
 					break;
 				}
 

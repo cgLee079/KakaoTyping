@@ -51,13 +51,13 @@ public class PauseFrame extends JFrame {
 			setPreferredSize(new Dimension(200, 200));
 			setBackground(null);
 			
-			homeBtn = new GButton(PATH, "Homebtn", 120, 50);
+			homeBtn = new GButton(PATH, "btn_home", 120, 50);
 			homeBtn.addActionListener(new ButtonActionListener());
 
-			resumeBtn = new GButton(PATH, "resumebtn", 120, 50);
+			resumeBtn = new GButton(PATH, "btn_resume", 120, 50);
 			resumeBtn.addActionListener(new ButtonActionListener());
 
-			exitBtn = new GButton(PATH, "exitbtn", 120, 50);
+			exitBtn = new GButton(PATH, "btn_exit", 120, 50);
 			exitBtn.addActionListener(new ButtonActionListener());
 
 			add(homeBtn);
@@ -70,15 +70,15 @@ public class PauseFrame extends JFrame {
 				GButton btn = (GButton) e.getSource();
 				
 				switch (btn.getId()){
-				case "Homebtn" :
+				case "btn_home" :
 					mainFrame.drawHome();
 					PauseFrame.this.dispose();
 					break;
-				case "resumebtn" :
+				case "btn_resume" :
 					play.resumeGame();
 					PauseFrame.this.dispose();
 					break;
-				case "exitbtn" :
+				case "btn_exit" :
 					System.exit(0);
 					break;
 				}

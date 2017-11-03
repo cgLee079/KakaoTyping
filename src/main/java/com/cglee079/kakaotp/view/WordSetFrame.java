@@ -53,7 +53,7 @@ public class WordSetFrame extends JFrame {
 		wordListPanel.setLocation(30, 20);
 		wordListPanel.setSize(250, 305);
 
-		userListPanel = new UserListPanel(PATH, "UserListPanel", 250, 40);
+		userListPanel = new UserListPanel(PATH, "bg_userlist", 250, 40);
 		userListPanel.setLocation(300, 40);
 
 		setButtonPanel = new SetButtonPanel();
@@ -207,13 +207,13 @@ public class WordSetFrame extends JFrame {
 		private SetButtonPanel() {
 			setBackground(null);
 			
-			wordPlusBtn = new GButton(PATH, "wordPlusBtn", 100, 40);
+			wordPlusBtn = new GButton(PATH, "btn_wordplus", 100, 40);
 			wordPlusBtn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					new WordPlusFrame(WordSetFrame.this, getSelectedUser());
 				}
 			});
-			successResetBtn = new GButton(PATH, "SuccessResetBtn", 100, 40);
+			successResetBtn = new GButton(PATH, "btn_successreset", 100, 40);
 			successResetBtn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					User user = getSelectedUser();
@@ -241,10 +241,10 @@ public class WordSetFrame extends JFrame {
 			setBackground(null);
 			setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 			
-			submitBtn = new GButton(PATH, "SubmitBtn", 100, 35);
+			submitBtn = new GButton(PATH, "btn_submit", 100, 35);
 			submitBtn.addActionListener(new SubmitAction());
 
-			concealBtn = new GButton(PATH, "ConcealBtn", 100, 35);
+			concealBtn = new GButton(PATH, "btn_cancel", 100, 35);
 			concealBtn.addActionListener(new SubmitAction());
 
 			add(submitBtn);
@@ -255,8 +255,8 @@ public class WordSetFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				GButton btn = (GButton) e.getSource();
-				if (btn.getId() == "SubmitBtn");
-				else if (btn.getId() == "ConcealBtn");
+				if (btn.getId() == "btn_submit");
+				else if (btn.getId() == "btn_cancel");
 
 				WordSetFrame.this.dispose();
 			}
