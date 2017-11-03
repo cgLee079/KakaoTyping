@@ -68,7 +68,7 @@ public class StartFrame extends JFrame {
 		int size = users.size();
 		for(int i = 0; i < size ; i++){
 			user = users.get(i);
-			userComboBox.addItem(user.getUsername() + "\t" + user.getCharacter());
+			userComboBox.addItem(user.getCharacter() + "\t" + user.getUsername());
 		}
 	}
 	
@@ -82,19 +82,20 @@ public class StartFrame extends JFrame {
 		
 		String[] spliter = str.split("\t");
 		
-		String username = spliter[0];
-		String character = spliter[1];
+		String character = spliter[0];
+		String username = spliter[1];
 		
 		return new User(username, character);
 	}
 	
 	public String getSelectedLevel(){
 		ButtonGroup levelBtnGroup = levelListPanel.getLevelBtnGroup();
-		
+		GRadioButton radiobtn = null;
 		String levelID = null;
+		
 		Enumeration<AbstractButton> enums = levelBtnGroup.getElements();
 		while (enums.hasMoreElements()) {
-			GRadioButton radiobtn = (GRadioButton) enums.nextElement();
+			radiobtn = (GRadioButton) enums.nextElement();
 			if (radiobtn.isSelected()) {
 				levelID = radiobtn.getId();
 			}
@@ -164,7 +165,7 @@ public class StartFrame extends JFrame {
 			userComboBox.setSelectedIndex(-1);
 			userComboBox.setSelectedItem(-1);
 
-			this.add(userComboBox);
+			add(userComboBox);
 
 			GButton wordPlusBtn = new GButton(PATH, "UserPlusBtn", 30, 30);
 			wordPlusBtn.addActionListener(new ActionListener(){
@@ -174,7 +175,7 @@ public class StartFrame extends JFrame {
 			});
 			
 			wordPlusBtn.setLocation(240, 5);
-			this.add(wordPlusBtn);
+			add(wordPlusBtn);
 		}
 
 		public JComboBox<String> getUserComboBox() {

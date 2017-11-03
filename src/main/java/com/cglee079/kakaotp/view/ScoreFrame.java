@@ -60,20 +60,21 @@ public class ScoreFrame extends JFrame {
 
 			gradePanel = new GradePanel(PATH, "frame", 390, 410);
 			myGradePanel = new MyGradePanel(PATH, "myScore", 320, 290);
-			this.add(gradePanel);
-			this.add(myGradePanel);
+			
+			add(gradePanel);
+			add(myGradePanel);
 
 			String myCharacter = score.getCharacter(); // 캐릭터 이미지
-			ImageIcon myCharacterImageICon = new ImageIcon(PATH + myCharacter + "_score.gif");
-			JLabel myCharacterLabel = new JLabel(myCharacterImageICon);
+			ImageIcon myCharacterImageIcon = new ImageIcon(PATH + myCharacter + "_score.gif");
+			JLabel myCharacterLabel = new JLabel(myCharacterImageIcon);
 			myCharacterLabel.setLocation(630, 300);
 			myCharacterLabel.setSize(130, 130);
 
-			this.add(myCharacterLabel);
+			add(myCharacterLabel);
 		}
 
 		class GradePanel extends GPanel {
-			private int num = 4;// 전체 화면에 표시할 등수 표시 갯수
+			private final int NUM_OF_THROPY = 4;// 전체 화면에 표시할 등수 표시 갯수
 
 			private GradePanel(String path, String filename, int width, int height) {
 				super(path, filename, width, height);
@@ -91,18 +92,18 @@ public class ScoreFrame extends JFrame {
 				ArrayList<Score> scores = scoreManager.getScores();
 				Score score = null;
 				
-				ImageIcon[] images	 = new ImageIcon[num];
-				ImageIcon[] gradeImg = new ImageIcon[num];
+				ImageIcon[] images	 = new ImageIcon[NUM_OF_THROPY];
+				ImageIcon[] gradeImg = new ImageIcon[NUM_OF_THROPY];
 
-				JLabel[] faceLabel 	= new JLabel[num];
-				JLabel[] scoreLabel = new JLabel[num];
-				JLabel[] gradeLabel = new JLabel[num];
-				JLabel[] nameLabel 	= new JLabel[num];
+				JLabel[] faceLabel 	= new JLabel[NUM_OF_THROPY];
+				JLabel[] scoreLabel = new JLabel[NUM_OF_THROPY];
+				JLabel[] gradeLabel = new JLabel[NUM_OF_THROPY];
+				JLabel[] nameLabel 	= new JLabel[NUM_OF_THROPY];
 
 				String name = "";// 이름 저장
 				String character = "";// 캐릭터 타입 저장
 
-				for (int i = 0; i < num; i++) {
+				for (int i = 0; i < NUM_OF_THROPY; i++) {
 					score = scores.get(i);
 					
 					gradeImg[i] = new ImageIcon(PATH + "trophy.png");
@@ -147,23 +148,22 @@ public class ScoreFrame extends JFrame {
 				setLayout(new GridLayout(3, 1));
 				setLocation(450, 30);
 				
-				Integer myScore = score.getPoint();
 				String myName 	= score.getUsername();
-				Integer myLevel = level;
+				int myScore 	= score.getPoint();
+				int myLevel 	= level;
 
-				JLabel myScoreLabel = new JLabel(myScore.toString());
+				JLabel myScoreLabel = new JLabel(myScore + "");
 				setGradeLabel(myScoreLabel, 250, 60, 50);
 
-				JLabel myNameLabel = new JLabel("userName : " + myName);
+				JLabel myNameLabel = new JLabel("NAME : " + myName);
 				setGradeLabel(myNameLabel, 150, 50, 20);
 
-				JLabel myLevelLabel = new JLabel("userlevel : " + myLevel);
+				JLabel myLevelLabel = new JLabel("LEVEL : " + myLevel);
 				setGradeLabel(myLevelLabel, 100, 50, 20);
 				
 			}
 
-
-			public void setGradeLabel(JLabel source, int x, int y, int fontSize) {
+			private void setGradeLabel(JLabel source, int x, int y, int fontSize) {
 				source.setSize(x, y);
 				source.setForeground(ColorManager.baseColor);
 				source.setHorizontalAlignment(JLabel.CENTER);

@@ -10,22 +10,19 @@ import com.cglee079.kakaotp.view.MainFrame;
 import com.cglee079.kakaotp.view.PauseFrame;
 
 public class KeyEventor extends KeyAdapter {
-	private MainFrame mainFrame;
 	private Play play;
-	private PauseFrame pauseFrame;
 	
-	public KeyEventor(MainFrame mainFrame, Play play){
-		this.mainFrame 	= mainFrame;
-		this.play 		= play;
+	public KeyEventor(Play play){
+		this.play = play;
 	}
 	
 	public void keyPressed(KeyEvent e) {
 		JTextField wordTextField = (JTextField) e.getSource();
+		
 		switch (e.getKeyCode()) {
 		
 		case KeyEvent.VK_ESCAPE:
-			play.pauseGame();
-			pauseFrame = new PauseFrame(mainFrame, play);
+			play.pauseGame(true);
 			break;
 
 		case KeyEvent.VK_F1: // item1 모두 지우기

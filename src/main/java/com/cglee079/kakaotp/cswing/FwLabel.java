@@ -10,63 +10,52 @@ import com.cglee079.kakaotp.font.GameFontP;
 import com.cglee079.kakaotp.util.PathManager;
 
 public class FwLabel extends JLabel {
-	// 라벨의 Item 보유
-	private boolean itemHave = false;
-
-	// 라벨의 유효성
-	private boolean valid = true;
-
-	// 라벨의 언어
-	private boolean lenguage = true;
+	private boolean haveItem	= false; 	// 라벨의 Item 보유
+	private boolean valid 		= true; 	// 라벨의 유효성
+	private boolean korean 		= true; 	// 라벨의 언어
 
 	public FwLabel(String text) {
 		super(text);
-		this.setSize(120, 40);
+		setSize(120, 40);
 
 		if (Math.random() < 0.2) { // Item랜덤하게 생성
-			itemHave = true;
+			haveItem = true;
 		}
 
-		if (itemHave){
-			setHaveItem_k(); // Item을 가지고 있을때의 폰트
-		} else{
-			setKorean(); // 한글 폰트
-		}
+		setKoreanFont(); // 한글 폰트
 	}
 
 	// Item 리턴
-	public boolean getHaveItem() {
-		return itemHave;
-	}
-
-	// Item 가지고 있을때 한글 폰트
-	public void setHaveItem_k() {
-		String path = PathManager.characterPath + "CenterPanel/";
-		this.setIcon(new ImageIcon(path + "itemIcon" + ".png"));
-		this.setFont(new GameFontB(18));
-	}
-
-	// Item 가지고 있을 때 영어 폰트
-	public void setHaveItem_e() {
-		String path = PathManager.characterPath + "CenterPanel/";
-		this.setIcon(new ImageIcon(path + "itemIcon" + ".png"));
-		this.setFont(new GameFontB(18));
-		this.setForeground(Color.blue);
+	public boolean isHaveItem() {
+		return haveItem;
 	}
 
 	// 한글 폰트
-	public void setKorean() {
-		this.setFont(new GameFontP(15));
+	public void setKoreanFont() {
+		if(haveItem){ 
+			String path = PathManager.characterPath;
+			this.setIcon(new ImageIcon(path + "itemIcon" + ".png"));
+			this.setFont(new GameFontB(15));
+		} else {
+			this.setFont(new GameFontP(15));
+		}
 	}
 
 	// 영문 폰트
-	public void setEnglish() {
-		this.setFont(new GameFontP(15));
+	public void setEnglishFont() {
+		if(haveItem){ 
+			String path = PathManager.characterPath;
+			this.setIcon(new ImageIcon(path + "itemIcon" + ".png"));
+			this.setFont(new GameFontB(15));
+		} else {
+			this.setFont(new GameFontP(15));
+		}
+		
 		this.setForeground(Color.blue);// 영단어 입력시 글자색 변경
 	}
 
 	// 유효성 리턴
-	public boolean getValid() {
+	public boolean isValid() {
 		return valid;
 	}
 
@@ -75,12 +64,12 @@ public class FwLabel extends JLabel {
 		this.valid = valid;
 	}
 
-	public boolean getLanguage() {
-		return lenguage;
+	public boolean isKorean() {
+		return korean;
 	}
 
-	public void setLanguage(boolean lenguage) {
-		this.lenguage = lenguage;
+	public void setKorean(boolean language) {
+		this.korean = language;
 	}
 
 }

@@ -13,41 +13,52 @@ import com.cglee079.kakaotp.dict.UserDictionary;
 import com.cglee079.kakaotp.io.ScoreIO;
 import com.cglee079.kakaotp.model.Score;
 import com.cglee079.kakaotp.model.User;
+import com.cglee079.kakaotp.view.PauseFrame;
 import com.cglee079.kakaotp.view.PlayPanel;
 
 public class Play {
+	private final Item ITEM0;
+	private final Item ITEM1;
+	private final Item ITEM2;
+	private final Item ITEM3;
+	
 	private PlayPanel playPanel;
 	private User user;
 	private UserDictionary dictionary;
 	private boolean isplay;
-	private boolean iskorean; // 입력 차례 (한글,영문)
+	private boolean korean; // 입력 차례 (한글,영문)
 	private int heart;
 	private int level;
 	private int point;
 	private double speed;
 	private int count;
 	private boolean[] item;
-
+	
 	private Vector<FwLabel> fwLabels;
 	private Vector<FWAni> fwAnis;
 	private WordMaker wordMaker;
 	private SpeedUpper speedUpper;
 
 	public Play(User user, Integer level, Double speed) {
+		this.ITEM0 		= new Item0();
+		this.ITEM1 		= new Item1();
+		this.ITEM2		= new Item2();
+		this.ITEM3		= new Item3();
+		
 		this.user 		= user;
 		this.heart		= 100;
 		this.level 		= level;
 		this.speed 		= speed;
 		this.point 		= 0;
 		this.isplay 	= true;
-		this.iskorean 	= true; // 입력 차례 (한글,영문)
+		this.korean 	= true; // 입력 차례 (한글,영문)
 		this.count 		= 10;
 		this.item		= new boolean[4];
 		this.dictionary	= new UserDictionary(user.getUsername());
 		this.fwLabels	= new Vector<FwLabel>();
-		this.speedUpper 		= new SpeedUpper();
-		this.fwAnis 		= new Vector<FWAni>();
-		this.wordMaker			= new WordMaker(); // 단어 생성 시작
+		this.speedUpper = new SpeedUpper();
+		this.fwAnis 	= new Vector<FWAni>();
+		this.wordMaker	= new WordMaker(); // 단어 생성 시작
 		
 		Arrays.fill(item, false);
 	}
@@ -84,12 +95,12 @@ public class Play {
 		this.isplay = isplay;
 	}
 
-	public boolean isIskorean() {
-		return iskorean;
+	public boolean iskorean() {
+		return korean;
 	}
 
-	public void setIskorean(boolean iskorean) {
-		this.iskorean = iskorean;
+	public void setkorean(boolean korean) {
+		this.korean = korean;
 	}
 
 	public int getHeart() {
@@ -173,14 +184,6 @@ public class Play {
 	}
 
 	
-	public void setKoreanTurn() {
-		this.iskorean = true;
-	} // 한글 입력 차례로
-
-	public void setEnglishTurn() {
-		this.iskorean = false;
-	} // 영문 입력 차례로
-	
 	public void speedUp(double up) {
 		this.speed += up;
 	} // 속도 업
@@ -220,10 +223,10 @@ public class Play {
 	public void useItem(int index){
 		if(item[index]){
 			switch(index){
-			case 0: new Item1().call(); break;
-			case 1: new Item2().call(); break;
-			case 2: new Item3().call(); break;
-			case 3: new Item4().call(); break;
+			case 0: ITEM0.call(); break;
+			case 1: ITEM1.call(); break;
+			case 2: ITEM2.call(); break;
+			case 3: ITEM3.call(); break;
 			}
 			
 			item[index] = false;
@@ -242,7 +245,7 @@ public class Play {
 	public void checkFwLabels(String text) {
 		String renderWord = dictionary.render(text); // 번역글자 : 한글 -> 영어 -> null
 
-		if (!this.iskorean && renderWord != null) {// 영어 입력차례에서, 한글을  입력한 경우
+		if (!this.korean && renderWord != null) {// 영어 입력차례에서, 한글을  입력한 경우
 			return ;
 		}
 
@@ -252,11 +255,8 @@ public class Play {
 			String fallWord = fwLabel.getText(); // 떨어지는 라벨의 단어
 
 			if (fallWord.equalsIgnoreCase(text)) { // 떨어지는 단어와 입력 단어가 같을경우
-				if (fwLabel.getLanguage() == false) {
-					setEnglishTurn(fwLabel);
-				} else {
-					setKoreanTurn(fwLabel);
-				}
+				if (fwLabel.isKorean()) { koreanMatched(fwLabel); } 
+				else { englishMatched(fwLabel); }
 				
 				fwLabel.setText(renderWord); // 한글 -> 영어로, 영어-> null로
 
@@ -265,24 +265,18 @@ public class Play {
 		}
 	}
 
-	public void setEnglishTurn(FwLabel fwLabel) {
-		String english = fwLabel.getText();
-		fwLabel.setVisible(false);
+	public void englishMatched(FwLabel fwLabel) {
+		String english 	= fwLabel.getText();
+		String korean 	= dictionary.renderReverse(english); // 영어의 한글 값 저장
 
-		// 영어의 한글 값 저장
-		String korean = dictionary.renderReverse(english);
+		playPanel.addSuccessWord(korean, english); // 성공 단어에 추가
+		dictionary.plusSuccess(korean); // 단어 성공 횟수 증가
+		
+		fwLabels.remove(fwLabel);// 배열에서 제거
+		fwLabel.setVisible(false); //안보이게
+		fwLabel.setValid(false); // 무효한 숫자로
 
-		// 성공 단어에 추가
-		playPanel.addSuccessWord(korean, english);
-
-		// 단어 성공 횟수 증가
-		dictionary.plusSuccess(korean);
-
-		// 무효한 숫자로
-		fwLabel.setValid(false);
-
-		// Item확인, 생성
-		if (fwLabel.getHaveItem()) {
+		if (fwLabel.isHaveItem()) { // Item확인, 생성
 			Random random = new Random();
 			
 			int num = random.nextInt(4);// 0-3 아이템 번호 제공
@@ -299,25 +293,15 @@ public class Play {
 			playPanel.drawItemBtn(num, true);
 		}
 
-		// 배열에서 제거
-		fwLabels.remove(fwLabel);
-
-		// 점수 흭득
-		scoreUp();
-
-		// 한글 입력차례로 변환
-		setIskorean(true); 
+		scoreUp();// 점수 흭득
+		setkorean(true); // 한글 입력차례로 변환
 	}
 
-	public void setKoreanTurn(FwLabel fwLabel) {
-		fwLabel.setLanguage(false);
-		if (fwLabel.getHaveItem()) {
-			fwLabel.setHaveItem_e(); // 아이템을 가진 영단어 폰트 셋
-		} else {
-			fwLabel.setEnglish(); // 아이템 가지지 않은 영단어 폰트 셋
-		}
+	public void koreanMatched(FwLabel fwLabel) {
+		fwLabel.setKorean(false);
+		fwLabel.setEnglishFont();
 
-		setIskorean(false); // 영어차례로 변환
+		setkorean(false); // 영어차례로 변환
 	}
 	
 	public void startGame() {
@@ -330,7 +314,10 @@ public class Play {
 		isplay = false;		
 	}
 
-	public void pauseGame() {
+	public void pauseGame(boolean isESC) {
+		if(isESC){
+			playPanel.pause();
+		}
 		speedUpper.suspend();
 		wordMaker.suspend();
 		for (int i = 0; i < fwAnis.size(); i++){
@@ -374,8 +361,10 @@ public class Play {
 
 	class WordMaker extends Thread {
 		public void run() {
+			String word = null;
 			while (isplay) {
-				FWAni fallingAni = new FWAni();
+				word = dictionary.rand();
+				FWAni fallingAni = new FWAni(word);
 				fwAnis.add(fallingAni);
 				fallingAni.start();
 
@@ -390,13 +379,20 @@ public class Play {
 
 	// 라벨 하나 하나 떨어지는 쓰레드
 	class FWAni extends Thread {
+		String word;
+		
+		public FWAni(String word){
+			super();
+			this.word = word;
+		}
+		
 		public void run() {
 			// 좌표값 설정
 			int x = (int) (Math.random() * 400);
 			int y = 50;
 
 			// 단어를 랜덤하게 받아와 라벨 생성.
-			FwLabel fwLabel = new FwLabel(dictionary.rand());
+			FwLabel fwLabel = new FwLabel(word);
 			fwLabel.setLocation(x, y); // 위치 설정
 			fwLabels.add(fwLabel); // 떨어지는 라벨 추가
 			playPanel.drawFwLabel(fwLabel);
@@ -412,13 +408,12 @@ public class Play {
 				}
 			}
 
-			if (y >= 410 && fwLabel.getValid() == true) {
+			if (y >= 410 && fwLabel.isValid() == true) {
 				pain(20); // 체력 감소
 				fwLabels.remove(fwLabel); // 배열에서 제거
 
-				// 영어 라벨이 다 떨어지면, 한글 차례로
-				if (fwLabel.getLanguage() == false){
-					iskorean = true;
+				if (!fwLabel.isKorean()){ // 영어 라벨이 다 떨어지면, 한글 차례로
+					korean = true;
 				}
 			}
 
@@ -433,30 +428,25 @@ public class Play {
 		public abstract void call(); // item 사용
 	}
 
-	class Item1 extends Item {
+	class Item0 extends Item {
 		public void call() {
+			FwLabel fwLabel;
 			String korean;
 			String english;
 
-			// 떨어지는 모든 단어를 성공 단어에 추가
-			// case 1: 한글 입력상태에서 아이템 사용
-			// case 2: 영문 입력상테에서 아이템 사용
 			int size = fwLabels.size();
+			
 			for (int index = 0; index < size; index++) {
-				
-				FwLabel fwLabel = fwLabels.get(index);
-
-				korean = fwLabel.getText();
+				fwLabel = fwLabels.get(index);
+				korean 	= fwLabel.getText();
 				english = dictionary.render(korean);
 
-				// case2의 경우 - 모든 떨어지는 라벨 중 하나의 라벨은 영어를 가지고있음
-				if (fwLabel.getLanguage() == false) {
+				if (!fwLabel.isKorean()){// 모든 떨어지는 라벨 중 하나의 라벨은 영어를 가지고있음
 					english = korean;
 					korean = dictionary.renderReverse(english);
 				}
 
-				// 성공 단어에 추가
-				playPanel.addSuccessWord(korean, english);
+				playPanel.addSuccessWord(korean, english); // 성공 단어에 추가
 			}
 
 			// 모든 떨어지는 라벨 제거
@@ -464,9 +454,9 @@ public class Play {
 		}
 	}
 
-	class Item2 extends Item {
+	class Item1 extends Item {
 		public void call() {
-			pauseGame();
+			pauseGame(false);
 
 			Timer t = new Timer(false);
 			// 5초후에 원래 속도로
@@ -478,7 +468,7 @@ public class Play {
 		}
 	}
 
-	class Item3 extends Item {
+	class Item2 extends Item {
 		double curSpeed;
 		
 		public void call() {
@@ -498,7 +488,7 @@ public class Play {
 		}
 	}
 
-	class Item4 extends Item {
+	class Item3 extends Item {
 		public void call() {
 			fullGain();
 		}

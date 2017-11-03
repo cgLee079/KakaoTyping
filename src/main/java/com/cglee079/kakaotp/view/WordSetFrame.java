@@ -46,7 +46,7 @@ public class WordSetFrame extends JFrame {
 		setUndecorated(true);
 		getContentPane().setBackground(ColorManager.BASIC2);
 		setVisible(true);
-		this.setShape(new RoundRectangle2D.Float(0, 0, this.getWidth(), this.getHeight(), 100, 100));
+		setShape(new RoundRectangle2D.Float(0, 0, this.getWidth(), this.getHeight(), 100, 100));
 		setLocation(MainPosition.x - (this.getWidth()/2), MainPosition.y - (this.getHeight()/2));
 		
 		wordListPanel = new WordListPanel();
@@ -98,15 +98,17 @@ public class WordSetFrame extends JFrame {
 		}
 		
 		String[] spliter = str.split("\t");
+		String character= spliter[0];
+		String username = spliter[1];
 		
-		String username = spliter[0];
-		String character = spliter[1];
 		
 		return new User(username, character);
 	}
 	
 	public void loadDictionary(String username) {
 		DefaultTableModel model = wordListPanel.getWordListTable().getModel();
+		String content[] = new String[3];
+		
 		int rowCnt = model.getRowCount();
 		for (int i = 0 ; i < rowCnt; i++){
 			model.removeRow(0);
@@ -116,7 +118,6 @@ public class WordSetFrame extends JFrame {
 		
 		// WordList에 모든 단어 add
 		for (int index = 0; index < dictionary.getNumOfWord(); index++) {
-			String content[] = new String[3];
 			content[0] = dictionary.getWord(index);
 			content[1] = dictionary.render(content[0]);
 			content[2] = dictionary.getSuccess(content[0]).toString();
@@ -146,11 +147,12 @@ public class WordSetFrame extends JFrame {
 			private DefaultTableModel model;
 
 			WordListTable() {
-				this.setFont(new GameFontP(13));
+				setFont(new GameFontP(13));
+				
 				// Table에 add할수 있도록
 				String[] header = { "한글", "영어", "성공횟수" };
 				model = new DefaultTableModel(header, 0);
-				this.setModel(model);
+				setModel(model);
 			}
 
 			// 더블클릭수정불가
@@ -171,7 +173,7 @@ public class WordSetFrame extends JFrame {
 		private UserListPanel(String path, String filename, int width, int height) {
 			super(path, filename, width, height);
 			setLayout(null);
-			this.setBackground(null);
+			setBackground(null);
 
 			userComboBox = new JComboBox<String>();
 			userComboBox.setSize(150, 20);
@@ -218,7 +220,8 @@ public class WordSetFrame extends JFrame {
 					String username = user.getUsername();
 					UserDictionary userDictionary = new UserDictionary(username);
 					userDictionary.successReset();
-					userDictionary.writeWordUserDictionary();			
+					userDictionary.writeWordUserDictionary();
+					
 					loadDictionary(username);
 					
 					JOptionPane.showMessageDialog(WordSetFrame.this, "성공횟수가 초기화 되었습니다", "확인",JOptionPane.INFORMATION_MESSAGE);

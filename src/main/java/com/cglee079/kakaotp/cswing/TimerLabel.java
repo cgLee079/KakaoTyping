@@ -15,13 +15,12 @@ public class TimerLabel extends JLabel{
 	public void action(int time){
 		setVisible(true);
 		Timer t = new Timer(false);
-		TimerTask repairTask = new RepairTask();
-		t.schedule(repairTask, time);
+		t.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				setVisible(false);
+			}
+		}, time);
 	}
 
-	class RepairTask extends TimerTask {
-		public void run() {
-			setVisible(false);
-		}
-	}
 }

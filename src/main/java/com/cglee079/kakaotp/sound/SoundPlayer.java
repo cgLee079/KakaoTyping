@@ -14,22 +14,23 @@ import com.cglee079.kakaotp.util.PathManager;
 
 public class SoundPlayer {
 	public synchronized static void play(String fileName){
-		String audioFile = PathManager.SOUND + fileName;
-
-		Clip clip;
-		File soundFile = new File(audioFile);
-
+		String path = PathManager.SOUND + fileName;
+		File soundFile = new File(path);
+		
+		AudioInputStream ais = null;
 		Line.Info linfo = new Line.Info(Clip.class);
 		Line line;
+		Clip clip;
+		
+		
 		try {
 			line = AudioSystem.getLine(linfo);
 			clip = (Clip) line;
-			AudioInputStream ais;
+			
 			ais = AudioSystem.getAudioInputStream(soundFile);		
 			clip.open(ais);
 			clip.start();
 			Thread.sleep(10);
-			
 		} catch (LineUnavailableException | UnsupportedAudioFileException | IOException | InterruptedException e) {
 			e.printStackTrace();
 		}		

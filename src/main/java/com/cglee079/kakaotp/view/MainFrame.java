@@ -37,7 +37,7 @@ public class MainFrame extends JFrame{
 		setResizable(false);//크기 고정
 		setUndecorated(true);
 		setVisible(true);		
-		this.setShape(new RoundRectangle2D.Float(0,0,this.getWidth(),this.getHeight(),30,30));
+		setShape(new RoundRectangle2D.Float(0,0,this.getWidth(),this.getHeight(),30,30));
 		
 		Dimension frameSize = getSize();
 		Dimension windowSize = Toolkit.getDefaultToolkit().getScreenSize();		
@@ -77,7 +77,6 @@ public class MainFrame extends JFrame{
 		};
 		bgmTh.start();
 		
-		
 		drawHome();
 		createMenuBar();
 	}
@@ -88,7 +87,7 @@ public class MainFrame extends JFrame{
 		this.revalidate();
 	}
 
-	void createMenuBar() {
+	private void createMenuBar() {
 
 		JMenuBar menuBar = new JMenuBar();
 		JMenu fileMenu = new JMenu("File");

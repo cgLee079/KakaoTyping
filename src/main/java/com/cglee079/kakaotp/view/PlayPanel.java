@@ -61,7 +61,7 @@ public class PlayPanel extends JPanel {
 		this.play = play;
 		
 		play.setPlayPanel(this);
-		addKeyListener(new KeyEventor(mainFrame, play));
+		addKeyListener(new KeyEventor(play));
 		
 		drawLevel(play.getLevel());
 		drawPoint(play.getPoint());
@@ -129,6 +129,10 @@ public class PlayPanel extends JPanel {
 	public void gameOver(Score score, int level) {
 		SoundPlayer.play("gameOver.wav");
 		new ScoreFrame(score, level);
+	}
+	
+	public void pause() {
+		new PauseFrame(mainFrame, play);
 	}
 	
 	/**/
@@ -441,6 +445,5 @@ public class PlayPanel extends JPanel {
 			return wordTextField;
 		}
 	}
-
 
 }

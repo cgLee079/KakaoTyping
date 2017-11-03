@@ -13,6 +13,4 @@ public class ColorManager {
 	public static final Color MUZI 			= new Color(251, 233, 13);
 	public static final Color APEACH 		= new Color(247, 171, 171);
 	public static final Color LYAN 			= new Color(215, 209, 137);
-	
-	
 }

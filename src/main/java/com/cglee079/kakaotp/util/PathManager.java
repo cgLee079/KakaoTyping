@@ -3,7 +3,7 @@ package com.cglee079.kakaotp.util;
 public class PathManager {
 	public static String characterPath = "";
 	
-	public static final String SOUND 		= "resources/sounds/";
+	public static final String SOUND 			= "resources/sounds/";
 	
 	public static final String MAIN_FRAME 		= "resources/images/MainFrame/";
 	public static final String START_FRAME 		= "resources/images/StartFrame/";
