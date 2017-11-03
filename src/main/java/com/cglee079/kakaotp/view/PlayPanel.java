@@ -144,8 +144,8 @@ public class PlayPanel extends JPanel {
 			super(path, filename, width, height);
 			setLayout(null);
 
-			levelPanel = new LevelPanel(PATH, "levelBg", 130, 50);
-			scorePanel = new PointPanel(PATH, "scoreBg", 130, 50);
+			levelPanel = new LevelPanel(PATH, "bg_level", 130, 50);
+			scorePanel = new PointPanel(PATH, "bg_score", 130, 50);
 
 			levelPanel.setLocation(250, 0);
 			scorePanel.setLocation(400, 0);
@@ -212,8 +212,8 @@ public class PlayPanel extends JPanel {
 			setBackground(ColorManager.baseColor);
 			setPreferredSize(new Dimension(150, 0));
 
-			speedPanel = new SpeedPanel(PATH, "SpeedPanel", 130, 150);
-			itemPanel = new ItemPanel(PATH, "ItemPanel", 130, 240);
+			speedPanel = new SpeedPanel(PATH, "bg_speed", 130, 150);
+			itemPanel = new ItemPanel(PATH, "bg_itempanel", 130, 240);
 
 			add(speedPanel);
 			add(itemPanel);
@@ -259,10 +259,10 @@ public class PlayPanel extends JPanel {
 				setLayout(null);
 				setBackground(null);
 
-				itemBtn[0] = new GButton(PATH, "ItemBtn1", 100, 35);
-				itemBtn[1] = new GButton(PATH, "ItemBtn2", 100, 35);
-				itemBtn[2] = new GButton(PATH, "ItemBtn3", 100, 35);
-				itemBtn[3] = new GButton(PATH, "ItemBtn4", 100, 35);
+				itemBtn[0] = new GButton(PATH, "btn_item0", 100, 35);
+				itemBtn[1] = new GButton(PATH, "btn_item1", 100, 35);
+				itemBtn[2] = new GButton(PATH, "btn_item2", 100, 35);
+				itemBtn[3] = new GButton(PATH, "btn_item3", 100, 35);
 
 				for (int i = 0; i < 4; i++) {
 					itemBtn[i].setLocation(15, 10 + (i * 37));
@@ -289,17 +289,17 @@ public class PlayPanel extends JPanel {
 			super(path, filename, width, height);
 			setLayout(null);
 
-			itemLabel = new TimerLabel(new ImageIcon(PATH + "Item.gif"));
+			itemLabel = new TimerLabel(new ImageIcon(PATH + "icon_itemuse.gif"));
 			itemLabel.setSize(200,200);
 			itemLabel.setLocation(150,100);
 			add(itemLabel);
 			
-			levelUpLabel = new TimerLabel(new ImageIcon(PATH + "levelUp.gif"));
+			levelUpLabel = new TimerLabel(new ImageIcon(PATH + "icon_levelup.gif"));
 			levelUpLabel.setSize(200,200);
 			levelUpLabel.setLocation(150,100);
 			add(levelUpLabel);
 			
-			heartGagePanel = new HeartGagePanel(PATH, "HeartGageBg", 200, 30);
+			heartGagePanel = new HeartGagePanel(PATH, "bg_heartgage", 200, 30);
 			heartGagePanel.setLocation(150, 10);
 			add(heartGagePanel);
 
