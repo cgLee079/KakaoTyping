@@ -33,19 +33,18 @@ public class ScoreFrame extends JFrame {
 		setVisible(true);
 		setBackground(ColorManager.BASIC);
 		setLocation(MainPosition.x - (this.getWidth()/2), MainPosition.y - (this.getHeight()/2));
-
-		GPanel northPanel = new GPanel(PATH, "bg_northpanel", 800, 60);
-		CenterPanel centerPanel = new CenterPanel();
-		
-		add(centerPanel, BorderLayout.CENTER);
-		add(northPanel, BorderLayout.NORTH);
-
 	}
 	
 	public ScoreFrame(Score score, int level){
 		this();
 		this.score = score;
 		this.level = level;
+
+		GPanel northPanel = new GPanel(PATH, "bg_northpanel", 800, 60);
+		CenterPanel centerPanel = new CenterPanel();
+		
+		add(centerPanel, BorderLayout.CENTER);
+		add(northPanel, BorderLayout.NORTH);
 	}
 
 	class CenterPanel extends JPanel {

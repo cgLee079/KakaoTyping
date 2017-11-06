@@ -17,15 +17,15 @@ import com.cglee079.kakaotp.view.PauseFrame;
 import com.cglee079.kakaotp.view.PlayPanel;
 
 public class Play {
-	private final Item ITEM0;
-	private final Item ITEM1;
-	private final Item ITEM2;
-	private final Item ITEM3;
+	private final Item ITEM0 = new Item0();
+	private final Item ITEM1 = new Item1();
+	private final Item ITEM2 = new Item2();
+	private final Item ITEM3 = new Item3();
 	
 	private PlayPanel playPanel;
 	private User user;
 	private UserDictionary dictionary;
-	private boolean isplay;
+	private boolean play;
 	private boolean korean; // 입력 차례 (한글,영문)
 	private int heart;
 	private int level;
@@ -40,17 +40,12 @@ public class Play {
 	private SpeedUpper speedUpper;
 
 	public Play(User user, Integer level, Double speed) {
-		this.ITEM0 		= new Item0();
-		this.ITEM1 		= new Item1();
-		this.ITEM2		= new Item2();
-		this.ITEM3		= new Item3();
-		
 		this.user 		= user;
 		this.heart		= 100;
 		this.level 		= level;
 		this.speed 		= speed;
 		this.point 		= 0;
-		this.isplay 	= true;
+		this.play 	= true;
 		this.korean 	= true; // 입력 차례 (한글,영문)
 		this.count 		= 10;
 		this.item		= new boolean[4];
@@ -88,11 +83,11 @@ public class Play {
 	}
 
 	public boolean isIsplay() {
-		return isplay;
+		return play;
 	}
 
 	public void setIsplay(boolean isplay) {
-		this.isplay = isplay;
+		this.play = isplay;
 	}
 
 	public boolean iskorean() {
@@ -305,17 +300,17 @@ public class Play {
 	}
 	
 	public void startGame() {
-		isplay = true;	
+		play = true;	
 		speedUpper.start();
 		wordMaker.start();
 	}
 
 	public void stopGame() {
-		isplay = false;		
+		play = false;		
 	}
 
-	public void pauseGame(boolean isESC) {
-		if(isESC){
+	public void pauseGame(boolean pause) {
+		if(pause){
 			playPanel.pause();
 		}
 		speedUpper.suspend();
@@ -346,7 +341,7 @@ public class Play {
 		public void run() {
 			NumberFormat formatter = new DecimalFormat("#0.00");    
 			
-			while (isplay) {
+			while (play) {
 				speedUp(0.01);
 				playPanel.drawSpeed(formatter.format(speed));
 				
@@ -362,7 +357,7 @@ public class Play {
 	class WordMaker extends Thread {
 		public void run() {
 			String word = null;
-			while (isplay) {
+			while (play) {
 				word = dictionary.rand();
 				FWAni fallingAni = new FWAni(word);
 				fwAnis.add(fallingAni);
@@ -398,7 +393,7 @@ public class Play {
 			playPanel.drawFwLabel(fwLabel);
 
 			// y<410까지 떨어트림
-			while (y < 410 && isplay) {
+			while (y < 410 && play) {
 				y = (int) (y + speed);
 				fwLabel.setLocation(x, y);
 				try {
